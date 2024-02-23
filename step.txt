@@ -1,0 +1,19 @@
+
+> php --version   // Required php 7.2.5
+
+> composer install    OR  > composer self-update
+
+D:\CRM_PROJECT\CRM\vendor\laravel\framework\src\Illuminate\Foundation\PackageManifest.php
+
+          $installed = json_decode($this->files->get($path), true);
+          $packages = $installed['packages'] ?? $installed;
+
+> php artisan key:generate
+
+> php artisan migrate
+
+> php artisan serve
+
+Login:
+admin@example.com
+123456
