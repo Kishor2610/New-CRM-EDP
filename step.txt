@@ -17,3 +17,5 @@ D:\CRM_PROJECT\CRM\vendor\laravel\framework\src\Illuminate\Foundation\PackageMan
 Login:
 admin@example.com
 123456
+
+Database name = crm2
