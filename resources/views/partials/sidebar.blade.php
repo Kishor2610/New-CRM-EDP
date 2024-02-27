@@ -16,14 +16,14 @@
         {{-- Invoice  --}}
         <li class="treeview "><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-indent"></i><span class="app-menu__label">Invoice</span><i class="treeview-indicator fa fa-angle-right"></i></a>
             <ul class="treeview-menu">
-                <li><a class="treeview-item " href="{{route('register')}}" ><i class="icon fa fa-plus"></i>Create Invoice </a></li>
+                <li><a class="treeview-item " href="#" ><i class="icon fa fa-plus"></i>Create Invoice </a></li>
             </ul>
         </li>
 
         {{-- customer --}}
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-users"></i><span class="app-menu__label">Customer</span><i class="treeview-indicator fa fa-angle-right"></i></a>
             <ul class="treeview-menu">
-                <li><a class="treeview-item" href="{{route('register')}}"><i class="icon fa fa-circle-o"></i> Add Customer</a></li>
+                <li><a class="treeview-item" href="{{route('customer.create')}}"><i class="icon fa fa-circle-o"></i> Add Customer</a></li>
             </ul>
         </li>
 

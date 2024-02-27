@@ -29,9 +29,11 @@ class ResetPasswordController extends Controller
         $user->password = Hash::make($request->password);
         $user->save();
 
-        Session::flash('success', 'Password has been reset successfully.');
+        return redirect()->back()->with('message', 'Password has been reset successfully.');
+
+        // Session::flash('success', 'Password has been reset successfully.');
         // dd(session()->all());
-        return redirect()->back()->with('success', 'Password has been reset successfully.');
+        // return redirect()->back()->with('success', 'Password has been reset successfully.');
     }
 
 
