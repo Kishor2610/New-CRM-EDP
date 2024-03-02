@@ -9,4 +9,8 @@
         </ul>
     </div>
     
+    <div class="tile" style="width: 95%;"> <!-- Increased width of the white box -->
+        <h3 style="color:#343a40; text-align:center"> 🟤 Welcome to Customer Relationship Management System 🟤</h3>
+    </div>
+
 </main>

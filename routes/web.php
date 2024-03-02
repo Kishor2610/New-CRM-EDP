@@ -19,5 +19,11 @@ Route::post('/register', [RegisterController::class, 'register']);
 
 Route::resource('customer', 'CustomerController');
 
+Route::resource('invoice', 'InvoiceController');
+
+Route::resource('category', 'CategoryController');
+
+
+
 ?>
 

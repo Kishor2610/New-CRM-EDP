@@ -1,4 +1,4 @@
-<header class="app-header"><a class="app-header__logo" href="edit_profile">CRM System</a>
+<header class="app-header"><a class="app-header__logo" href="/">CRM System</a>
    
    
     <!-- Sidebar toggle button-->
