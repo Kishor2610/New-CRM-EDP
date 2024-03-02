@@ -12,8 +12,14 @@ Modules:
 
 Screenshots:
 
-![alt text](image.png)    
+![alt text](<1. SignIn_image.png>)
 
-![alt text](image-1.png)
+![alt text](<2. SignUp_image.png>)
 
-![alt text](image-2.png)
+![alt text](<3. Profile_image.png>)
+
+![alt text](<4. ChangePassword_image.png>)
+
+![alt text](<5. Customer_image.png>)
+
+![alt text](<6. Catergory_image.png>)
