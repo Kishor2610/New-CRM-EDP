@@ -23,6 +23,13 @@ Route::resource('invoice', 'InvoiceController');
 
 Route::resource('category', 'CategoryController');
 
+Route::get('changeStatus', 'CategoryController@changeStatus');
+
+Route::resource('tax', 'TaxController');
+
+Route::resource('product', 'ProductController');
+
+Route::resource('supplier', 'SupplierController');
 
 
 ?>

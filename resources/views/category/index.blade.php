@@ -34,15 +34,24 @@
                             </tr>
                             </thead>
                             <tbody>
+                            
                             @foreach( $categories as $category)
+                        
                             <tr>
                                 <td>{{ $category->name }}</td>
-                                @if($category->status)
-                                <td>Active</td>
-                                    @else
-                                    <td>Inactive</td>
-                                @endif
-
+                                <td>
+                                    <div class="btn-group" role="group" aria-label="Category Status">
+                                        @if($category->status == '1')
+                                        <button type="button" class="btn btn-success toggle-class" data-id="{{ $category->id }}" data-status="{{ $category->status ? 'active' : 'inactive' }}">
+                                            Active
+                                        </button>
+                                        @else
+                                        <button type="button" class="btn btn-danger toggle-class" data-id="{{ $category->id }}" data-status="{{ $category->status ? 'active' : 'inactive' }}">
+                                            Inactive
+                                        </button>
+                                        @endif
+                                    </div>
+                                </td>
 
                                 <td>
                                     <a class="btn btn-primary" href="{{route('category.edit', $category->id)}}"><i class="fa fa-edit" ></i></a>
@@ -104,5 +113,40 @@
                 }
             })
         }
+
     </script>
+
+
+<script>
+    $(function() {
+        $('.toggle-class').click(function() {
+            var id = $(this).data('id'); 
+            var status = $(this).data('status') === 'active' ? 0 : 1;
+
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: '/changeStatus',
+                data: {'status': status, 'id': id},
+                success: function(data){
+                    if (data.success) {
+                        var button = $('.toggle-class[data-id="' + id + '"]');
+                        if (status === 1) {
+                            button.data('status', 'active').removeClass('btn-danger').addClass('btn-success').text('Active');
+                        } else {
+                            button.data('status', 'inactive').removeClass('btn-success').addClass('btn-danger').text('Inactive');
+                        }
+                        location.reload();
+                    }else {
+                        console.error('Status change failed:', data.error);
+                    }
+                }
+            });
+        });
+    });
+</script>
+
+
 @endpush
+
+

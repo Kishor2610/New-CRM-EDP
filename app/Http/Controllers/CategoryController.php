@@ -40,6 +40,16 @@ class CategoryController extends Controller
         return redirect()->back()->with('message', 'Category Created Successfully');
     }
 
+    public function changeStatus(Request $request)
+    {
+        $category = Category::find($request->id);
+        $category->status = $request->status;
+        $category->save();
+  
+        return redirect()->back()->with('message', 'Status change successfully');
+    }
+
+
     public function show($id)
     {
         //
