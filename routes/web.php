@@ -32,5 +32,6 @@ Route::resource('product', 'ProductController');
 Route::resource('supplier', 'SupplierController');
 
 
+
 ?>
 

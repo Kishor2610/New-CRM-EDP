@@ -27,35 +27,44 @@
                                 <th>Product Name </th>
                                 <th>Model </th>
                                 <th>Sales Price</th>
-                                <th>Supplier Price</th>
-                                <th>Supplier Name</th>
+                                {{-- <th>Supplier Price</th> --}}
+                                {{-- <th>Supplier Name</th> --}}
                                 <th>Image</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
                              <tbody>
 
-                             {{-- @foreach($additional as $add)
+                             @foreach($products as $product)
                                  <tr>
-                                     <td>{{$add->product->name}}</td>
-                                     <td>{{$add->product->model}}</td>
-                                     <td>{{$add->product->sales_price}}</td>
-                                     <td>{{$add->price}}</td>
-                                     <td>{{$add->supplier->name}}</td>
-                                     <td><img width="30 px" src="{{ asset('images/product/'.$add->product->image) }}"></td>
+                                     <td>{{$product->name}}</td>
+                                     <td>{{$product->model}}</td>
+                                     <td>{{$product->sales_price}}</td>
+                                     {{-- <td>{{$price}}</td> --}}
+                                     {{-- <td>{{$product->supplier->name}}</td> --}}
+
+                                     {{-- <td>
+                                        @foreach($suppliers as $supplier)
+                                            @if($supplier->id === $product->supplier_id)
+                                                {{$supplier->name}}
+                                            @endif
+                                        @endforeach
+                                    </td> --}}
+
+                                     <td><img width="60 px" src="{{ asset('images/product/'.$product->image) }}"></td>
 
                                      <td>
-                                         <a class="btn btn-primary" href="{{route('product.edit', $add->product->id)}}"><i class="fa fa-edit" ></i></a>
-                                         <button class="btn btn-danger waves-effect" type="submit" onclick="deleteTag({{ $add->product->id }})">
+                                         <a class="btn btn-primary" href="{{route('product.edit', $product->id)}}"><i class="fa fa-edit" ></i></a>
+                                         <button class="btn btn-danger waves-effect" type="submit" onclick="deleteTag({{ $product->id }})">
                                              <i class="fa fa-trash-o"></i>
                                          </button>
-                                         <form id="delete-form-{{ $add->product->id }}" action="{{ route('product.destroy',$add->product->id) }}" method="POST" style="display: none;">
+                                         <form id="delete-form-{{ $product->id }}" action="{{ route('product.destroy',$product->id) }}" method="POST" style="display: none;">
                                              @csrf
                                              @method('DELETE')
                                          </form>
                                      </td>
                                  </tr>
-                             @endforeach --}}
+                             @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -77,13 +86,13 @@
         function deleteTag(id) {
             swal({
                 title: 'Are you sure?',
-                text: "You won't be able to revert this!",
+                text: "",
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!',
-                cancelButtonText: 'No, cancel!',
+                confirmButtonText: 'Yes',
+                cancelButtonText: 'No',
                 confirmButtonClass: 'btn btn-success',
                 cancelButtonClass: 'btn btn-danger',
                 buttonsStyling: false,

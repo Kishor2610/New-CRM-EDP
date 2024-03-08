@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Supplier;
+use App\RawMaterial;
 use Illuminate\Http\Request;
 
 class SupplierController extends Controller
@@ -22,7 +23,8 @@ class SupplierController extends Controller
    
     public function create()
     {
-        return view('supplier.create');
+        $rawMaterials = RawMaterial::all();
+        return view('supplier.create', compact('rawMaterials'));
     }
 
     public function store(Request $request)
@@ -31,7 +33,7 @@ class SupplierController extends Controller
             'name' => 'required|min:3|unique:suppliers|regex:/^[a-zA-Z ]+$/',
             'address' => 'required|min:3',
             'mobile' => 'required|min:3|digits:11',
-            'details' => 'required|min:3|',
+            'details' => 'required|string|min:1',
             'previous_balance' => 'min:3',
 
         ]);
@@ -40,22 +42,24 @@ class SupplierController extends Controller
         $supplier->name = $request->name;
         $supplier->address = $request->address;
         $supplier->mobile = $request->mobile;
-        $supplier->details = $request->details;
+
+        $supplier->details = $request->input('details');
         $supplier->previous_balance = $request->previous_balance;
         $supplier->save();
-
+       
         return redirect()->back()->with('message', 'Supplier Created Successfully');
     }
 
     public function show($id)
     {
-        //
+       
     }
 
     public function edit($id)
     {
         $supplier = Supplier::findOrFail($id);
-        return view('supplier.edit', compact('supplier'));
+        $rawMaterials = RawMaterial::all();
+        return view('supplier.edit', compact('supplier','rawMaterials'));
     }
 
     public function update(Request $request, $id)

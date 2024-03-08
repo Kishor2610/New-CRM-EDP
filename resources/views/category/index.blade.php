@@ -13,7 +13,7 @@
                 <h1><i class="fa fa-th-list"></i> Category List</h1>
             </div>
             <ul class="app-breadcrumb breadcrumb side">
-                <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+                <li class="breadcrumb-item"><a href="/"><i class="fa fa-home fa-lg"></i></a></li>
                 <li class="breadcrumb-item active"><a href="#">Category List</a></li>
             </ul>
         </div>
@@ -136,9 +136,9 @@
                         } else {
                             button.data('status', 'inactive').removeClass('btn-success').addClass('btn-danger').text('Inactive');
                         }
-                        location.reload();
-                    }else {
-                        console.error('Status change failed:', data.error);
+
+                        location.reload(true); 
+
                     }
                 }
             });

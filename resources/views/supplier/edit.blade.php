@@ -12,7 +12,7 @@
       <h1><i class="fa fa-edit"></i> Edit Supplier Information</h1>
     </div>
     <ul class="app-breadcrumb breadcrumb">
-      <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+      <li class="breadcrumb-item"><a href="/"><i class="fa fa-home fa-lg"></i></a></li>
       <li class="breadcrumb-item"><a href="#">Supplier</a></li>
     </ul>
   </div>
@@ -60,7 +60,8 @@
               </span>
               @enderror
             </div>
-            <div class="form-group">
+          
+            {{-- <div class="form-group">
               <label class="control-label">Supplier Raw Material</label>
               <textarea name="details" class="form-control @error('details') is-invalid @enderror" style="height: 40px;">{{ $supplier->details }}</textarea>
               @error('details')
@@ -68,7 +69,24 @@
                 <strong>{{ $message }}</strong>
               </span>
               @enderror
+            </div> --}}
+
+            <div class="form-group">
+              <label class="control-label">Supplier Raw Material</label>
+              <select name="details" class="form-control">
+                  <option>Select Supplier</option>
+                    @foreach($rawMaterials as $rawMaterial)
+                        <option value="{{ $rawMaterial->material_name }}">{{ $rawMaterial->material_name }}</option>
+                    @endforeach
+              </select>
+              @error('details')
+              <span class=" invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+              </span>
+              @enderror
             </div>
+
+
             <div class="form-group">
               <label class="control-label">Previous Credit Balance</label>
               <input value="{{ $supplier->previous_balance }}" name="previous_balance" class="form-control @error('previous_balance') is-invalid @enderror" type="text" placeholder="Enter Previous Balance">

@@ -1,4 +1,4 @@
-<header class="app-header"><a class="app-header__logo" href="/">CRM System</a>
+<header class="app-header"><a class="app-header__logo" href="/" style="font-family: 'Times New Roman', Times, serif; color: white;">CRM System</a>
    
    
     <!-- Sidebar toggle button-->

@@ -6,7 +6,7 @@
     <div class="cover"></div>
 </section>
 <section class="login-content">
-    <div class="logo">
+    <div class="logo" style="font-family: 'Times New Roman', Times, serif; color: white;">
         <h1>CRM System</h1>
     </div>
 
