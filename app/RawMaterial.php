@@ -12,8 +12,14 @@ class RawMaterial extends Model
     protected $fillable = ['material_name', 'status'];
 
 
-    public function suppliers(){
+    public function suppliers()
+    {
         return $this->belongsToMany(Supplier::class);
+    }
+
+    public function Supplier(){
+        
+        return $this->hasMany('App\Supplier');
     }
     
     

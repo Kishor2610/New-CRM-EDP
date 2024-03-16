@@ -21,9 +21,6 @@
             </div>
         @endif
 
-        {{-- <div class="">
-            <a class="btn btn-primary" href="{{route('product.index')}}"><i class="fa fa-edit"> Manage Tax</i></a>
-        </div> --}}
         <div class="row mt-2 justify-content-center">
 
             <div class="clearix"></div>
@@ -89,22 +86,7 @@
                                     </span>
                                     @enderror
                                 </div>
-                                {{-- <div class="form-group col-md-6">
-                                    <label class="control-label">Unite</label>
-                                    <select name="unit_id" class="form-control">
-                                        {{-- <option value="{{$additional->product->unit->id}}">{{$additional->product->unit->name}}</option> --}}
-                                        {{-- @foreach($units as $unit)
-                                            <option value="{{$unit->id}}">{{$unit->name}}</option>
-                                        @endforeach --}}
-                                    {{-- </select>
-                                    @error('unit_id')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror --}}
-                                {{-- </div>
-                                 --}} 
-
+                              
                                 <div class="form-group col-md-6">
                                     <label class="control-label">Image</label>
                                     <input value="{{$product->image}}" name="image"  class="form-control @error('image') is-invalid @enderror" type="file" >

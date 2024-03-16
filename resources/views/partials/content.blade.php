@@ -13,4 +13,46 @@
         <h3 style="color:#343a40; text-align:center"> 🟤 Welcome to Customer Relationship Management System 🟤</h3>
     </div>
 
+    <div class="row justify-content-center">
+
+        <div class="col-md-6 col-lg-3">
+            <div class="widget-small primary coloured-icon"><i class="icon fa fa-users fa-3x"></i>
+                <div class="info">
+                    <h4 > Invoice</h4>
+                    <p><b>5</b></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+            <div class="widget-small primary coloured-icon"><i class="icon fa fa-users fa-3x"></i>
+                <div class="info">
+                    <h4 > Quatation</h4>
+                    <p><b>5</b></p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6 col-lg-3">
+            <div class="widget-small primary coloured-icon"><i class="icon fa fa-users fa-3x"></i>
+                <div class="info">
+                    <h4 >Customer</h4>
+                    <p><b>5</b></p>
+                </div>
+            </div>
+        </div>
+   
+
+        <div class="col-md-6 col-lg-3">
+            <div class="widget-small primary coloured-icon"><i class="icon fa fa-users fa-3x"></i>
+                <div class="info">
+                    <h4 >Product</h4>
+                    <p><b>5</b></p>
+                </div>
+            </div>
+        </div>
+
+        
+    </div>
+
 </main>

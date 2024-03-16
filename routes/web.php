@@ -21,6 +21,9 @@ Route::resource('customer', 'CustomerController');
 
 Route::resource('invoice', 'InvoiceController');
 
+Route::get('/findPrice', 'InvoiceController@findPrice')->name('findPrice');
+
+
 Route::resource('category', 'CategoryController');
 
 Route::get('changeStatus', 'CategoryController@changeStatus');
@@ -30,6 +33,11 @@ Route::resource('tax', 'TaxController');
 Route::resource('product', 'ProductController');
 
 Route::resource('supplier', 'SupplierController');
+
+Route::resource('raw_material', 'RawMaterialController');
+
+Route::get('changeStatus', 'RawMaterialController@changeStatus');
+
 
 
 

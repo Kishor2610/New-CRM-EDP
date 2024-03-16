@@ -17,7 +17,7 @@
         <li class="treeview "><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-indent"></i><span class="app-menu__label">Invoice</span><i class="treeview-indicator fa fa-angle-right"></i></a>
             <ul class="treeview-menu">
                 <li><a class="treeview-item " href="{{route('invoice.create')}}" ><i class="icon fa fa-plus"></i>Create Invoice </a></li>
-                <li><a class="treeview-item" href="#"><i class="icon fa fa-edit"></i> Manage Invoice</a></li>
+                <li><a class="treeview-item" href="{{route('invoice.index')}}"><i class="icon fa fa-edit"></i> Manage Invoice</a></li>
 
             </ul>
         </li>
@@ -63,6 +63,8 @@
             <ul class="treeview-menu">
                 <li><a class="treeview-item" href="{{route('supplier.create')}}"><i class="icon fa fa-plus"></i> Add Supplier</a></li>
                 <li><a class="treeview-item" href="{{route('supplier.index')}}"><i class="icon fa fa-edit"></i> Manage Suppliers</a></li>
+                <li><a class="treeview-item" href="{{route('raw_material.create')}}"><i class="icon fa fa-plus"></i> Add Raw Material</a></li>
+                <li><a class="treeview-item" href="{{route('raw_material.index')}}"><i class="icon fa fa-edit"></i> Manage Raw Material</a></li>
             </ul>
         </li>
 
@@ -75,3 +77,12 @@
     </ul>
 
 </aside>
+
+
+
+
+
+
+
+
+

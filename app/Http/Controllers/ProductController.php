@@ -105,8 +105,7 @@ class ProductController extends Controller
 
         ]);
 
-
-        $product = new Product();
+        $product = Product::findOrFail($id);
         $product->name = $request->name;
         $product->serial_number = $request->serial_number;
         $product->model = $request->model;
@@ -126,12 +125,9 @@ class ProductController extends Controller
             request()->image->move(public_path('images/product/'), $imageName);
             $product->image = $imageName;
         }
-
-
-
         $product->save();
 
-        return redirect()->back()->with('message', 'Product Created Successfully');
+        return redirect()->back()->with('message', 'Product Updated Successfully');
     }
 
 
