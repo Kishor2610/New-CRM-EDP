@@ -45,6 +45,7 @@ class InvoiceController extends Controller
             'price' => 'required',
             'dis' => 'required',
             'amount' => 'required',
+            'tax_id'=> 'required',
         ]);
 
         $invoice = new Invoice();
@@ -55,9 +56,20 @@ class InvoiceController extends Controller
         foreach ( $request->product_id as $key => $product_id){
             $sale = new Sale();
             $sale->qty = $request->qty[$key];
+            
+           
+            // $tax = Tax::find($request->tax_id[$key]);
+            // $total = $sale->price; 
+            // $taxAmount = $total +($total * $tax->slug); 
+            // $sale->price = $taxAmount; 
+            // dd( $sale->amount);
+            
+            
             $sale->price = $request->price[$key];
             $sale->dis = $request->dis[$key];
+            
             $sale->amount = $request->amount[$key];
+
             $sale->product_id = $request->product_id[$key];
             $sale->invoice_id = $invoice->id;
             $sale->save();

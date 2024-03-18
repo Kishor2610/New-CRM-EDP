@@ -41,7 +41,7 @@
                                      <td>{{$invoice->created_at->format('Y-m-d')}}</td>
                                      <td>
                                          <a class="btn btn-primary" href="{{route('invoice.show', $invoice->id)}}"><i class="fa fa-bandcamp" ></i></a>
-                                         <a class="btn btn-primary" href="{{route('invoice.edit', $invoice->id)}}"><i class="fa fa-edit" ></i></a>
+                                         {{-- <a class="btn btn-primary" href="{{route('invoice.edit', $invoice->id)}}"><i class="fa fa-edit" ></i></a> --}}
 
                                          <button class="btn btn-danger waves-effect" type="submit" onclick="deleteTag({{ $invoice->id }})">
                                              <i class="fa fa-trash-o"></i>
@@ -74,13 +74,13 @@
         function deleteTag(id) {
             swal({
                 title: 'Are you sure?',
-                text: "You won't be able to revert this!",
+                text: "",
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!',
-                cancelButtonText: 'No, cancel!',
+                confirmButtonText: 'Yes',
+                cancelButtonText: 'No',
                 confirmButtonClass: 'btn btn-success',
                 cancelButtonClass: 'btn btn-danger',
                 buttonsStyling: false,

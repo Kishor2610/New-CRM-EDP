@@ -52,11 +52,9 @@
                                 <th scope="col">Qty</th>
                                 <th scope="col">Price</th>
                                 <th scope="col">Discount</th>
-                                <th scope="col">Tax</th>
                                 <th scope="col">Amount</th>
-                                 <th scope="col">Action</th>
                                  
-                                <th scope="col"><a class="addRow"><i class="fa fa-plus"></i></a></th>
+                                <th scope="col"><a class="btn btn-success addRow"><i class="fa fa-plus"></i></a></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -70,20 +68,11 @@
                                 <td><input type="text" name="qty[]" class="form-control qty" ></td>
                                 <td><input type="text" name="price[]" class="form-control price" ></td>
                                 <td><input type="text" name="dis[]" class="form-control dis"></td>
-                                
-                                
-                                <td><select name="tax_id[]" class="form-control productname" >
-                                    <option>Select Tax</option> 
-                                @foreach($taxes as $taxes)
-                                        <option name="product_id[]" value="{{$taxes->id}}">{{$taxes->slug}}%</option>
-                                    @endforeach
-                                 </select></td>
-
-                                {{-- <td></td> --}}
-                                
+                                 
                                 <td><input type="text" name="amount[]" class="form-control amount" ></td>
+
                                 <td>
-                                    <a class="btn btn-success add"> <i class="fa fa-plus"></i></a>
+                                                                        
                                     <a class="btn btn-danger remove"> <i class="fa fa-remove"></i></a>
                                 </td>
                             
@@ -92,9 +81,16 @@
                             <tfoot>
                             <tr>
                                 <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td> <b>Select Tax</b></td>
+                                <td>
+                                    <select name="tax_id[]" class="form-control tax_id" >
+                                        <option>Select Tax</option> 
+                                    @foreach($taxes as $taxes)
+                                            <option name="tax_id[]" value="{{$taxes->slug}}">{{$taxes->slug}}%</option>
+                                        @endforeach
+                                     </select>
+                                </td>
+                               
                                 <td><b>Total</b></td>
                                 <td><b class="total"></b></td>
                                 <td></td>
@@ -103,7 +99,7 @@
 
                         </table>
 
-                            <div >
+                        <div class="form-group text-center">
                                 <button class="btn btn-primary" type="submit">Submit</button>
                             </div>
                      </form>
@@ -131,9 +127,8 @@
 
 
     <script type="text/javascript">
+        
         $(document).ready(function(){
-
-
 
             $('tbody').delegate('.productname', 'change', function () {
 
@@ -141,6 +136,7 @@
                 tr.find('.qty').focus();
 
             })
+
 
             $('tbody').delegate('.productname', 'change', function () {
 
@@ -165,18 +161,33 @@
                 var qty = tr.find('.qty').val();
                 var price = tr.find('.price').val();
                 var dis = tr.find('.dis').val();
+
+            
                 var amount = (qty * price)-(qty * price * dis)/100;
                 tr.find('.amount').val(amount);
                 total();
             });
+
+                   
             function total(){
                 var total = 0;
                 $('.amount').each(function (i,e) {
                     var amount =$(this).val()-0;
+                  
                     total += amount;
+                   
                 })
+
+                // total = total + (total*2/100) ;
+
                 $('.total').html(total);
+
+
             }
+
+
+
+
 
             $('.addRow').on('click', function () {
                 addRow();

@@ -20,7 +20,9 @@
                     <section class="invoice">
                         <div class="row mb-4">
                             <div class="col-6">
-                                <h2 class="page-header"><i class="fa fa-globe"></i> EDHAAS DIGISOFT PRIVATE LIMITED</h2>
+                                
+                                {{-- <h2 class="page-header"><i class="fa fa-globe"></i> EDHAAS DIGISOFT PRIVATE LIMITED</h2> --}}
+                                <h2 class="page-header"> EDHAAS DIGISOFT PRIVATE LIMITED</h2>
                             </div>
                             <div class="col-6">
                                 <h5 class="text-right">Date: {{$invoice->created_at->format('Y-m-d')}}</h5>
@@ -64,18 +66,45 @@
                                     </tbody>
                                     <tfoot>
                                     <tr>
+
+                                        <td></td>
+                                        <td></td>
+                                        <td><b>Tax</b></td>
+                                        <td><b class="total">0</b></td>
+                                    </tr>
+                                    <tr>
+
                                         <td></td>
                                         <td></td>
                                         <td><b>Total</b></td>
                                         <td><b class="total">{{$total}}</b></td>
                                     </tr>
+
                                     </tfoot>
                                 </table>
                             </div>
                         </div>
-                        <div class="row d-print-none mt-2">
-                            <div class="col-12 text-right"><a class="btn btn-primary" href="javascript:window.print();" target="_blank"><i class="fa fa-print"></i> Print</a></div>
+                        
+                        {{-- <div class="row d-print-none mt-2">
+                            <div class="col-12 text-right">
+                                <a class="btn btn-primary" href="javascript:window.open('about:blank').document.body.innerHTML = document.body.innerHTML; window.print();">
+                                    <i class="fa fa-print"></i> Print
+                                </a>
+                            </div>
                         </div>
+                         --}}
+
+
+                       <div class="row d-print-none mt-2">
+                            <div class="col-11 text-right">
+                                <a class="btn btn-primary" href="javascript:window.print();">
+                                    <i class="fa fa-print"></i> Print
+                                </a>
+                            </div>
+                        </div>
+
+
+                    
                     </section>
                 </div>
             </div>
@@ -85,6 +114,16 @@
 @endsection
 @push('js')
 @endpush
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+<script>
+    document.getElementById("print-pdf-btn").addEventListener("click", function() {
+        var doc = new jsPDF();
+        doc.text(20, 20, 'This is a sample PDF generated using jsPDF!');
+        doc.save('sample.pdf');
+    });
+</script>
 
 
 
