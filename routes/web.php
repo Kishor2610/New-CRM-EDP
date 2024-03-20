@@ -23,6 +23,9 @@ Route::resource('invoice', 'InvoiceController');
 
 Route::get('/findPrice', 'InvoiceController@findPrice')->name('findPrice');
 
+Route::get('/invoices/sales', 'InvoiceController@sales')->name('invoice.sales');
+
+
 
 Route::resource('category', 'CategoryController');
 
@@ -37,6 +40,7 @@ Route::resource('supplier', 'SupplierController');
 Route::resource('raw_material', 'RawMaterialController');
 
 Route::get('changeStatus', 'RawMaterialController@changeStatus');
+
 
 
 

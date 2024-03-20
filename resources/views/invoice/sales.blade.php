@@ -2,7 +2,7 @@
 
 @extends('layouts.master')
 
-@section('titel', 'Customer | ')
+@section('titel', 'Sales | ')
 @section('content')
     @include('partials.header')
     @include('partials.sidebar')
@@ -10,11 +10,11 @@
     <main class="app-content">
         <div class="app-title">
             <div>
-                <h1><i class="fa fa-th-list"></i> View Invoice</h1>
+                <h1><i class="fa fa-th-list"></i> View Sales</h1>
             </div>
             <ul class="app-breadcrumb breadcrumb side">
                 <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-                <li class="breadcrumb-item active"><a href="#">View Invoice</a></li>
+                <li class="breadcrumb-item active"><a href="#">View Sales</a></li>
             </ul>
         </div>
        
@@ -27,32 +27,34 @@
                             <thead>
                             <tr>
                                 <th>Invoice ID </th>
-                                <th>Customer Name </th>
                                 <th>Date </th>
-                                <th>Action</th>
+                                <th>Customer Name </th>
+                                <th>Product Name </th>
+                                <th>Product Image </th>
+                                <th> Qty </th>
+                                <th> Price  </th>
+                                <th> Discount  </th>
+                                <th>Total Amount  </th>
+                                {{-- <th>Action</th> --}}
                             </tr>
                             </thead>
                              <tbody>
 
-                             @foreach($invoices as $invoice)
+                             @foreach($sales as $sales)
                                  <tr>
-                                     <td>{{1000+$invoice->id}}</td>
-                                     <td>{{$invoice->customer->name}}</td>
-                                     <td>{{$invoice->created_at->format('Y-m-d')}}</td>
-                                     <td>
-                                         <a class="btn btn-primary" href="{{route('invoice.show', $invoice->id)}}"><i class="fa fa-bandcamp" ></i></a>
-                                         <a class="btn btn-primary" href="{{route('invoice.edit', $invoice->id)}}"><i class="fa fa-edit" ></i></a>
-
-                                         <button class="btn btn-danger waves-effect" type="submit" onclick="deleteTag({{ $invoice->id }})">
-                                             <i class="fa fa-trash-o"></i>
-                                         </button>
-                                         <form id="delete-form-{{ $invoice->id }}" action="{{ route('invoice.destroy',$invoice->id) }}" method="POST" style="display: none;">
-                                             @csrf
-                                             @method('DELETE')
-                                         </form>
-                                     </td>
+                                     <td>{{1000+$sales->id}}</td>
+                                     <td>{{$sales->created_at->format('Y-m-d')}}</td>
+                                     <td>{{ $sales->invoice->customer->name }}</td>
+                                     <td>{{ $sales->product->name }}</td>
+                                     <td><img width="60 px" src="{{ asset('images/product/'.$sales->product->image) }}"></td>
+                                     <td>{{$sales->qty}}</td>
+                                     <td>{{$sales->price}}</td>
+                                     <td>{{$sales->dis}}</td>
+                                     <td>{{$sales->amount}}</td>
+                                     
                                  </tr>
-                             @endforeach
+                            @endforeach
+                    
                             </tbody>
                         </table>
                     </div>

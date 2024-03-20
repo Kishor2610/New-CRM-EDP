@@ -43,8 +43,8 @@
                                     <thead>
                                     <tr>
                                         <th>Product</th>
-                                        <th>Qty</th>
                                         <th>Price</th>
+                                        <th>Qty</th>
                                         <th>Amount</th>
                                      </tr>
                                     </thead>
@@ -55,8 +55,8 @@
                                     @foreach($sales as $sale)
                                     <tr>
                                         <td>{{$sale->product->name}}</td>
-                                        <td>{{$sale->qty}}</td>
                                         <td>{{$sale->price}}</td>
+                                        <td>{{$sale->qty}}</td>
                                         <td>{{$sale->amount}}</td>
                                         <div style="display: none">
                                             {{$total +=$sale->amount}}
@@ -70,7 +70,7 @@
                                         <td></td>
                                         <td></td>
                                         <td><b>Tax</b></td>
-                                        <td><b class="total">0</b></td>
+                                        <td><b class="tax_id">{{ $invoice->tax }}%</b></td>
                                     </tr>
                                     <tr>
 

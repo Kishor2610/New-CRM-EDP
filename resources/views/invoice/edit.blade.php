@@ -25,6 +25,7 @@
                         <form  method="POST" action="{{route('invoice.update',$invoice->id)}}">
                             @csrf
                             @method('PUT')
+                            <div class="form-row">
                             <div class="form-group col-md-3">
                                 <label class="control-label">Customer Name</label>
                                 <select name="customer_id" class="form-control">
@@ -37,6 +38,7 @@
                                 <label class="control-label">Date</label>
                                 <input name="date"  class="form-control datepicker"  value="<?php echo date('Y-m-d')?>" type="date" placeholder="Enter your email">
                             </div>
+                            </div>
 
 
 
@@ -48,7 +50,10 @@
                                     <th scope="col">Price</th>
                                     <th scope="col">Discount</th>
                                     <th scope="col">Amount</th>
-                                    <th scope="col"><a class="addRow"><i class="fa fa-plus"></i></a></th>
+                                    <th>
+                                    <a class="btn btn-success add"> <i class="fa fa-plus"></i></a>
+                                    </th>
+                                    {{-- <th scope="col"><a class="addRow"><i class="fa fa-plus"></i></a></th> --}}
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -65,26 +70,34 @@
                                     <td><input value="{{$sale->dis}}" type="text" name="dis[]" class="form-control dis" ></td>
                                     <td><input value="{{$sale->amount}}" type="text" name="amount[]" class="form-control amount" ></td>
                                     <td>
-                                        <a class="btn btn-success add"> <i class="fa fa-plus"></i></a>
+                                        {{-- <a class="btn btn-success add"> <i class="fa fa-plus"></i></a> --}}
                                         <a class="btn btn-danger remove"> <i class="fa fa-remove"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach
                                 </tbody>
                                 <tfoot>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td><b>Total</b></td>
-                                    <td><b class="total"></b></td>
-                                    <td></td>
-                                </tr>
-                                </tfoot>
+                                    <tr>
+                                        <td></td>
+                                        <td> <b>Select Tax</b></td>
+                                        <td>
+                                            <select name="tax_id[]" class="form-control tax_id" >
+                                                <option>Select Tax</option> 
+                                            @foreach($taxes as $taxes)
+                                                    <option name="tax_id[]" value="{{$taxes->slug}}">{{$taxes->slug}}%</option>
+                                                @endforeach
+                                             </select>
+                                        </td>
+                                       
+                                        <td><b>Total</b></td>
+                                        <td><b class="total"></b></td>
+                                        <td></td>
+                                    </tr>
+                                    </tfoot>
 
                             </table>
 
-                            <div >
+                            <div class="form-group text-center">
                                 <button class="btn btn-primary" type="submit">Update</button>
                             </div>
                         </form>
@@ -150,15 +163,43 @@
                 tr.find('.amount').val(amount);
                 total();
             });
+
+            $('tfoot').delegate('.tax_id','change',function(){
+                var tr =$(this).parent().parent();
+                tr.find('.tax_id').focus();
+                total();
+
+            });
+
+                   
             function total(){
                 var total = 0;
+                var tax = 0;
+                tax = $('.tax_id').val();
+
+                if(tax > -10){
+                    tax =parseInt(tax);
+                }
+                else (
+                    tax =parseInt(0)
+                )
+
                 $('.amount').each(function (i,e) {
                     var amount =$(this).val()-0;
+                  
                     total += amount;
+                   
                 })
+
+                //total = parseInt(total);
+                total +=  +(total) * +(+(tax)/100);
+                
+                total = parseInt(total);
+            
                 $('.total').html(total);
             }
-
+            
+            
             $('.addRow').on('click', function () {
                 addRow();
 

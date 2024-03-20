@@ -168,9 +168,26 @@
                 total();
             });
 
+            $('tfoot').delegate('.tax_id','change',function(){
+                var tr =$(this).parent().parent();
+                tr.find('.tax_id').focus();
+                total();
+
+            });
+
                    
             function total(){
                 var total = 0;
+                var tax = 0;
+                tax = $('.tax_id').val();
+
+                if(tax > -10){
+                    tax =parseInt(tax);
+                }
+                else (
+                    tax =parseInt(0)
+                )
+
                 $('.amount').each(function (i,e) {
                     var amount =$(this).val()-0;
                   
@@ -178,16 +195,16 @@
                    
                 })
 
-                // total = total + (total*2/100) ;
-
+                //total = parseInt(total);
+                total +=  +(total) * +(+(tax)/100);
+                
+                total = parseInt(total);
+            
                 $('.total').html(total);
-
-
             }
 
-
-
-
+                   
+           
 
             $('.addRow').on('click', function () {
                 addRow();

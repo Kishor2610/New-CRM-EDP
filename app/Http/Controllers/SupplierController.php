@@ -32,7 +32,7 @@ class SupplierController extends Controller
         $request->validate([
             'name' => 'required|min:3|unique:suppliers|regex:/^[a-zA-Z ]+$/',
             'address' => 'required|min:3',
-            'mobile' => 'required|min:3|digits:11',
+            'mobile' => 'required|min:3|digits:10',
             'details' => 'required|string|min:1',
             'previous_balance' => 'min:3',
 

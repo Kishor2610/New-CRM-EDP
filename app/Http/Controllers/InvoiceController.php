@@ -50,21 +50,14 @@ class InvoiceController extends Controller
 
         $invoice = new Invoice();
         $invoice->customer_id = $request->customer_id;
+        $invoice->tax = implode(',', $request->tax_id);
         $invoice->total = 1000;
         $invoice->save();
 
         foreach ( $request->product_id as $key => $product_id){
             $sale = new Sale();
             $sale->qty = $request->qty[$key];
-            
-           
-            // $tax = Tax::find($request->tax_id[$key]);
-            // $total = $sale->price; 
-            // $taxAmount = $total +($total * $tax->slug); 
-            // $sale->price = $taxAmount; 
-            // dd( $sale->amount);
-            
-            
+                        
             $sale->price = $request->price[$key];
             $sale->dis = $request->dis[$key];
             
@@ -105,7 +98,8 @@ class InvoiceController extends Controller
         $products = Product::orderBy('id', 'DESC')->get();
         $invoice = Invoice::findOrFail($id);
         $sales = Sale::where('invoice_id', $id)->get();
-        return view('invoice.edit', compact('customers','products','invoice','sales'));
+        $taxes = Tax::all();
+        return view('invoice.edit', compact('customers','products','invoice','sales','taxes'));
     }
 
 
@@ -119,11 +113,14 @@ class InvoiceController extends Controller
         'price' => 'required',
         'dis' => 'required',
         'amount' => 'required',
+        'tax_id'=> 'required',
+
     ]);
 
         $invoice = Invoice::findOrFail($id);
         $invoice->customer_id = $request->customer_id;
         $invoice->total = 1000;
+        $invoice->tax = implode(',', $request->tax_id);
         $invoice->save();
 
         Sale::where('invoice_id', $id)->delete();
@@ -154,4 +151,21 @@ class InvoiceController extends Controller
         return redirect()->back();
 
     }
+
+
+    public function sales()
+    {
+        $invoices = Invoice::with('sales.product')->get();
+    
+        $sales = collect();
+        foreach ($invoices as $invoice) {
+            $sales = $sales->merge($invoice->sales);
+        }
+
+        return view('invoice.sales', compact('invoices','sales'));
+    }
+
+    
+
+    
 }

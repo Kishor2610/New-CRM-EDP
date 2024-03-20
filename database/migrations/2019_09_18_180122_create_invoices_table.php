@@ -17,6 +17,7 @@ class CreateInvoicesTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('customer_id')->unsigned();
             $table->string('total');
+            $table->string('tax');
             $table->foreign('customer_id')
                 ->references('id')->on('customers')
                 ->onDelete('cascade');
