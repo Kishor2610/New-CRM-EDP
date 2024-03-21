@@ -3,6 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\User;
+
+use App\Customer;
+use App\Product;
+use App\Invoice;
+use App\Sale;
+use Illuminate\Support\Facades\DB;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,8 +23,15 @@ class HomeController extends Controller
 
     public function index(){
 
-        return view('home');
+        $customerCount = Customer::count();
+        $productCount = Product::count();
+        $invoiceCount = Invoice::count();
+
+        
+        return view('home',compact('customerCount','productCount','invoiceCount'));
     }
+
+
 
     public function edit_profile(){
         

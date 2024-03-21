@@ -71,8 +71,7 @@
                                  
                                 <td><input type="text" name="amount[]" class="form-control amount" ></td>
 
-                                <td>
-                                                                        
+                                <td>                                       
                                     <a class="btn btn-danger remove"> <i class="fa fa-remove"></i></a>
                                 </td>
                             

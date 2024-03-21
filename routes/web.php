@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
 
+
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
@@ -26,7 +27,6 @@ Route::get('/findPrice', 'InvoiceController@findPrice')->name('findPrice');
 Route::get('/invoices/sales', 'InvoiceController@sales')->name('invoice.sales');
 
 
-
 Route::resource('category', 'CategoryController');
 
 Route::get('changeStatus', 'CategoryController@changeStatus');
@@ -40,8 +40,6 @@ Route::resource('supplier', 'SupplierController');
 Route::resource('raw_material', 'RawMaterialController');
 
 Route::get('changeStatus', 'RawMaterialController@changeStatus');
-
-
 
 
 

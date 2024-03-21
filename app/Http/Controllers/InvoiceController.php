@@ -156,7 +156,7 @@ class InvoiceController extends Controller
     public function sales()
     {
         $invoices = Invoice::with('sales.product')->get();
-    
+
         $sales = collect();
         foreach ($invoices as $invoice) {
             $sales = $sales->merge($invoice->sales);
