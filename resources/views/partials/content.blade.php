@@ -38,8 +38,8 @@
         <div class="col-md-6 col-lg-3">
             <div class="widget-small primary coloured-icon"><i class="icon fa fa-users fa-3x"></i>
                 <div class="info">
-                    <h4><b>Customer</b></h4>
-                    <p><b>{{ $customerCount }}</b></p>
+                    <h4><b>Sale</b></h4>
+                    {{-- <p><b>{{ $saleCount }}</b></p> --}}
                 </div>
             </div>
         </div>
@@ -60,13 +60,62 @@
 
         <div class="col-md-6">
             <div class="tile">
-                <h3 class="tile-title">Product Sales</h3>
+                <h3 class="tile-title">Invoice Product Sales</h3>
                 <div class="embed-responsive embed-responsive-16by9">
                     <canvas class="embed-responsive-item" id="barChartDemo"></canvas>
                 </div>
             </div>
         </div>
         
+
+           
+        <div class="col-md-6">
+            <div class="tile">
+                <h3 class="tile-title">Invoice Customer Sales Distribution</h3>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Customer Name</th>
+                                <th>Total Bill</th>
+                                <th>Received</th>
+                                <th>Remaining</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @php
+                                $customerTotal = [];
+                            @endphp
+
+                            @foreach($invoices as $invoice)
+                                @php
+                                    $customerId = $invoice->customer_id;
+                                    $customerName = $invoice->customer->name;
+                                    $total = $invoice->total;
+
+                                    // Calculate total bill value for each customer
+                                    if (!isset($customerTotal[$customerId])) {
+                                        $customerTotal[$customerId] = $total;
+                                    } else {
+                                        $customerTotal[$customerId] += $total;
+                                    }
+                                @endphp
+                            @endforeach
+
+                            @foreach($customerTotal as $customerId => $total)
+                                <tr>
+                                    <td>{{ \App\Customer::find($customerId)->name }}</td>
+                                    <td>{{ $total }}</td>
+                                    <td>5000</td>
+                                    <td>{{ $total - 100}}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
 
         <div class="col-md-6">
             <div class="tile">
@@ -91,16 +140,14 @@
                 </div>
             </div>
         </div> 
-    
-       
-        {{-- <div class="col-md-6">
+
+        <div class="col-md-6">
             <div class="tile">
-                <h3 class="tile-title">Product Sales Distribution</h3>
-                <div class="embed-responsive embed-responsive-16by9">
-                    <canvas class="embed-responsive-item" id="pieChartDemo"></canvas>
-                </div>
+                <h3 class="tile-title">Quation Sales</h3>
+                
             </div>
-        </div>  --}}
+        </div>
+        
 
 
        
@@ -116,6 +163,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+{{-- Invoice Product Sales --}}
 <script>
     // Extract product sales data from PHP array
     var productSalesData = {!! json_encode($sales->pluck('qty', 'product_id')) !!};
@@ -139,7 +187,7 @@
         {
             label: 'Sale',
             data: Object.values(productAmountData),
-            backgroundColor: 'rgba(83, 105, 125, 0.8)', 
+            backgroundColor: 'rgba(0, 150, 136, 0.8)', 
             borderColor: 'rgba(255, 99, 132, 1)',
             borderWidth: 1
         }]
@@ -189,6 +237,7 @@
 </script>
 
 
+{{-- Monthly Sales --}}
 <script>
     // Extract sales data from PHP array
     var salesData = {!! json_encode($sales) !!};
