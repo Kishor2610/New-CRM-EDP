@@ -26,13 +26,12 @@ class HomeController extends Controller
         $customerCount = Customer::count();
         $productCount = Product::count();
         $invoiceCount = Invoice::count();
-        $sales = Sale::all();
-        
-        $invoices = Invoice::all();
+        $saleCount = Sale::sum('amount');
 
-        // dd($invoices);
+        $sales = Sale::all();
+        $invoices = Invoice::all();
                
-        return view('home',compact('customerCount','productCount','invoiceCount','sales','invoices'));
+        return view('home',compact('customerCount','productCount','invoiceCount','saleCount','sales','invoices'));
     }
 
 

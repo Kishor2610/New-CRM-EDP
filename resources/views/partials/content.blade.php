@@ -39,7 +39,7 @@
             <div class="widget-small primary coloured-icon"><i class="icon fa fa-users fa-3x"></i>
                 <div class="info">
                     <h4><b>Sale</b></h4>
-                    {{-- <p><b>{{ $saleCount }}</b></p> --}}
+                    <p><b>{{ $saleCount }}</b></p>
                 </div>
             </div>
         </div>
@@ -58,6 +58,33 @@
 
     <div class="row">
 
+        {{-- Invoice Customer Sales Distribution --}}
+        <div class="col-md-6">
+            <div class="tile">
+                
+                <div class="form-group d-flex">
+                <h3 class="tile-title mr-5">Monthly Sales</h3>
+
+                <div class="d-flex align-items-center mr-4">
+                    <label for="yearSelect" class="mr-2"> Year:</label>
+                    <select class="form-control" id="yearSelect"></select>
+                </div>
+
+                <div class="d-flex align-items-center">
+                    <label for="monthSelect" class="mr-2"> Month:</label>
+                    <select class="form-control" id="monthSelect"></select>
+                </div>
+                    
+                </div>
+
+                <div class="embed-responsive embed-responsive-16by9">
+                    <canvas class="embed-responsive-item" id="lineChartDemo1"></canvas>
+                </div>
+            </div>
+        </div> 
+
+        
+        {{-- Invoice Product Sales --}}
         <div class="col-md-6">
             <div class="tile">
                 <h3 class="tile-title">Invoice Product Sales</h3>
@@ -68,8 +95,8 @@
         </div>
         
 
-           
-        <div class="col-md-6">
+         {{-- Monthly Sales --}}
+         {{-- <div class="col-md-6">
             <div class="tile">
                 <h3 class="tile-title">Invoice Customer Sales Distribution</h3>
                 <div class="table-responsive">
@@ -115,42 +142,13 @@
                     </table>
                 </div>
             </div>
-        </div>
-
-        <div class="col-md-6">
-            <div class="tile">
-                
-                <div class="form-group d-flex">
-                <h3 class="tile-title mr-5">Monthly Sales</h3>
-
-                <div class="d-flex align-items-center mr-4">
-                    <label for="yearSelect" class="mr-2"> Year:</label>
-                    <select class="form-control" id="yearSelect"></select>
-                </div>
-
-                <div class="d-flex align-items-center">
-                    <label for="monthSelect" class="mr-2"> Month:</label>
-                    <select class="form-control" id="monthSelect"></select>
-                </div>
-                    
-                </div>
-
-                <div class="embed-responsive embed-responsive-16by9">
-                    <canvas class="embed-responsive-item" id="lineChartDemo1"></canvas>
-                </div>
-            </div>
-        </div> 
-
-        <div class="col-md-6">
-            <div class="tile">
-                <h3 class="tile-title">Quation Sales</h3>
-                
-            </div>
-        </div>
+        </div> --}}
+       
+       
         
 
-
-       
+              
+              
     </div>
 
 
@@ -366,6 +364,8 @@
         lineChart.update();
     });
 </script>
+
+
 
 
 
