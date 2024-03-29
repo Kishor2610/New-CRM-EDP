@@ -43,5 +43,13 @@ Route::get('changeStatus', 'RawMaterialController@changeStatus');
 
 
 
+
+Route::resource('quotation', 'QuotationController');
+
+Route::get('/findPrice', 'QuotationController@findPrice')->name('findPrice');
+
+Route::get('/quotations/quotation_sales', 'QuotationController@quotation_sales')->name('quotation.quotation_sales');
+
+
 ?>
 

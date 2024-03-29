@@ -63,37 +63,42 @@
             <div class="tile">
                 
                 <div class="form-group d-flex">
-                <h3 class="tile-title mr-5">Monthly Sales</h3>
+                <h3 class="tile-title mr-4"> Sales</h3>
 
-                <div class="d-flex align-items-center mr-4">
-                    <label for="yearSelect" class="mr-2"> Year:</label>
+                <div class="d-flex align-items-center mr-1">
+                    <label for="yearSelect" class="mr-1"> Year:</label>
                     <select class="form-control" id="yearSelect"></select>
                 </div>
 
                 <div class="d-flex align-items-center">
-                    <label for="monthSelect" class="mr-2"> Month:</label>
+                    <label for="monthSelect" class="mr-1"> Month:</label>
                     <select class="form-control" id="monthSelect"></select>
                 </div>
                     
                 </div>
 
                 <div class="embed-responsive embed-responsive-16by9">
+                    <br><br><br><br><br><br>
                     <canvas class="embed-responsive-item" id="lineChartDemo1"></canvas>
                 </div>
             </div>
         </div> 
 
-        
         {{-- Invoice Product Sales --}}
         <div class="col-md-6">
             <div class="tile">
-                <h3 class="tile-title">Invoice Product Sales</h3>
+                 <div class="form-group">
+                <h3 class="tile-title"> Product </h3>
                 <div class="embed-responsive embed-responsive-16by9">
+                    <br><br><br><br><br><br>
                     <canvas class="embed-responsive-item" id="barChartDemo"></canvas>
                 </div>
+                 </div>
             </div>
         </div>
+    
         
+       
 
          {{-- Monthly Sales --}}
          {{-- <div class="col-md-6">
@@ -143,14 +148,37 @@
                 </div>
             </div>
         </div> --}}
-       
-       
-        
 
-              
-              
-    </div>
 
+
+        <div class="col-md-6">
+            <div class="tile">
+                <h3 class="tile-title">Customer Payments</h3>
+                <div class="form-group">
+                    <label for="customerSelect">Select Customer:</label>
+                    <select class="form-control" id="customerSelect">
+                        <option value="">Select Customer</option>
+                        @foreach($invoices as $invoice)
+                            <option value="{{ $invoice->customer->id }}">{{ $invoice->customer->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="embed-responsive embed-responsive-16by9">
+                    <br><br><br>
+                    <canvas class="embed-responsive-item" id="pieChartDemo"></canvas>
+                </div>
+            </div>
+        </div>
+     
+   
+
+
+
+    
+    
+   
+</div>
+    
 
             
 </main>
@@ -160,7 +188,8 @@
 
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
+<script src="https://cdn.anychart.com/releases/8.11.1/js/anychart-core.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/8.11.1/js/anychart-pie.min.js"></script>
 {{-- Invoice Product Sales --}}
 <script>
     // Extract product sales data from PHP array
@@ -364,6 +393,52 @@
         lineChart.update();
     });
 </script>
+
+
+
+{{-- pie chart --}}
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+ <script>
+    // Assuming you have access to total bill and remaining bill data for each customer
+    // You can update this data dynamically based on the selected customer
+    var totalBill = 500; // Example total bill
+    var remainingBill = 200; // Example remaining bill
+
+    // Initialize Chart.js with pie chart configuration
+    var ctx = document.getElementById('pieChartDemo').getContext('2d');
+    var pieChartDemo = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ['Remaining Bill', 'Paid Bill'],
+            datasets: [{
+                label: 'Customer Bill Distribution',
+                data: [remainingBill, totalBill - remainingBill],
+                backgroundColor: [
+                    'rgba(255, 77, 12, 0.5)', // Red for remaining bill
+                    'rgba(54, 162, 56, 0.5)' // Blue for paid bill
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Customer Bill Distribution'
+                }
+            }
+        }
+    });
+</script> 
+
 
 
 

@@ -8,6 +8,7 @@ use App\Sale;
 use App\Tax;
 use App\Supplier;
 use App\Invoice;
+use App\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -31,6 +32,7 @@ class InvoiceController extends Controller
         $customers = Customer::all();
         $products = Product::all();
         $taxes = Tax::all();
+        $taxe = Invoice::all();
         return view('invoice.create', compact('customers','products','taxes'));
     }
 
@@ -48,12 +50,15 @@ class InvoiceController extends Controller
             'tax_id'=> 'required',
         ]);
 
+       
+       
         $invoice = new Invoice();
         $invoice->customer_id = $request->customer_id;
         $invoice->tax = implode(',', $request->tax_id);
-        $invoice->total = 1000;
+        $invoice->total = 0;
         $invoice->save();
 
+      
         foreach ( $request->product_id as $key => $product_id){
             $sale = new Sale();
             $sale->qty = $request->qty[$key];
@@ -67,8 +72,39 @@ class InvoiceController extends Controller
             $sale->invoice_id = $invoice->id;
             $sale->save();
 
-
+    
          }
+      
+            $sales = Sale::where('invoice_id', $invoice->id)->get();
+            $totalAmount = $sales->sum('amount');
+            $invoice->total = $totalAmount;
+            $invoice->save();
+
+
+            
+        // Payment
+            $invoices = Invoice::all();
+            $customerTotals = [];
+        
+            foreach ($invoices as $invoice) {
+                $customerId = $invoice->customer_id;
+                $total = (float) $invoice->total;
+                if (!isset($customerTotals[$customerId])) {
+                    $customerTotals[$customerId] = 0.0;
+                }
+                $customerTotals[$customerId] += $total;
+            }
+
+            foreach ($customerTotals as $customerId => $total) {
+                $payment = new Payment();
+                $payment->customer_id = $customerId;
+                $payment->total_bills = $total;
+
+                $payment->total_received = $total;
+                $payment->remaining_balance = $total; 
+                $payment->save();
+            }
+
 
          return redirect('invoice/'.$invoice->id)->with('message','invoice created Successfully');
 
@@ -164,6 +200,10 @@ class InvoiceController extends Controller
 
         return view('invoice.sales', compact('invoices','sales'));
     }
+
+
+
+   
 
     
 

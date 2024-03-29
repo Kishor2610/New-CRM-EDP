@@ -1123,7 +1123,7 @@ pre code {
     -webkit-box-flex: 0;
         -ms-flex: 0 0 50%;
             flex: 0 0 50%;
-    max-width: 50%;
+    max-width: 33%;
   }
   .col-md-7 {
     -webkit-box-flex: 0;
@@ -14219,7 +14219,7 @@ be a descendant of the grid when it is being dragged.
 .tile .tile-title {
   margin-top: 0;
   margin-bottom: 20px;
-  font-size: 1.5rem;
+  font-size: 1rem;
 }
 
 .tile .tile-title-w-btn {

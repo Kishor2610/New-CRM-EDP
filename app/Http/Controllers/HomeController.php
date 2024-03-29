@@ -8,6 +8,7 @@ use App\Customer;
 use App\Product;
 use App\Invoice;
 use App\Sale;
+use App\Payment;
 use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
@@ -30,8 +31,9 @@ class HomeController extends Controller
 
         $sales = Sale::all();
         $invoices = Invoice::all();
-               
-        return view('home',compact('customerCount','productCount','invoiceCount','saleCount','sales','invoices'));
+        $payments = Payment::all();
+        // dd($payments);
+        return view('home',compact('customerCount','productCount','invoiceCount','saleCount','sales','invoices','payments'));
     }
 
 

@@ -17,22 +17,24 @@
             <ul class="treeview-menu">
                 <li><a class="treeview-item " href="{{route('invoice.create')}}" ><i class="icon fa fa-plus"></i>Create Invoice </a></li>
                 <li><a class="treeview-item" href="{{route('invoice.index')}}"><i class="icon fa fa-edit"></i> Manage Invoice</a></li>
+                <li><a class="treeview-item" href="{{route('invoice.sales')}}"><i class="icon fa fa-industry"></i> View Sales</a></li>
+                <li><a class="treeview-item" href="#"><i class="icon fa fa-industry"></i> Purchase Sales</a></li>
             </ul>
         </li>
 
        
-        <li class="treeview "><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-quote-left"></i><span class="app-menu__label">Quatation</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+        <li class="treeview "><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-quote-left"></i><span class="app-menu__label">Quotation</span><i class="treeview-indicator fa fa-angle-right"></i></a>
             <ul class="treeview-menu">
-                <li><a class="treeview-item " href="#" ><i class="icon fa fa-plus"></i>Create Quatation </a></li>
-                <li><a class="treeview-item" href="#"><i class="icon fa fa-edit"></i> Manage Quatation</a></li>
+                <li><a class="treeview-item " href="{{route('quotation.create')}}" ><i class="icon fa fa-plus"></i>Create Quotation </a></li>
+                <li><a class="treeview-item" href="{{route('quotation.index')}}"><i class="icon fa fa-edit"></i> Manage Quotation</a></li>
             </ul>
         </li>
 
-        <li class="treeview "><a class="app-menu__item" href="{{route('invoice.sales')}}" data-toggle="treeview"><i class="app-menu__icon fa fa-industry"></i><span class="app-menu__label">Sales</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+        {{-- <li class="treeview "><a class="app-menu__item" href="{{route('invoice.sales')}}" data-toggle="treeview"><i class="app-menu__icon fa fa-industry"></i><span class="app-menu__label">Sales</span><i class="treeview-indicator fa fa-angle-right"></i></a>
             <ul class="treeview-menu">
                 <li><a class="treeview-item" href="{{route('invoice.sales')}}"><i class="icon fa fa-industry"></i> View Sales</a></li>
             </ul>
-        </li>
+        </li> --}}
       
         {{-- customer --}}
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-users"></i><span class="app-menu__label">Customer</span><i class="treeview-indicator fa fa-angle-right"></i></a>
