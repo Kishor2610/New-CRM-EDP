@@ -16,8 +16,8 @@ class CreateQuotationsTable extends Migration
         Schema::create('quotations', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('customer_id')->unsigned();
-            $table->string('q_total');
-            $table->string('q_tax');
+            $table->string('total');
+            $table->string('tax');
             $table->foreign('customer_id')
                 ->references('id')->on('customers')
                 ->onDelete('cascade');

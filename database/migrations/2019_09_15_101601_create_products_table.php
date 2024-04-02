@@ -20,6 +20,7 @@ class CreateProductsTable extends Migration
             $table->string('model');
             $table->integer('category_id');
             $table->string('sales_price');
+            $table->string('product_qty');
             $table->integer('unit_id');
             $table->string('image');
             $table->string('tax_id');

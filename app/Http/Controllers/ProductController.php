@@ -46,6 +46,7 @@ class ProductController extends Controller
             'model' => 'required|min:3',
             'category_id' => 'required',
             'sales_price' => 'required',
+            'product_qty' => 'required',
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'tax_id' => 'required',
 
@@ -58,6 +59,7 @@ class ProductController extends Controller
         $product->model = $request->model;
         $product->category_id = $request->category_id;
         $product->sales_price = $request->sales_price;
+        $product->product_qty = $request->product_qty;
         $product->unit_id = '0';
         $product->tax_id = $request->tax_id;
 
@@ -99,6 +101,7 @@ class ProductController extends Controller
             'model' => 'required|min:3',
             'category_id' => 'required',
             'sales_price' => 'required',
+            'product_qty' => 'required',
             'unit_id' => '0',
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'tax_id' => 'required',
@@ -111,6 +114,7 @@ class ProductController extends Controller
         $product->model = $request->model;
         $product->category_id = $request->category_id;
         $product->sales_price = $request->sales_price;
+        $product->product_qty = $request->product_qty;
         $product->unit_id = '0';
         $product->tax_id = $request->tax_id;
 

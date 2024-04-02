@@ -82,7 +82,7 @@ class InvoiceController extends Controller
 
 
             
-        // Payment
+        // Payment Data Stored
             $invoices = Invoice::all();
             $customerTotals = [];
         
@@ -100,16 +100,12 @@ class InvoiceController extends Controller
                 $payment->customer_id = $customerId;
                 $payment->total_bills = $total;
 
-                $payment->total_received = $total;
-                $payment->remaining_balance = $total; 
+                $payment->total_received = 10000;
+                $payment->remaining_balance = $total - 10000 ; 
                 $payment->save();
             }
-
-
+            
          return redirect('invoice/'.$invoice->id)->with('message','invoice created Successfully');
-
-
-
 
     }
 

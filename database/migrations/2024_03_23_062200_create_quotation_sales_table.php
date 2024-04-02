@@ -19,7 +19,7 @@ class CreateQuotationSalesTable extends Migration
             $table->bigInteger('product_id')->unsigned();
             $table->integer('qty');
             $table->integer('price');
-            $table->integer('discount');
+            $table->integer('dis');
             $table->integer('amount');
             $table->foreign('quotation_id')
                 ->references('id')->on('quotations')

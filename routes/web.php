@@ -51,5 +51,8 @@ Route::get('/findPrice', 'QuotationController@findPrice')->name('findPrice');
 Route::get('/quotations/quotation_sales', 'QuotationController@quotation_sales')->name('quotation.quotation_sales');
 
 
+Route::get('/customer/payments/{customerId}', 'PaymentController@getCustomerPayments');
+
+
 ?>
 

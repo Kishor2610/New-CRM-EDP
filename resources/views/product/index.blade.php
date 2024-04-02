@@ -26,10 +26,11 @@
                             <tr>
                                 <th>Product Name </th>
                                 <th>Model </th>
-                                <th>Sales Price</th>
                                 {{-- <th>Supplier Price</th> --}}
                                 {{-- <th>Supplier Name</th> --}}
                                 <th>Image</th>
+                                <th>Sales Price</th>
+                                <th>Product Qty</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -39,7 +40,7 @@
                                  <tr>
                                      <td>{{$product->name}}</td>
                                      <td>{{$product->model}}</td>
-                                     <td>{{$product->sales_price}}</td>
+
                                      {{-- <td>{{$price}}</td> --}}
                                      {{-- <td>{{$product->supplier->name}}</td> --}}
 
@@ -52,7 +53,8 @@
                                     </td> --}}
 
                                      <td><img width="60 px" src="{{ asset('images/product/'.$product->image) }}"></td>
-
+                                     <td>{{$product->sales_price}}</td>
+                                     <td>{{$product->product_qty}}</td>
                                      <td>
                                          <a class="btn btn-primary" href="{{route('product.edit', $product->id)}}"><i class="fa fa-edit" ></i></a>
                                          <button class="btn btn-danger waves-effect" type="submit" onclick="deleteTag({{ $product->id }})">

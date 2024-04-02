@@ -18,7 +18,7 @@
                 <li><a class="treeview-item " href="{{route('invoice.create')}}" ><i class="icon fa fa-plus"></i>Create Invoice </a></li>
                 <li><a class="treeview-item" href="{{route('invoice.index')}}"><i class="icon fa fa-edit"></i> Manage Invoice</a></li>
                 <li><a class="treeview-item" href="{{route('invoice.sales')}}"><i class="icon fa fa-industry"></i> View Sales</a></li>
-                <li><a class="treeview-item" href="#"><i class="icon fa fa-industry"></i> Purchase Sales</a></li>
+                <li><a class="treeview-item" href="#"><i class="icon fa fa-industry"></i> Available Products</a></li>
             </ul>
         </li>
 

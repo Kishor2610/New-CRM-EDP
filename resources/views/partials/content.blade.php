@@ -97,60 +97,7 @@
             </div>
         </div>
     
-        
-       
-
-         {{-- Monthly Sales --}}
-         {{-- <div class="col-md-6">
-            <div class="tile">
-                <h3 class="tile-title">Invoice Customer Sales Distribution</h3>
-                <div class="table-responsive">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Customer Name</th>
-                                <th>Total Bill</th>
-                                <th>Received</th>
-                                <th>Remaining</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                            @php
-                                $customerTotal = [];
-                            @endphp
-
-                            @foreach($invoices as $invoice)
-                                @php
-                                    $customerId = $invoice->customer_id;
-                                    $customerName = $invoice->customer->name;
-                                    $total = $invoice->total;
-
-                                    // Calculate total bill value for each customer
-                                    if (!isset($customerTotal[$customerId])) {
-                                        $customerTotal[$customerId] = $total;
-                                    } else {
-                                        $customerTotal[$customerId] += $total;
-                                    }
-                                @endphp
-                            @endforeach
-
-                            @foreach($customerTotal as $customerId => $total)
-                                <tr>
-                                    <td>{{ \App\Customer::find($customerId)->name }}</td>
-                                    <td>{{ $total }}</td>
-                                    <td>5000</td>
-                                    <td>{{ $total - 100}}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div> --}}
-
-
-
+    
         <div class="col-md-6">
             <div class="tile">
                 <h3 class="tile-title">Customer Payments</h3>
@@ -158,9 +105,14 @@
                     <label for="customerSelect">Select Customer:</label>
                     <select class="form-control" id="customerSelect">
                         <option value="">Select Customer</option>
-                        @foreach($invoices as $invoice)
+                        
+                        @php
+                            $uniqueCustomers = $invoices->unique('customer_id');
+                        @endphp
+                        @foreach($uniqueCustomers as $invoice)
                             <option value="{{ $invoice->customer->id }}">{{ $invoice->customer->name }}</option>
                         @endforeach
+
                     </select>
                 </div>
                 <div class="embed-responsive embed-responsive-16by9">
@@ -400,11 +352,26 @@
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
- <script>
-    // Assuming you have access to total bill and remaining bill data for each customer
-    // You can update this data dynamically based on the selected customer
-    var totalBill = 500; // Example total bill
-    var remainingBill = 200; // Example remaining bill
+<script>
+    document.getElementById('customerSelect').addEventListener('change', function() {
+        var customerId = this.value;
+        if (customerId) {
+            // AJAX call to fetch data for the selected customer
+            $.ajax({
+                url: '/customer/payments/' + customerId,
+                type: 'GET',
+                success: function(data) {
+                    updateChart(data.totalBill, data.remainingBill);
+                }
+            });
+        }
+    });
+
+    function updateChart(totalBill, remainingBill) {
+        // Update pie chart with the new data
+        pieChartDemo.data.datasets[0].data = [remainingBill, totalBill - remainingBill];
+        pieChartDemo.update();
+    }
 
     // Initialize Chart.js with pie chart configuration
     var ctx = document.getElementById('pieChartDemo').getContext('2d');
@@ -414,7 +381,7 @@
             labels: ['Remaining Bill', 'Paid Bill'],
             datasets: [{
                 label: 'Customer Bill Distribution',
-                data: [remainingBill, totalBill - remainingBill],
+                data: [0, 0], // Initialize with zero values
                 backgroundColor: [
                     'rgba(255, 77, 12, 0.5)', // Red for remaining bill
                     'rgba(54, 162, 56, 0.5)' // Blue for paid bill
@@ -437,7 +404,7 @@
             }
         }
     });
-</script> 
+</script>
 
 
 

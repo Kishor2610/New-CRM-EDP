@@ -51,7 +51,7 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label class="control-label">Serial Number</label>
-                                    <input name="serial_number" class="form-control @error('serial_number') is-invalid @enderror" type="number" placeholder="Enter Tax Name">
+                                    <input name="serial_number" class="form-control @error('serial_number') is-invalid @enderror" type="number" placeholder="Enter Serial Number">
                                     @error('serial_number')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -61,7 +61,7 @@
 
                                 <div class="form-group col-md-6">
                                     <label class="control-label">Model</label>
-                                    <input name="model" class="form-control @error('name') is-invalid @enderror" type="text" placeholder="Enter Tax Name">
+                                    <input name="model" class="form-control @error('name') is-invalid @enderror" type="text" placeholder="Enter Model Name">
                                     @error('model')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -89,7 +89,7 @@
 
                                 <div class="form-group col-md-6">
                                     <label class="control-label">Sale Price</label>
-                                    <input name="sales_price" class="form-control @error('sales_price') is-invalid @enderror" type="number" placeholder="Enter Tax Name">
+                                    <input name="sales_price" class="form-control @error('sales_price') is-invalid @enderror" type="number" placeholder="Enter Sale Price">
                                     @error('sales_price')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -129,6 +129,15 @@
                                         @endforeach
                                     </select>
                                     @error('tax_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="control-label">Product Qty</label>
+                                    <input name="product_qty" class="form-control @error('product_qty') is-invalid @enderror" type="number" placeholder="Enter product Qty">
+                                    @error('product_qty')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
