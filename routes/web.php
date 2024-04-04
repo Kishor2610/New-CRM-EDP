@@ -26,6 +26,9 @@ Route::get('/findPrice', 'InvoiceController@findPrice')->name('findPrice');
 
 Route::get('/invoices/sales', 'InvoiceController@sales')->name('invoice.sales');
 
+Route::get('/invoices/available_Product', 'InvoiceController@availableProduct')->name('invoice.available_Product');
+
+
 
 Route::resource('category', 'CategoryController');
 

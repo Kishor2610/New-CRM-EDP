@@ -16,6 +16,7 @@ class PaymentController extends Controller
         $totalBill = 0;
         $remainingBill = 0;
 
+        
         $payments = Payment::where('customer_id', $customerId)->get();
 
         foreach ($payments as $payment) {
@@ -23,7 +24,12 @@ class PaymentController extends Controller
             $remainingBill += $payment->remaining_balance;
     }
 
-    return response()->json(['totalBill' => $totalBill, 'remainingBill' => $remainingBill]);
+    $payments2 = Payment::all();
+    
+    return response()->json(['totalBill' => $totalBill, 
+                            'remainingBill' => $remainingBill,
+                            'payments' => $payments2
+                        ]);
 }
 
 

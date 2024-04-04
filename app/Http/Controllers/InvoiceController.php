@@ -100,8 +100,17 @@ class InvoiceController extends Controller
                 $payment->customer_id = $customerId;
                 $payment->total_bills = $total;
 
-                $payment->total_received = 10000;
+                $payment->total_received = $total;
                 $payment->remaining_balance = $total - 10000 ; 
+
+                if($total == $payment->total_received)
+                {
+                    $payment->payments_status = 1;
+                }else
+                {
+                    $payment->payments_status = 0;
+                }
+
                 $payment->save();
             }
             
@@ -196,6 +205,22 @@ class InvoiceController extends Controller
 
         return view('invoice.sales', compact('invoices','sales'));
     }
+
+
+    public function availableProduct()
+    {
+        $products = Product::all();
+        $sales = Sale::all();
+        
+
+        foreach ($products as $product) {
+            $soldQuantity = $sales->where('product_id', $product->id)->sum('qty');
+            $product->availableQty = $product->product_qty - $soldQuantity;
+        }
+
+        return view('invoice.available_Product', compact('products'));
+    }
+
 
 
 

@@ -31,9 +31,8 @@ class HomeController extends Controller
 
         $sales = Sale::all();
         $invoices = Invoice::all();
-        $payments = Payment::all();
         
-        return view('home',compact('customerCount','productCount','invoiceCount','saleCount','sales','invoices','payments'));
+        return view('home',compact('customerCount','productCount','invoiceCount','saleCount','sales','invoices'));
     }
 
 
