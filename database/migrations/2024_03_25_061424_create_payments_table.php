@@ -20,7 +20,7 @@ class CreatePaymentsTable extends Migration
             $table->decimal('total_bills', 10, 2); 
             $table->decimal('total_received', 10, 2); 
             $table->decimal('remaining_balance', 10, 2); 
-            $table->boolean('payments_status');
+            $table->string('payments_status');
             $table->timestamps();
         });
     }

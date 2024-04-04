@@ -100,17 +100,19 @@ class InvoiceController extends Controller
                 $payment->customer_id = $customerId;
                 $payment->total_bills = $total;
 
-                $payment->total_received = $total;
+                $payment->total_received = $total;    // received payment
+
                 $payment->remaining_balance = $total - 10000 ; 
 
                 if($total == $payment->total_received)
                 {
-                    $payment->payments_status = 1;
-                }else
-                {
-                    $payment->payments_status = 0;
+                    $payment->payments_status = "Completed"; // complete payment paid
                 }
-
+                else
+                {
+                    $payment->payments_status = "Pending"; // 
+                }
+                
                 $payment->save();
             }
             
