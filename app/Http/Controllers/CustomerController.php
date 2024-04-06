@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Customer;
+use App\Invoice;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -83,14 +84,6 @@ class CustomerController extends Controller
     }
 
 
-    // public function destroy($id)
-    // {
-    //     $customer = Customer::find($id);
-    //     $customer->delete();
-    //     return redirect()->back();
-    // }
-
-
     public function destroy($id)
     {
     $customer = Customer::find($id);
@@ -99,6 +92,13 @@ class CustomerController extends Controller
     
     return redirect()->back()->with('message', 'Customer Deleted Successfully');
     }
+
+
+
+    
+
+    
+
 
 }
 

@@ -35,6 +35,7 @@
                 <th>Details</th>
                 <th>Previous Balance</th>
                 <th>Action</th>
+                <th>Payment</th>
               </tr>
             </thead>
             <tbody>
@@ -55,6 +56,10 @@
                     @csrf
                     @method('DELETE')
                   </form>
+                </td>
+                <td>
+                  <a class="btn btn-primary" href="{{route('customer.payment', $customer->id)}}">
+                    <i class="fa fa-payment" ></i>Make Payment</a>
                 </td>
               </tr>
               @endforeach

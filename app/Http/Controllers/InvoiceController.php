@@ -81,40 +81,33 @@ class InvoiceController extends Controller
             $invoice->save();
 
 
+            // $payment = new Payment();
+            // $payment->customer_id = $invoice->customer_id;
+            // $payment->total_bills = $invoice->total;
             
-        // Payment Data Stored
-            $invoices = Invoice::all();
-            $customerTotals = [];
-        
-            foreach ($invoices as $invoice) {
-                $customerId = $invoice->customer_id;
-                $total = (float) $invoice->total;
-                if (!isset($customerTotals[$customerId])) {
-                    $customerTotals[$customerId] = 0.0;
-                }
-                $customerTotals[$customerId] += $total;
-            }
+            // Status Paid
+            // $payment->total_received = $invoice->total;
+            // $payment->remaining_balance = 0;
 
-            foreach ($customerTotals as $customerId => $total) {
-                $payment = new Payment();
-                $payment->customer_id = $customerId;
-                $payment->total_bills = $total;
+             // Status Pending
+            // $payment->total_received = 0;
+            // $payment->remaining_balance = $invoice->total;
 
-                $payment->total_received = $total;    // received payment
+             // Status Unpaid
+            // $payment->total_received = 2000;
+            // $payment->remaining_balance = $invoice->total -  $payment->total_received ;
 
-                $payment->remaining_balance = $total - 10000 ; 
-
-                if($total == $payment->total_received)
-                {
-                    $payment->payments_status = "Completed"; // complete payment paid
-                }
-                else
-                {
-                    $payment->payments_status = "Pending"; // 
-                }
+            //     if($invoice->total == $payment->total_received)
+            //     {
+            //             $payment->payments_status = "Paid"; // complete payment paid
+            //     }
+            //     else
+            //     {
+            //             $payment->payments_status = "Pending";  
+            //     }
                 
-                $payment->save();
-            }
+            // $payment->save();
+
             
          return redirect('invoice/'.$invoice->id)->with('message','invoice created Successfully');
 
@@ -222,8 +215,6 @@ class InvoiceController extends Controller
 
         return view('invoice.available_Product', compact('products'));
     }
-
-
 
 
    

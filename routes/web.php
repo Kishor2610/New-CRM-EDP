@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\PaymentController;
 
 
 Auth::routes();
@@ -30,6 +31,14 @@ Route::get('/invoices/available_Product', 'InvoiceController@availableProduct')-
 
 
 
+Route::get('/customer/payment/{id}', 'PaymentController@payment')->name('customer.payment');
+
+Route::post('/customer/store', 'PaymentController@store')->name('customer.store');
+
+
+
+
+
 Route::resource('category', 'CategoryController');
 
 Route::get('changeStatus', 'CategoryController@changeStatus');
@@ -55,6 +64,11 @@ Route::get('/quotations/quotation_sales', 'QuotationController@quotation_sales')
 
 
 Route::get('/customer/payments/{customerId}', 'PaymentController@getCustomerPayments');
+
+
+// Route::get('/payments', [PaymentController::class, 'index'])->name('payments.index');
+// Route::get('/payments/create', [PaymentController::class, 'create'])->name('payments.create');
+// Route::post('/payments', [PaymentController::class, 'store'])->name('payments.store');
 
 
 ?>
