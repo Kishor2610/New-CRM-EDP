@@ -53,23 +53,14 @@
                                     <tbody>
                                         <tr> 
                                             <td>
-                                                @if($payments_status === 'Paid')
-                                                    <input value="{{ $totalBill }}" type="text" name="total_bills" class="form-control amount" readonly></td>
-                                                @else  
-                                                     <input value="{{ $totalBill}}" type="text" name="total_bills" class="form-control amount" readonly></td>
-                                                @endif
-                                            
+                                                <input value="{{ $totalBill}}" type="text" name="total_bills" class="form-control amount" readonly></td>                                
                                             <td>
                                                 <input  id="total_received2" value="{{$totalReceived}}" type="text" name="total_received2" class="form-control total_received" required disabled>    
                                             </td>
 
                                             
                                             <td>
-                                                @if($payments_status === 'Paid') 
-                                                    <input  id="total_received" value="" type="text" name="total_received" class="form-control total_received" required disabled>
-                                                @else
-                                                    <input id="total_received" value="{{$totalRemainingBalance}}" type="text" name="total_received" class="form-control total_received" required>
-                                                    @endif
+                                                <input id="total_received" value="{{$totalRemainingBalance}}" type="text" name="total_received" class="form-control total_received" required>    
                                             </td>
                                                
                                         

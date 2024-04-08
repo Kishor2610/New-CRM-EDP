@@ -31,7 +31,7 @@
       <div class="tile" style="width: 95%;"> <!-- Increased width of the white box -->
         <h3 class="tile-title">Customer</h3>
         <div class="tile-body">
-          <form method="POST" action="{{route('customer.store')}}">
+          <form method="POST" action="{{route('customer.store_data')}}">
             @csrf
             <div class="form-row">
               <div class="form-group col-md-6">

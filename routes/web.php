@@ -25,7 +25,11 @@ Route::post('/register', [RegisterController::class, 'register']);
 
 Route::resource('customer', 'CustomerController');
 
-// Route::post('/customers', [CustomerController::class, 'store'])->name('customer.store');
+Route::post('customer', [CustomerController::class, 'store_data'])->name('customer.store_data');
+
+
+// Route::post('customer', 'CustomerController@store')->name('customer.store');
+
 
 
 Route::resource('invoice', 'InvoiceController');
@@ -71,9 +75,6 @@ Route::get('/customer/payment/{id}', 'PaymentController@payment')->name('custome
 Route::post('/customer/payment/', 'PaymentController@store')->name('customer.store');
 
 
-// Route::post('/customer','CustomerController@store')->name('customer.store');
-
-Route::post('/customers/store', [CustomerController::class, 'store'])->name('customer.store');
 
 
 ?>

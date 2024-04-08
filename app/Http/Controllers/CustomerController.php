@@ -30,7 +30,7 @@ class CustomerController extends Controller
         return view('customer.create');
     }
 
-    public function store(Request $request)
+    public function store_data(Request $request)
     {
         $request->validate([
         'name' => 'required|min:3|unique:customers|regex:/^[a-zA-Z ]+$/',

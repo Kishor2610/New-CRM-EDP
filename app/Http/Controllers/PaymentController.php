@@ -52,9 +52,9 @@ class PaymentController extends Controller
             
             $payment->remaining_balance = $totalBills -  $payment->total_received;
             
+
             if ($totalBills == $payment->total_received) 
             {
-                
                 $payment->payments_status = 'Paid'; 
             }
             else if($totalReceived == 0) 
@@ -75,19 +75,19 @@ class PaymentController extends Controller
             $payment->total_received = $totalReceived;
             $payment->remaining_balance = $remainingBalance;
             
-            if ($totalBills == $previous_total_received) {
-                
-                    $payment->payments_status = 'Paid'; 
-            }
-            else if ($totalReceived != 0) 
+            if ($totalBills == $payment->total_received) 
             {
-                $payment->payments_status = 'Pending'; 
+                $payment->payments_status = 'Paid'; 
             }
-            else
+            else if($totalReceived == 0) 
             {
                 $payment->payments_status = 'Unpaid';
             }
-                    
+            else
+            {
+                $payment->payments_status = 'Pending'; 
+            }
+
             $payment->save();
         }
 
