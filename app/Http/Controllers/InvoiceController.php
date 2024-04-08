@@ -81,32 +81,23 @@ class InvoiceController extends Controller
             $invoice->save();
 
 
-            // $payment = new Payment();
-            // $payment->customer_id = $invoice->customer_id;
-            // $payment->total_bills = $invoice->total;
-            
-            // Status Paid
-            // $payment->total_received = $invoice->total;
-            // $payment->remaining_balance = 0;
+            // Check if payment record exists for the customer
+            $payment = Payment::where('customer_id', $invoice->customer_id)->first();
 
-             // Status Pending
-            // $payment->total_received = 0;
-            // $payment->remaining_balance = $invoice->total;
+            if ($payment) {
+                // Update existing payment record
+                $payment->total_bills += $invoice->total;
+                $payment->remaining_balance += $invoice->total;
+            } else {
+                // Create new payment record
+                $payment = new Payment();
+                $payment->customer_id = $invoice->customer_id;
+                $payment->total_bills = $invoice->total;
+                $payment->total_received = 0;
+                $payment->remaining_balance = $invoice->total;
+            }
 
-             // Status Unpaid
-            // $payment->total_received = 2000;
-            // $payment->remaining_balance = $invoice->total -  $payment->total_received ;
-
-            //     if($invoice->total == $payment->total_received)
-            //     {
-            //             $payment->payments_status = "Paid"; // complete payment paid
-            //     }
-            //     else
-            //     {
-            //             $payment->payments_status = "Pending";  
-            //     }
-                
-            // $payment->save();
+            $payment->save();
 
             
          return redirect('invoice/'.$invoice->id)->with('message','invoice created Successfully');

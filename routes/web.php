@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\CustomerController;
 
 
 Auth::routes();
@@ -19,7 +20,13 @@ Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->na
 
 Route::post('/register', [RegisterController::class, 'register']);
 
+
+// Customer Route
+
 Route::resource('customer', 'CustomerController');
+
+// Route::post('/customers', [CustomerController::class, 'store'])->name('customer.store');
+
 
 Route::resource('invoice', 'InvoiceController');
 
@@ -28,15 +35,6 @@ Route::get('/findPrice', 'InvoiceController@findPrice')->name('findPrice');
 Route::get('/invoices/sales', 'InvoiceController@sales')->name('invoice.sales');
 
 Route::get('/invoices/available_Product', 'InvoiceController@availableProduct')->name('invoice.available_Product');
-
-
-
-Route::get('/customer/payment/{id}', 'PaymentController@payment')->name('customer.payment');
-
-Route::post('/customer/store', 'PaymentController@store')->name('customer.store');
-
-
-
 
 
 Route::resource('category', 'CategoryController');
@@ -63,12 +61,19 @@ Route::get('/findPrice', 'QuotationController@findPrice')->name('findPrice');
 Route::get('/quotations/quotation_sales', 'QuotationController@quotation_sales')->name('quotation.quotation_sales');
 
 
+
+// Payment Route
+
 Route::get('/customer/payments/{customerId}', 'PaymentController@getCustomerPayments');
 
+Route::get('/customer/payment/{id}', 'PaymentController@payment')->name('customer.payment');
 
-// Route::get('/payments', [PaymentController::class, 'index'])->name('payments.index');
-// Route::get('/payments/create', [PaymentController::class, 'create'])->name('payments.create');
-// Route::post('/payments', [PaymentController::class, 'store'])->name('payments.store');
+Route::post('/customer/payment/', 'PaymentController@store')->name('customer.store');
+
+
+// Route::post('/customer','CustomerController@store')->name('customer.store');
+
+Route::post('/customers/store', [CustomerController::class, 'store'])->name('customer.store');
 
 
 ?>

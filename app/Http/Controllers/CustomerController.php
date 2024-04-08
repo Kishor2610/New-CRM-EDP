@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Customer;
+
+use App\Payment;
 use App\Invoice;
 use Illuminate\Http\Request;
 
@@ -18,6 +20,7 @@ class CustomerController extends Controller
     public function index()
     {
         $customers = Customer::all();
+        
         return view('customer.index', compact('customers'));
     }
 

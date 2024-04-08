@@ -15,38 +15,108 @@ class PaymentController extends Controller
     {
         $this->middleware('auth');
     }
+    
+    public function create()
+    {
+        return view('customer.payment');
+    }
 
     public function store(Request $request)
     {
-        // Validate the incoming request data
-        $validatedData = $request->validate([
-            'customer_id' => 'required|exists:customers,id', 
-            'total_received' => 'required|numeric|min:0', 
+
+        $request->validate([
+
+            'total_received' => 'required|numeric',
+
         ]);
 
-        // Calculate remaining balance
-        $totalBills = $request->input('total_bills');
-        $totalReceived = $request->input('total_received');
+        $customer_id = $request->customer_id;
+
+        $totalBills = $request->total_bills;
+        $totalReceived = $request->total_received;
         $remainingBalance = $totalBills - $totalReceived;
 
-        // Create a new payment record
-        $payment = new Payment();
-        $payment->customer_id = $validatedData['customer_id'];
-        $payment->total_bills = $totalBills;
-        $payment->total_received = $totalReceived;
-        $payment->remaining_balance = $remainingBalance;
-        $payment->payments_status = ($remainingBalance <= 0) ? 'Paid' : 'Pending'; // Determine payment status
-        
-                
-        $payment->save();
+      
+        $payment = Payment::where('customer_id', $customer_id)->first();
 
-        return redirect()->back()->with('success', 'Payment has been successfully recorded.');
+        $previous_total_received = Payment::where('customer_id', $customer_id)->value('total_received');
+
+        $previous_remaining_balance = Payment::where('customer_id', $customer_id)->value('remaining_balance');
+
+
+        if ($payment) {
+            // Update existing payment record
+            $payment->total_bills = $totalBills;
+
+            $payment->total_received = $totalReceived + $previous_total_received;
+            
+            $payment->remaining_balance = $totalBills -  $payment->total_received;
+            
+            if ($totalBills == $payment->total_received) 
+            {
+                
+                $payment->payments_status = 'Paid'; 
+            }
+            else if($totalReceived == 0) 
+            {
+                $payment->payments_status = 'Unpaid';
+            }
+            else
+            {
+                $payment->payments_status = 'Pending'; 
+            }
+            
+            $payment->save();
+        } else {
+            // Create new payment record
+            $payment = new Payment();
+            $payment->customer_id = $customer_id;
+            $payment->total_bills = $totalBills;
+            $payment->total_received = $totalReceived;
+            $payment->remaining_balance = $remainingBalance;
+            
+            if ($totalBills == $previous_total_received) {
+                
+                    $payment->payments_status = 'Paid'; 
+            }
+            else if ($totalReceived != 0) 
+            {
+                $payment->payments_status = 'Pending'; 
+            }
+            else
+            {
+                $payment->payments_status = 'Unpaid';
+            }
+                    
+            $payment->save();
+        }
+
+
+        return redirect()->back()->with('message', 'Payment has been successfully recorded.');
     }
 
-
+   
     public function payment($id)
     {
         $customers = Customer::find($id);
+
+        $payment = Payment::all();
+
+        $totalBill = Payment::where('customer_id', $customers->id)->sum('total_bills');
+
+        // dd($totalBill);
+
+        $totalRemainingBalance = Payment::where('customer_id', $customers->id)->sum('remaining_balance');
+
+        $totalReceived = Payment::where('customer_id', $customers->id)->sum('total_received');
+
+        
+
+        $payment = Payment::where('customer_id', $customers->id)->first();
+        $payments_status = $payment ? $payment->payments_status : '';
+
+
+        
         $invoices = Invoice::all();
         $totalAmounts = [];
 
@@ -60,11 +130,13 @@ class PaymentController extends Controller
                 $totalAmounts[$customerId] = $totalAmount;
             }
         }
-       
-        return view('customer.payment', compact('id','customers', 'totalAmounts', 'invoice'));
+
+        return view('customer.payment', compact('customers', 'totalAmounts', 'invoice','totalBill','totalRemainingBalance','totalReceived','payments_status'));
     }
 
 
+
+// Pie chart
     public function getCustomerPayments($customerId)
     {
         $totalBill = 0;
