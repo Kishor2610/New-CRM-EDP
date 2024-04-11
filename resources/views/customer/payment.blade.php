@@ -28,9 +28,15 @@
                 <div class="tile">
                     <h3 class="tile-title">Make Payment</h3>
                     <div class="tile-body">
-                        <form method="POST" action="{{ route('customer.store') }}">
+                        <form method="POST" action="{{ route('customer.store') }}">       
                                 @csrf
                                 <div class="form-row">
+                                    <div class="form-group col-md-3">
+                                        <label class="control-label">Invoice Id</label>
+                                                                   
+                                        <input value="#{{1000+$invoiceId}}" type="text" name="invoice_id" class="form-control invoice_id" disabled>
+
+                                    </div>
                                     <div class="form-group col-md-3">
                                         <label class="control-label">Customer Name</label>
                                         <input value="{{ $customers->name }}" type="text" name="customer_id" class="form-control name" disabled>
@@ -52,31 +58,43 @@
                                     </thead>
                                     <tbody>
                                         <tr> 
+                                             {{-- Total Amount --}}
                                             <td>
-                                                <input value="{{ $totalBill}}" type="text" name="total_bills" class="form-control amount" readonly></td>                                
-                                            <td>
-                                                <input  id="total_received2" value="{{$totalReceived}}" type="text" name="total_received2" class="form-control total_received" required disabled>    
+                                                <input value="{{$totalBill}}" type="text" name="total_bills" class="form-control amount" readonly></td>                                
                                             </td>
 
-                                            
+                                             {{-- Total received --}}
                                             <td>
-                                                <input id="total_received" value="{{$totalRemainingBalance}}" type="text" name="total_received" class="form-control total_received" required>    
+                                                <input  id="remaining_balance" value="{{$totalReceived ?: 0}}" type="text" name="remaining_balance" class="form-control remaining_balance" required disabled>    
                                             </td>
+
+                                           
+                                            {{-- Pay  Amount {total_received}--}}
+                                            <td>
+                                                    <input id="total_received" value="{{$totalBill-$totalReceived}}" type="text" name="total_received" class="form-control total_received" required>    
+                                            </td>
+                                            
+                                            
+                                           
                                                
-                                        
-                                            <td><button class="btn
-                                                    @if($payments_status === 'Paid')
-                                                        btn-success
-                                                    @elseif($payments_status === 'Unpaid')
-                                                        btn-danger
-                                                    @elseif($payments_status === 'Pending')
-                                                        btn-warning
-                                                    @endif" 
-
-                                                    disabled>{{ $payments_status }}    
-                                            
+                                            <td>
+                                                @if($totalReceived == 0)
+                                                    <button class="btn btn-danger" disabled>Unpaid</button>
+                                                @else
+                                                    <button class="btn
+                                                        @if($payments_status === 'Paid')
+                                                            btn-success
+                                                        @elseif($payments_status === 'Unpaid')
+                                                            btn-danger
+                                                        @elseif($payments_status === 'Pending')
+                                                            btn-warning
+                                                        @endif" 
+                                                        disabled>
+                                                        {{ $payments_status }}    
+                                                    </button>
+                                                @endif
                                             </td>
-                                            
+                            
                                         </tr>
                                     </tbody>
                                 </table>
@@ -102,17 +120,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
 
 
-    
-    <script>
-
-        document.getElementById('customer_name').addEventListener('change', function () {
-            var customerId = this.value;
-            var totalAmount = {{ $totalAmounts[$invoice->customer_id] ?? 0 }};
-            document.getElementById('total_amount').value = totalAmount;
-        });
-    </script>
-
-    
 
 
 @endpush

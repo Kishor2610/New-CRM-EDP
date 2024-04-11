@@ -408,6 +408,26 @@
 
 
 
+{{-- default month --}}
+{{-- <script>
+    // Function to set default values for year and month selects
+    function setDefaultDate() {
+        var currentDate = new Date();
+        var currentYear = currentDate.getFullYear();
+        var currentMonth = currentDate.getMonth() + 1;
+
+        // Set default values for year and month selects
+        document.getElementById("yearSelect").value = currentYear;
+        document.getElementById("monthSelect").value = currentMonth;
+    }
+
+    // Call the function to set default values
+    setDefaultDate();
+</script> --}}
+
+
+
+
 
 
 

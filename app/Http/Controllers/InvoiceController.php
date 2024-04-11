@@ -79,26 +79,6 @@ class InvoiceController extends Controller
             $totalAmount = $sales->sum('amount');
             $invoice->total = $totalAmount;
             $invoice->save();
-
-
-            // Check if payment record exists for the customer
-            $payment = Payment::where('customer_id', $invoice->customer_id)->first();
-
-            if ($payment) {
-                // Update existing payment record
-                $payment->total_bills += $invoice->total;
-                $payment->remaining_balance += $invoice->total;
-            } else {
-                // Create new payment record
-                $payment = new Payment();
-                $payment->customer_id = $invoice->customer_id;
-                $payment->total_bills = $invoice->total;
-                $payment->total_received = 0;
-                $payment->remaining_balance = $invoice->total;
-            }
-
-            $payment->save();
-
             
          return redirect('invoice/'.$invoice->id)->with('message','invoice created Successfully');
 

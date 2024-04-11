@@ -98,8 +98,7 @@
                        <div class="row d-print-none mt-2">
                             <div class="col-11 text-right">
                                     
-                    
-                                <a class="btn btn-primary" href="{{route('customer.payment', $invoice->customer->id)}}"> 
+                                <a class="btn btn-primary" href="{{route('customer.payment', $invoice->id)}}"> 
                                     <i class="fa fa-payment" ></i>Make Payment</a>
 
                                 <a class="btn btn-primary" href="javascript:window.print();">

@@ -21,117 +21,85 @@ class PaymentController extends Controller
         return view('customer.payment');
     }
 
+
     public function store(Request $request)
-    {
+    { 
+        $url = $request->session()->get('_previous')['url']; // Get the URL from the session
+        $segments = explode('/', $url); // Split the URL into segments
+        $invoiceId = end($segments); 
+        
+        $customerId = $request->customer_id;
+        $previous_total_received = Payment::where('customer_id', $customerId)
+                                    ->where('invoice_id', $invoiceId)->value('total_received');
 
-        $request->validate([
-
-            'total_received' => 'required|numeric',
-
-        ]);
-
-        $customer_id = $request->customer_id;
-
+        $totalReceived = $request->total_received + $previous_total_received;
         $totalBills = $request->total_bills;
-        $totalReceived = $request->total_received;
-        $remainingBalance = $totalBills - $totalReceived;
+       
+        $paymentStatus = ($totalReceived == $totalBills) ? 'Paid' : (($totalReceived > 0) ? 'Pending' : ($request->payments_status ?? 'Unpaid'));
 
-      
-        $payment = Payment::where('customer_id', $customer_id)->first();
+        $paymentData = [
+            'customer_id' => $customerId,
+            'total_bills' => $request->total_bills,
+            'total_received' => $request->total_received + $previous_total_received,
+            'remaining_balance' => $request->total_bills - ($request->total_received + $previous_total_received),
+            'payments_status' => $paymentStatus,
 
-        $previous_total_received = Payment::where('customer_id', $customer_id)->value('total_received');
+        ];
+       
+        // Check if the payment record already exists for the invoice ID
+        $payment = Payment::where('customer_id', $customerId)
+                        ->where('invoice_id', $invoiceId)
+                        ->first();
 
-        $previous_remaining_balance = Payment::where('customer_id', $customer_id)->value('remaining_balance');
-
-
-        if ($payment) {
-            // Update existing payment record
-            $payment->total_bills = $totalBills;
-
-            $payment->total_received = $totalReceived + $previous_total_received;
-            
-            $payment->remaining_balance = $totalBills -  $payment->total_received;
-            
-
-            if ($totalBills == $payment->total_received) 
-            {
-                $payment->payments_status = 'Paid'; 
-            }
-            else if($totalReceived == 0) 
-            {
-                $payment->payments_status = 'Unpaid';
-            }
-            else
-            {
-                $payment->payments_status = 'Pending'; 
-            }
-            
-            $payment->save();
-        } else {
-            // Create new payment record
-            $payment = new Payment();
-            $payment->customer_id = $customer_id;
-            $payment->total_bills = $totalBills;
-            $payment->total_received = $totalReceived;
-            $payment->remaining_balance = $remainingBalance;
-            
-            if ($totalBills == $payment->total_received) 
-            {
-                $payment->payments_status = 'Paid'; 
-            }
-            else if($totalReceived == 0) 
-            {
-                $payment->payments_status = 'Unpaid';
-            }
-            else
-            {
-                $payment->payments_status = 'Pending'; 
-            }
-
-            $payment->save();
+        if ($payment) 
+        {                            
+                $payment->update($paymentData);    // If the payment record exists, update it with the new data
+        
+        } else 
+        {
+            Payment::create(array_merge(['invoice_id' => $invoiceId], $paymentData));   // If the payment record doesn't exist, create a new one
         }
-
 
         return redirect()->back()->with('message', 'Payment has been successfully recorded.');
-    }
+}
 
-   
+
+
+// Data Pass To Create payment  blade
+
     public function payment($id)
     {
-        $customers = Customer::find($id);
+        
+        $invoices = Invoice::find($id);
+        $invoiceId = $invoices->id;
+        
+        $customerId = Invoice::where('Id', $invoiceId)->value('customer_id');
+
+        $customers = Customer::find($customerId);
 
         $payment = Payment::all();
-
-        $totalBill = Payment::where('customer_id', $customers->id)->sum('total_bills');
-
-        // dd($totalBill);
-
-        $totalRemainingBalance = Payment::where('customer_id', $customers->id)->sum('remaining_balance');
-
-        $totalReceived = Payment::where('customer_id', $customers->id)->sum('total_received');
-
+       
+       
+        $totalBill = Invoice::where('customer_id', $customerId)
+                    ->where('id', $invoiceId)
+                    ->value('total');
         
-
-        $payment = Payment::where('customer_id', $customers->id)->first();
-        $payments_status = $payment ? $payment->payments_status : '';
-
-
+       
+        $totalReceived = Payment::where('customer_id', $customerId)
+                                ->where('invoice_id', $invoiceId)->value('total_received');
         
-        $invoices = Invoice::all();
-        $totalAmounts = [];
+                                
+        $totalRemainingBalance = Payment::where('customer_id', $customerId)
+                                        ->where('invoice_id', $invoiceId)
+                                        ->value('remaining_balance');
+      
+        
+        $payments_status = Payment::where('customer_id', $customerId)
+                                        ->where('invoice_id', $invoiceId)
+                                        ->value('payments_status');
+      
 
-        foreach ($invoices as $invoice) {
-            $customerId = $invoice->customer_id;
-            $totalAmount = (float)$invoice->total;
-
-            if (isset($totalAmounts[$customerId])) {
-                $totalAmounts[$customerId] += $totalAmount;
-            } else { 
-                $totalAmounts[$customerId] = $totalAmount;
-            }
-        }
-
-        return view('customer.payment', compact('customers', 'totalAmounts', 'invoice','totalBill','totalRemainingBalance','totalReceived','payments_status'));
+        return view('customer.payment', compact('customers','invoiceId','totalBill','totalRemainingBalance','totalReceived','payments_status'));
     }
 
 

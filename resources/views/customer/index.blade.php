@@ -35,7 +35,6 @@
                 <th>Details</th>
                 {{-- <th>Previous Balance</th> --}}
                 
-                <th>Payment Status</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -47,12 +46,7 @@
                 <td>{{ $customer->mobile }} </td>
                 <td>{{ $customer->details }} </td>
                 {{-- <td>{{ $customer->previous_balance }}</td> --}}
-                <td>
-                  <a class="btn btn-primary" href="{{route('customer.payment', $customer->id)}}"> 
-                   <i class="fa fa-payment" ></i>Make Payment</a>
-
-
-                 </td>
+                
                 <td>
                   <a class="btn btn-primary" href="{{route('customer.edit', $customer->id)}}"><i class="fa fa-edit"></i></a>
                   <button class="btn btn-danger waves-effect" type="submit" onclick="deleteTag(event, {{$customer->id }})">

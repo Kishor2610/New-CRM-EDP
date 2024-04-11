@@ -16,6 +16,7 @@ class CreatePaymentsTable extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('customer_id')->unsigned();
+            $table->bigInteger('invoice_id')->unsigned();
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
             $table->decimal('total_bills', 10, 2); 
             $table->decimal('total_received', 10, 2); 

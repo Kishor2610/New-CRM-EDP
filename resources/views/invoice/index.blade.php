@@ -29,6 +29,7 @@
                                 <th>Invoice ID </th>
                                 <th>Customer Name </th>
                                 <th>Date </th>
+                                <th>Payment </th>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -39,10 +40,17 @@
                                      <td>{{1000+$invoice->id}}</td>
                                      <td>{{$invoice->customer->name}}</td>
                                      <td>{{$invoice->created_at->format('Y-m-d')}}</td>
+
+                                     <td>
+                                            <a class="btn btn-primary" href="{{route('customer.payment', $invoice->id)}}"> 
+                                                <i class="fa fa-payment" ></i>Make Payment</a>
+
+                                     </td>
                                      <td>
                                          <a class="btn btn-primary" href="{{route('invoice.show', $invoice->id)}}"><i class="fa fa-bandcamp" ></i></a>
                                          <a class="btn btn-primary" href="{{route('invoice.edit', $invoice->id)}}"><i class="fa fa-edit" ></i></a>
 
+                                         
                                          <button class="btn btn-danger waves-effect" type="submit" onclick="deleteTag({{ $invoice->id }})">
                                              <i class="fa fa-trash-o"></i>
                                          </button>
