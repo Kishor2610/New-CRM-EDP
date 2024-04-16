@@ -35,6 +35,7 @@ class CustomerController extends Controller
         $request->validate([
         'name' => 'required|min:3|unique:customers|regex:/^[a-zA-Z ]+$/',
         'address' => 'required|min:3',
+        'email' => 'required|string|email|max:255|unique:users',
         'mobile' => 'required|min:3|digits:10',
         'details' => 'required|min:3|',
         'previous_balance' => 'min:2',
@@ -44,6 +45,7 @@ class CustomerController extends Controller
         $customer = new Customer();
         $customer->name = $request->name;
         $customer->address = $request->address;
+        $customer->email = $request->email;
         $customer->mobile = $request->mobile;
         $customer->details = $request->details;
         $customer->previous_balance = $request->previous_balance;
@@ -70,6 +72,7 @@ class CustomerController extends Controller
         $request->validate([
         'name' => 'required|min:3|regex:/^[a-zA-Z ]+$/',
         'address' => 'required|min:3',
+        'email' => 'required|string|email|max:255|unique:users',
         'mobile' => 'required|min:3|digits:10',
         'details' => 'required|min:3|',
         'previous_balance' => 'min:2',
@@ -78,6 +81,7 @@ class CustomerController extends Controller
         $customer = Customer::findOrFail($id);
         $customer->name = $request->name;
         $customer->address = $request->address;
+        $customer->email = $request->email;
         $customer->mobile = $request->mobile;
         $customer->details = $request->details;
         $customer->previous_balance = $request->previous_balance;

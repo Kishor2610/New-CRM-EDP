@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 
 
 class RegisterController extends Controller
@@ -19,6 +19,11 @@ class RegisterController extends Controller
     public function showRegistrationForm()
     {
         return view('auth.register');
+    }
+
+    public function showRegistrationForm2()
+    {
+        return view('auth.forgot');
     }
 
         public function register(Request $request)
@@ -53,6 +58,38 @@ class RegisterController extends Controller
     }
 
 
+    // Reset Password Form 
 
+    function showResetForm($token){
+        return view('auth.new-password',compact('token')); 
+    }
+
+    function reset(Request $request){
+        $request->validate([
+            
+            'email' => 'required|email',
+            'password' => 'required|confirmed|min:6',
+            'password_confirmation' => 'required'
+        ]);
+
+        $updatePassword = DB::table('password_resets')
+        ->where([
+            'email' => $request->email,
+            'token' => $request->token
+        ])->first();
+
+        if(!$updatePassword){
+            return redirect()->to(route('password.reset'))->with('message', 'Invalide');
+
+        }
+
+        User::where('email', $request->email)
+            ->update(['password' => Hash::make($request->password)]);
+
+        DB::table('password_resets')->where(['email' => $request->email])->delete();
+
+        return redirect()->to(route('login'))->with('message', 'Password Reset Successfully!');
+
+    }
 
 }

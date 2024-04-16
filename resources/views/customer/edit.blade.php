@@ -51,6 +51,17 @@
                 @enderror
               </div>
             </div>
+            
+            <div class="form-group">
+              <label class="control-label">Customer Email</label>
+              <input id="email" value="{{ $customer->email }}" type="email" class="form-control @error('email') is-invalid @enderror" name="email" placeholder="Enter Email Number" required autocomplete="email" autofocus>
+              @error('email')
+              <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+              </span>
+              @enderror
+          </div>
+
             <div class="form-group">
               <label class="control-label">Customer Address</label>
               <textarea name="address" class="form-control @error('address') is-invalid @enderror" style="height: 40px;">{{ $customer->address }}</textarea>

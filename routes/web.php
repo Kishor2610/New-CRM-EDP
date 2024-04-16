@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\CustomerController;
 
@@ -28,9 +29,6 @@ Route::resource('customer', 'CustomerController');
 Route::post('customer', [CustomerController::class, 'store_data'])->name('customer.store_data');
 
 
-// Route::post('customer', 'CustomerController@store')->name('customer.store');
-
-
 
 Route::resource('invoice', 'InvoiceController');
 
@@ -39,6 +37,15 @@ Route::get('/findPrice', 'InvoiceController@findPrice')->name('findPrice');
 Route::get('/invoices/sales', 'InvoiceController@sales')->name('invoice.sales');
 
 Route::get('/invoices/available_Product', 'InvoiceController@availableProduct')->name('invoice.available_Product');
+
+
+// Mail
+
+Route::get('/invoices/{id}/mail', 'InvoiceController@mailInvoice')->name('invoice.mailInvoice');
+
+
+// Route::get('/invoices/mail', 'InvoiceController@mail')->name('invoice.mail');
+
 
 
 Route::resource('category', 'CategoryController');
@@ -73,6 +80,19 @@ Route::get('/customer/payments/{customerId}', 'PaymentController@getCustomerPaym
 Route::get('/customer/payment/{id}', 'PaymentController@payment')->name('customer.payment');
 
 Route::post('/customer/payment/', 'PaymentController@store')->name('customer.store');
+
+
+// Route::get('/forgot', [ForgotPasswordController::class, 'showForgotForm'])->name('forgot');
+
+// Route::post('/forgot', [ForgotPasswordController::class, 'forgot']);
+
+
+
+Route::get('/forgot-password', 'auth\Forgotpasswordcontroller@showlinkrequestform')->name('forgot.password');
+Route::post('/forgot-password', 'auth\Forgotpasswordcontroller@sendresetlinkemail')->name('password.email');
+
+Route::get('/new-password/{token}', 'auth\Registercontroller@showresetform')->name('password.reset');
+Route::post('/new-password', 'auth\Registercontroller@reset')->name('password.update');
 
 
 

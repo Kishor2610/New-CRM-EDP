@@ -15,7 +15,7 @@
             </ul>
         </div>
 
-
+      
          <div class="row">
              <div class="clearix"></div>
             <div class="col-md-12">
@@ -82,13 +82,22 @@
                                 <td></td>
                                 <td> <b>Select Tax</b></td>
                                 <td>
+                                    <select name="tax_id[]" class="form-control tax_id">
+                                        @foreach($taxes as $tax)
+                                            @if($tax->slug != "Select Tax")
+                                                <option value="{{$tax->slug}}">{{$tax->slug}}%</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                </td>
+                                {{-- <td>
                                     <select name="tax_id[]" class="form-control tax_id" >
                                         <option>Select Tax</option> 
                                     @foreach($taxes as $taxes)
                                             <option name="tax_id[]" value="{{$taxes->slug}}">{{$taxes->slug}}%</option>
                                         @endforeach
                                      </select>
-                                </td>
+                                </td> --}}
                                
                                 <td><b>Total</b></td>
                                 <td><b class="total"></b></td>

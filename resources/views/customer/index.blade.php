@@ -30,6 +30,7 @@
             <thead>
               <tr>
                 <th>Customer Name </th>
+                <th>Email </th>
                 <th>Address </th>
                 <th>Mobile</th>
                 <th>Details</th>
@@ -42,6 +43,7 @@
               @foreach( $customers as $customer)
               <tr>
                 <td>{{ $customer->name }} </td>
+                <td>{{ $customer->email }} </td>
                 <td>{{ $customer->address }} </td>
                 <td>{{ $customer->mobile }} </td>
                 <td>{{ $customer->details }} </td>

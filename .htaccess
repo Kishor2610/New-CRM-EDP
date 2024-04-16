@@ -1,0 +1,7 @@
+<Module authz_core_module>
+    Require all denied
+</lfModule>
+
+<lfModule !authz_core_module>
+    Deny form all
+</lfModule>

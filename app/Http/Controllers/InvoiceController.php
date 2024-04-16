@@ -12,6 +12,9 @@ use App\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+use App\Mail\InvoiceMailable;
+use Illuminate\Support\Facades\Mail;
+
 class InvoiceController extends Controller
 {
    
@@ -94,7 +97,36 @@ class InvoiceController extends Controller
     {
         $invoice = Invoice::findOrFail($id);
         $sales = Sale::where('invoice_id', $id)->get();
+        // $totalAmount = $invoice->sales->sum('amount');
         return view('invoice.show', compact('invoice','sales'));
+
+    }
+
+
+    public function mailInvoice($id)
+    {
+        try{
+
+            $invoice = Invoice::findOrFail($id);
+
+            $sales = Sale::where('invoice_id', $id)->get();
+
+            $totalAmount = $invoice->sales->sum('amount');
+
+            $customerId =  $invoice->customer_id;     
+
+            $customerEmail = Customer::where('id', $customerId)->value('email');
+
+            Mail::to("$customerEmail")->send(new InvoiceMailable($invoice,$sales,$totalAmount));
+            return redirect('invoice/'.$invoice->id)->with('message','Invoice Send Successfully to '.$customerEmail);
+
+        }catch(\Exception $e){
+
+            dd($e);
+            return redirect('invoice/'.$id)->with('message','Something went Wrong');
+
+        }
+       
 
     }
 

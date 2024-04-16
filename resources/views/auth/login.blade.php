@@ -14,6 +14,7 @@
         <form class="login-form" method="POST" action="{{ route('login') }}">
             @csrf
             <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>SIGN IN</h3>
+        
             <div class="form-group">
                 <label class="control-label">USERNAME</label>
                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
@@ -41,6 +42,7 @@
                             <input type="checkbox"><span class="label-text">Stay Signed in</span>
                         </label>
                     </div>
+                    <p class="mb-2"><a href="{{ route('password.request') }}">Forgot Your Password?</a></p>
                 </div>
             </div>
                 

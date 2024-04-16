@@ -14,6 +14,14 @@
                 <li class="breadcrumb-item"><a href="#">Invoice</a></li>
             </ul>
         </div>
+
+        @if(session()->has('message'))
+        <div class="alert alert-success">
+            {{ session()->get('message') }}
+        </div>
+        @endif
+
+
         <div class="row">
             <div class="col-md-12">
                 <div class="tile">
@@ -101,9 +109,19 @@
                                 <a class="btn btn-primary" href="{{route('customer.payment', $invoice->id)}}"> 
                                     <i class="fa fa-payment" ></i>Make Payment</a>
 
+
+                                    <a class="btn btn-primary" href="{{ route('invoice.mailInvoice', $invoice->id) }}"> 
+                                        <i class="fa fa-payment"></i> Send Invoice Via Mail 
+                                    </a>
+
+                                    {{-- <a class="btn btn-primary" href="#"> 
+                                        <i class="fa fa-payment"></i> Send Invoice Via Mail 
+                                    </a> --}}
+
                                 <a class="btn btn-primary" href="javascript:window.print();">
                                     <i class="fa fa-print"></i> Print
                                 </a>
+
                             </div>
                         </div>
 
@@ -131,7 +149,6 @@
         doc.save('sample.pdf');
     });
 </script>
-
 
 
 

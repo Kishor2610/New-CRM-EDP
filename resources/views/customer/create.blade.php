@@ -43,6 +43,7 @@
                 </span>
                 @enderror
               </div>
+             
               <div class="form-group col-md-6">
                 <label class="control-label">Customer Mobile</label>
                 <input name="mobile" class="form-control @error('mobile') is-invalid @enderror" type="text" placeholder="Enter Mobile Number">
@@ -53,6 +54,19 @@
                 @enderror
               </div>
             </div>
+
+
+            <div class="form-group">
+              <label class="control-label">Customer Email</label>
+              <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" placeholder="Enter Email Number" value="{{ old('email') }}" required autocomplete="email" autofocus>
+              @error('email')
+              <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+              </span>
+              @enderror
+          </div>
+
+
             <div class="form-group">
               <label class="control-label">Customer Address</label>
               <textarea name="address" class="form-control @error('address') is-invalid @enderror" style="height: 40px;"></textarea> <!-- Reduced height -->
