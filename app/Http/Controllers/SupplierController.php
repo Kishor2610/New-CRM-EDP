@@ -33,20 +33,30 @@ class SupplierController extends Controller
             'name' => 'required|min:3|unique:suppliers|regex:/^[a-zA-Z ]+$/',
             'address' => 'required|min:3',
             'mobile' => 'required|min:3|digits:10',
-            'details' => 'required|string|min:1',
-            'previous_balance' => 'min:3',
+            'details' => 'required|array|min:1',
+            'details.*' => 'integer|exists:raw_material,id',
+            // 'previous_balance' => 'min:3',
 
         ]);
+
+      
 
         $supplier = new Supplier();
         $supplier->name = $request->name;
         $supplier->address = $request->address;
         $supplier->mobile = $request->mobile;
 
-        $supplier->details = $request->input('details');
-        $supplier->previous_balance = $request->previous_balance;
+        $supplier->previous_balance = "0";
+
+        $detailsString = implode(',', $request->input('details'));
+        $supplier->details = $detailsString;
+
+    
         $supplier->save();
        
+        
+        // $supplier->rawMaterials()->attach($request->input('details'));
+
         return redirect()->back()->with('message', 'Supplier Created Successfully');
     }
 
@@ -69,7 +79,7 @@ class SupplierController extends Controller
             'address' => 'required|min:3',
             'mobile' => 'required|min:3|digits:10',
             'details' => 'required|min:3|',
-            'previous_balance' => 'min:3',
+            // 'previous_balance' => 'min:3',
         ]);
 
         $supplier = Supplier::findOrFail($id);
@@ -77,7 +87,7 @@ class SupplierController extends Controller
         $supplier->address = $request->address;
         $supplier->mobile = $request->mobile;
         $supplier->details = $request->details;
-        $supplier->previous_balance = $request->previous_balance;
+        $supplier->previous_balance = "0";
         $supplier->save();
 
         return redirect()->back()->with('message', 'Suppler Updated Successfully');

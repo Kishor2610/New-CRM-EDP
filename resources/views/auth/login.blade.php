@@ -24,7 +24,7 @@
                 </span>
                 @enderror
             </div>
-
+{{-- 
             <div class="form-group">
                 <label class="control-label">PASSWORD</label>
                  <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
@@ -33,6 +33,23 @@
                      <strong>{{ $message }}</strong>
                  </span>
                  @enderror
+            </div> --}}
+
+            <div class="form-group">
+                <label class="control-label">PASSWORD</label>
+                <div class="input-group">
+                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                    <div class="input-group-append">
+                        <span class="input-group-text" onclick="togglePasswordVisibility()" style="cursor: pointer;">
+                            <i class="fa fa-eye" id="togglePassword"></i>
+                        </span>
+                    </div>
+                </div>
+                @error('password')
+                <span class="invalid-feedback" role="alert">
+                     <strong>{{ $message }}</strong>
+                </span>
+                @enderror
             </div>
            
             <div class="form-group">
@@ -58,4 +75,25 @@
     </div>
 </section>
 
+
 @endsection
+
+
+@push('js')
+<script type="text/javascript">
+    function togglePasswordVisibility() {
+        var passwordField = document.getElementById("password");
+        var toggleIcon = document.getElementById("togglePassword");
+        
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+            toggleIcon.classList.remove("fa-eye");
+            toggleIcon.classList.add("fa-eye-slash");
+        } else {
+            passwordField.type = "password";
+            toggleIcon.classList.remove("fa-eye-slash");
+            toggleIcon.classList.add("fa-eye");
+        }
+    }
+</script>
+@endpush

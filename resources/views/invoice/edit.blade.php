@@ -38,7 +38,7 @@
                                 </select>                            </div>
                             <div class="form-group col-md-3">
                                 <label class="control-label">Date</label>
-                                <input name="date"  class="form-control datepicker"  value="<?php echo date('Y-m-d')?>" type="date" placeholder="Enter your email">
+                                <input name="date"  class="form-control datepicker" disabled  value="<?php echo date('Y-m-d')?>" type="date" placeholder="Enter your email">
                             </div>
                             </div>
 
@@ -97,7 +97,7 @@
                                         <td></td> --}}
 
                                         <td><b>Total</b></td>
-                                        <td><input  type="number" class="form-control total" name="total"></td>
+                                        <td><input  type="number" class="form-control total" name="total" disabled></td>
                                         <td></td>
 
                                     </tr>

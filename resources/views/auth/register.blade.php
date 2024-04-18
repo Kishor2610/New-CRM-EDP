@@ -104,7 +104,7 @@
                 <div class="col-md-7">
                     <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                 </div>
-            </div>
+            </div> 
 
             <div class="form-group btn-container">
                 <button class="btn btn-primary btn-block" type="submit"><i class="fa fa-sign-in fa-lg fa-fw"></i>SIGN UP</button>
@@ -125,3 +125,5 @@
 </section>
 
 @endsection
+
+

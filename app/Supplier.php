@@ -13,5 +13,6 @@ class Supplier extends Model
     public function rawMaterials(){
         return $this->belongsToMany(RawMaterial::class);
     }
+    
 
 }

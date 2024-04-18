@@ -29,7 +29,7 @@
             <div class="widget-small primary coloured-icon"><i class="icon fa fa-dollar fa-3x"></i>
                 <div class="info">
                     <h4><b>Quotation</b></h4>
-                    <p><b>{{ $invoiceCount }}</b></p>
+                    <p><b>{{ $quotationCount }}</b></p>
                 </div>
             </div>
         </div>

@@ -9,6 +9,7 @@ use App\Product;
 use App\Invoice;
 use App\Sale;
 use App\Payment;
+use App\Quotation;
 use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
@@ -27,12 +28,13 @@ class HomeController extends Controller
         $customerCount = Customer::count();
         $productCount = Product::count();
         $invoiceCount = Invoice::count();
+        $quotationCount = Quotation::count();
         $saleCount = Sale::sum('amount');
 
         $sales = Sale::all();
         $invoices = Invoice::all();
         
-        return view('home',compact('customerCount','productCount','invoiceCount','saleCount','sales','invoices'));
+        return view('home',compact('customerCount','productCount','invoiceCount','quotationCount','saleCount','sales','invoices'));
     }
 
 
