@@ -82,17 +82,11 @@ Route::get('/customer/payment/{id}', 'PaymentController@payment')->name('custome
 Route::post('/customer/payment/', 'PaymentController@store')->name('customer.store');
 
 
-// Route::get('/forgot', [ForgotPasswordController::class, 'showForgotForm'])->name('forgot');
+Route::get('/forgot-password', 'Auth\ForgotPasswordController@showlinkrequestform')->name('forgot.password');
+Route::post('/forgot-password', 'Auth\ForgotpasswordController@sendresetlinkemail')->name('password.email');
 
-// Route::post('/forgot', [ForgotPasswordController::class, 'forgot']);
-
-
-
-Route::get('/forgot-password', 'auth\Forgotpasswordcontroller@showlinkrequestform')->name('forgot.password');
-Route::post('/forgot-password', 'auth\Forgotpasswordcontroller@sendresetlinkemail')->name('password.email');
-
-Route::get('/new-password/{token}', 'auth\Registercontroller@showresetform')->name('password.reset');
-Route::post('/new-password', 'auth\Registercontroller@reset')->name('password.update');
+Route::get('/new-password/{token}', 'Auth\RegisterController@showresetform')->name('password.reset');
+Route::post('/new-password', 'Auth\RegisterController@reset')->name('password.update');
 
 
 

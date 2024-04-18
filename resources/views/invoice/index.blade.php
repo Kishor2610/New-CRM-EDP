@@ -13,7 +13,9 @@
                 <h1><i class="fa fa-th-list"></i> View Invoice</h1>
             </div>
             <ul class="app-breadcrumb breadcrumb side">
-                <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+                <li class="breadcrumb-item">
+                    <a href="/"><i class="fa fa-home fa-lg"></i></a>
+                </li>
                 <li class="breadcrumb-item active"><a href="#">View Invoice</a></li>
             </ul>
         </div>
@@ -78,6 +80,13 @@
     <script type="text/javascript" src="{{asset('/')}}js/plugins/dataTables.bootstrap.min.js"></script>
     <script type="text/javascript">$('#sampleTable').DataTable();</script>
     <script src="https://unpkg.com/sweetalert2@7.19.1/dist/sweetalert2.all.js"></script>
+
+    <style>
+        .swal2-actions .swal2-styled:not([disabled]):not(.swal2-cancel) + .swal2-styled {
+            margin-left: 10px;
+        }
+    </style>
+
     <script type="text/javascript">
         function deleteTag(id) {
             swal({

@@ -10,7 +10,9 @@
                 <h1><i class="fa fa-plus"></i> Create Material </h1>
             </div>
             <ul class="app-breadcrumb breadcrumb">
-                <li class="breadcrumb-item"><a href="/"><i class="fa fa-home fa-lg"></i></a></li>
+                <li class="breadcrumb-item">
+                    <a href="/"><i class="fa fa-home fa-lg"></i></a>
+                </li>
                 <li class="breadcrumb-item"><a href="{{ route('raw_material.create') }}">Material</a></li>
 
             </ul>

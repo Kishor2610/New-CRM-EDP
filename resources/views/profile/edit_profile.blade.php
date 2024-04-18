@@ -11,7 +11,9 @@
                 <h1><i class="fa fa-edit"></i> Profile View/Update </h1>
             </div>
             <ul class="app-breadcrumb breadcrumb">
-                <li class="breadcrumb-item"><a href="/"><i class="fa fa-home fa-lg"></i></a></li>
+                <li class="breadcrumb-item">
+                    <a href="/"><i class="fa fa-home fa-lg"></i></a>
+                </li>
                 <li class="breadcrumb-item"><a href="#"> Profile View/Update </a></li>
             </ul>
         </div>

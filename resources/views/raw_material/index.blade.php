@@ -13,7 +13,9 @@
                 <h1><i class="fa fa-th-list"></i> Raw Material List</h1>
             </div>
             <ul class="app-breadcrumb breadcrumb side">
-                <li class="breadcrumb-item"><a href="/"><i class="fa fa-home fa-lg"></i></a></li>
+                <li class="breadcrumb-item">
+                    <a href="/"><i class="fa fa-home fa-lg"></i></a>
+                </li>
                 <li class="breadcrumb-item active"><a href="#">Raw Material List</a></li>
             </ul>
         </div>

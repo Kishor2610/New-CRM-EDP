@@ -84,7 +84,6 @@ class ProductController extends Controller
 
     public function edit($id)
     {
-
         $product =Product::findOrFail($id);
         $suppliers =Supplier::all();
         $categories = Category::all();

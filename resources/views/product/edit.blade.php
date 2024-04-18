@@ -69,7 +69,6 @@
                                             <option value="{{$category->id}}">{{$category->name}}</option>
                                         @endforeach
                                     </select>
-
                                     @error('category_id')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -137,7 +136,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 
-    <script type="text/javascript">
+    {{-- <script type="text/javascript">
         $(document).ready(function(){
             var maxField = 10; //Input fields increment limitation
             var addButton = $('.add_button'); //Add button selector
@@ -161,7 +160,7 @@
                 x--; //Decrement field counter
             });
         });
-    </script>
+    </script> --}}
 
 @endpush
 
