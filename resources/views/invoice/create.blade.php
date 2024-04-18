@@ -101,8 +101,13 @@
                                      </select>
                                 </td> --}}
                                
+                                {{-- <td><b>Total</b></td>
+                                <td>
+                                    <b class="total"></b>   
+                                </td>                           --}}
+
                                 <td><b>Total</b></td>
-                                <td><b class="total"></b></td>
+                                    <td><input  type="number" class="form-control total" name="total"></td>
                                 <td></td>
                             </tr>
                             </tfoot>
@@ -133,11 +138,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
      <script src="{{asset('/')}}js/multifield/jquery.multifield.min.js"></script>
 
+     
 
 
 
     <script type="text/javascript">
-        
+      
         $(document).ready(function(){
 
             $('tbody').delegate('.productname', 'change', function () {
@@ -210,7 +216,8 @@
                 
                 total = parseInt(total);
             
-                $('.total').html(total);
+                // $('.total').html(total);
+                $('.total').val(total);
             }
 
                    

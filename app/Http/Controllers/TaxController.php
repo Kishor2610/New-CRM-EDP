@@ -64,7 +64,7 @@ class TaxController extends Controller
     {
         $request->validate([
 
-            'name' => 'required|unique:taxes',
+            'name' => 'required',
             'tax_value' => 'required|numeric',
             // 'name' => 'required|numeric',
         ]);

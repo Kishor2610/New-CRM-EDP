@@ -43,7 +43,7 @@
                             @csrf
                             <div class="row">
                                 <div class="form-group col-md-6">
-                                    <label class="control-label">Product Name</label>
+                                    <label class="control-label">Product Name *</label>
                                     <input name="name" class="form-control @error('name') is-invalid @enderror" type="text" placeholder="Product Name">
                                     @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -52,7 +52,7 @@
                                     @enderror
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label class="control-label">Serial Number</label>
+                                    <label class="control-label">Serial Number *</label>
                                     <input name="serial_number" class="form-control @error('serial_number') is-invalid @enderror" type="number" placeholder="Enter Serial Number">
                                     @error('serial_number')
                                     <span class="invalid-feedback" role="alert">
@@ -62,7 +62,7 @@
                                 </div>
 
                                 <div class="form-group col-md-6">
-                                    <label class="control-label">Model</label>
+                                    <label class="control-label">Model *</label>
                                     <input name="model" class="form-control @error('name') is-invalid @enderror" type="text" placeholder="Enter Model Name">
                                     @error('model')
                                     <span class="invalid-feedback" role="alert">
@@ -71,7 +71,7 @@
                                     @enderror
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label class="control-label">Category</label>
+                                    <label class="control-label">Category *</label>
 
                                     <select name="category_id" class="form-control">
                                         <option>---Select Category---</option>
@@ -90,7 +90,7 @@
                                 </div>
 
                                 <div class="form-group col-md-6">
-                                    <label class="control-label">Sale Price</label>
+                                    <label class="control-label">Sale Price *</label>
                                     <input name="sales_price" class="form-control @error('sales_price') is-invalid @enderror" type="number" placeholder="Enter Sale Price">
                                     @error('sales_price')
                                     <span class="invalid-feedback" role="alert">
@@ -114,7 +114,7 @@
                                 </div> --}}
 
                                 <div class="form-group col-md-6">
-                                    <label class="control-label">Image</label>
+                                    <label class="control-label">Image *</label>
                                     <input name="image"  class="form-control @error('image') is-invalid @enderror" type="file" >
                                     @error('image')
                                     <span class="invalid-feedback" role="alert">
@@ -123,7 +123,7 @@
                                     @enderror
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label class="control-label">Tax </label>
+                                    <label class="control-label">Tax  *</label>
                                     <select name="tax_id" class="form-control">
                                         <option>---Select Tax---</option>
                                         @foreach($taxes as $tax)
@@ -137,7 +137,7 @@
                                     @enderror
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label class="control-label">Product Qty</label>
+                                    <label class="control-label">Product Qty *</label>
                                     <input name="product_qty" class="form-control @error('product_qty') is-invalid @enderror" type="number" placeholder="Enter product Qty">
                                     @error('product_qty')
                                     <span class="invalid-feedback" role="alert">

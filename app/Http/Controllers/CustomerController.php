@@ -38,7 +38,7 @@ class CustomerController extends Controller
         'email' => 'required|string|email|max:255|unique:users',
         'mobile' => 'required|min:3|digits:10',
         'details' => 'required|min:3|',
-        'previous_balance' => 'min:2',
+        // 'previous_balance' => 'min:2',
 
         ]);
 
@@ -48,7 +48,7 @@ class CustomerController extends Controller
         $customer->email = $request->email;
         $customer->mobile = $request->mobile;
         $customer->details = $request->details;
-        $customer->previous_balance = $request->previous_balance;
+        $customer->previous_balance = "0";
         $customer->save();
 
         return redirect()->back()->with('message', 'Customer Created Successfully');
@@ -75,7 +75,7 @@ class CustomerController extends Controller
         'email' => 'required|string|email|max:255|unique:users',
         'mobile' => 'required|min:3|digits:10',
         'details' => 'required|min:3|',
-        'previous_balance' => 'min:2',
+        // 'previous_balance' => 'min:2',
         ]);
 
         $customer = Customer::findOrFail($id);
@@ -84,7 +84,7 @@ class CustomerController extends Controller
         $customer->email = $request->email;
         $customer->mobile = $request->mobile;
         $customer->details = $request->details;
-        $customer->previous_balance = $request->previous_balance;
+        $customer->previous_balance = "0";
         $customer->save();
 
         return redirect()->back()->with('message', 'Customer Updated Successfully');

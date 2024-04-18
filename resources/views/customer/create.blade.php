@@ -37,7 +37,7 @@
             @csrf
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label class="control-label">Customer Name</label>
+                <label class="control-label">Customer Name *</label>
                 <input name="name" class="form-control @error('name') is-invalid @enderror" type="text" placeholder="Enter Customer Name">
                 @error('name')
                 <span class="invalid-feedback" role="alert">
@@ -47,7 +47,7 @@
               </div>
              
               <div class="form-group col-md-6">
-                <label class="control-label">Customer Mobile</label>
+                <label class="control-label">Customer Mobile *</label>
                 <input name="mobile" class="form-control @error('mobile') is-invalid @enderror" type="text" placeholder="Enter Mobile Number">
                 @error('mobile')
                 <span class="invalid-feedback" role="alert">
@@ -59,7 +59,7 @@
 
 
             <div class="form-group">
-              <label class="control-label">Customer Email</label>
+              <label class="control-label">Customer Email *</label>
               <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" placeholder="Enter Email Number" value="{{ old('email') }}" required autocomplete="email" autofocus>
               @error('email')
               <span class="invalid-feedback" role="alert">
@@ -70,7 +70,7 @@
 
 
             <div class="form-group">
-              <label class="control-label">Customer Address</label>
+              <label class="control-label">Customer Address *</label>
               <textarea name="address" class="form-control @error('address') is-invalid @enderror" style="height: 40px;"></textarea> <!-- Reduced height -->
               @error('address')
               <span class="invalid-feedback" role="alert">
@@ -79,7 +79,7 @@
               @enderror
             </div>
             <div class="form-group">
-              <label class="control-label">Customer Details</label>
+              <label class="control-label">Customer Details *</label>
               <textarea name="details" class="form-control @error('details') is-invalid @enderror" style="height: 40px;"></textarea> <!-- Reduced height -->
               @error('details')
               <span class="invalid-feedback" role="alert">
@@ -87,15 +87,15 @@
               </span>
               @enderror
             </div>
-            <div class="form-group">
+            {{-- <div class="form-group">
               <label class="control-label">Previous Credit Balance</label>
-              <input name="previous_balance" class="form-control @error('previous_balance') is-invalid @enderror" type="text" placeholder="Enter Balance">
+              <input name="previous_balance" value="0" class="form-control @error('previous_balance') is-invalid @enderror" type="text" placeholder="Enter Balance">
               @error('previous_balance')
               <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
               </span>
               @enderror
-            </div>
+            </div> --}}
             <div class="form-group text-center">
               <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Create</button>
             </div>

@@ -52,10 +52,11 @@
                                     <th scope="col">Price</th>
                                     <th scope="col">Discount</th>
                                     <th scope="col">Amount</th>
-                                    <th>
-                                    <a class="btn btn-success add"> <i class="fa fa-plus"></i></a>
+{{--                                 
+                                    <th scope="col"><a class="addRow"><i class="fa fa-plus"></i></a></th> --}}
+                                    <th scope="col"><a class="btn btn-success addRow"><i class="fa fa-plus"></i></a></th>
                                     </th>
-                                    {{-- <th scope="col"><a class="addRow"><i class="fa fa-plus"></i></a></th> --}}
+    
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -91,9 +92,14 @@
                                              </select>
                                         </td>
                                        
-                                        <td><b>Total</b></td>
+                                        {{-- <td><b>Total</b></td>
                                         <td><b class="total"></b></td>
+                                        <td></td> --}}
+
+                                        <td><b>Total</b></td>
+                                        <td><input  type="number" class="form-control total" name="total"></td>
                                         <td></td>
+
                                     </tr>
                                     </tfoot>
 
@@ -198,7 +204,9 @@
                 
                 total = parseInt(total);
             
-                $('.total').html(total);
+                // $('.total').html(total);
+                $('.total').val(total);
+
             }
             
             

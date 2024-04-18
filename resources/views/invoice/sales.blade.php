@@ -34,9 +34,9 @@
                                 <th>Product Name </th>
                                 <th>Product Image </th>
                                 <th> Qty </th>
-                                <th> Price  </th>
                                 <th> Discount  </th>
-                                <th>Total Amount  </th>
+                                <th> Price  </th>
+                                {{-- <th>Total Amount  </th> --}}
                                 {{-- <th>Action</th> --}}
                             </tr>
                             </thead>
@@ -50,10 +50,10 @@
                                      <td>{{ $sales->product->name }}</td>
                                      <td><img width="60 px" src="{{ asset('images/product/'.$sales->product->image) }}"></td>
                                      <td>{{$sales->qty}}</td>
-                                     <td>{{$sales->price}}</td>
                                      <td>{{$sales->dis}}</td>
-                                     <td>{{$sales->amount}}</td>
-                                     
+                                     <td>{{$sales->price * $sales->qty}}</td>
+                                     {{-- <td>{{$sales->amount}}</td> --}}
+                                     {{-- <td>{{$invoicetotal}}</td> --}}
                                  </tr>
                             @endforeach
                     

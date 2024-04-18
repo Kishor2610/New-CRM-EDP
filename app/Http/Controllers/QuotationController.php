@@ -45,13 +45,14 @@ class QuotationController extends Controller
             'price' => 'required',
             'dis' => 'required',
             'amount' => 'required',
+            'total' => 'required',
             'tax_id'=> 'required',
         ]);
 
         $quotation = new Quotation();
         $quotation->customer_id = $request->customer_id;
         $quotation->tax = implode(',', $request->tax_id);
-        $quotation->total = 1000;
+        $quotation->total = $request->total;
         $quotation->save();
 
         foreach ( $request->product_id as $key => $product_id){
@@ -87,7 +88,10 @@ class QuotationController extends Controller
     {
         $quotation = Quotation::findOrFail($id);
         $quotation_sales = Quotation_sale::where('quotation_id', $id)->get();
-        return view('quotation.show', compact('quotation','quotation_sales'));
+
+        $quotationtotal = Quotation::where('id', $id)->value('total');
+
+        return view('quotation.show', compact('quotation','quotation_sales','quotationtotal'));
 
     }
 
@@ -99,6 +103,8 @@ class QuotationController extends Controller
         $quotation = Quotation::findOrFail($id);
         $quotation_sales = Quotation_sale::where('quotation_id', $id)->get();
         $taxes = Tax::all();
+
+    
         return view('quotation.edit', compact('customers','products','quotation','quotation_sales','taxes'));
     }
 
@@ -113,13 +119,14 @@ class QuotationController extends Controller
         'price' => 'required',
         'dis' => 'required',
         'amount' => 'required',
+        'total' => 'required',
         'tax_id'=> 'required',
 
     ]);
 
         $quotation = Quotation::findOrFail($id);
         $quotation->customer_id = $request->customer_id;
-        $quotation->total = 1000;
+        $quotation->total = $request->total;;
         $quotation->tax = implode(',', $request->tax_id);
         $quotation->save();
 

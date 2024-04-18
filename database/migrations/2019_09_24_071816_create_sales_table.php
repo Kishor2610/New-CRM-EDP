@@ -21,6 +21,7 @@ class CreateSalesTable extends Migration
             $table->integer('price');
             $table->integer('dis');
             $table->integer('amount');
+            $table->string('total');
             $table->foreign('invoice_id')
                 ->references('id')->on('invoices')
                 ->onDelete('cascade');

@@ -50,6 +50,7 @@ class InvoiceController extends Controller
             'price' => 'required',
             'dis' => 'required',
             'amount' => 'required',
+            'total' => 'required',
             'tax_id'=> 'required',
         ]);
 
@@ -58,10 +59,9 @@ class InvoiceController extends Controller
         $invoice = new Invoice();
         $invoice->customer_id = $request->customer_id;
         $invoice->tax = implode(',', $request->tax_id);
-        $invoice->total = 0;
+        $invoice->total = $request->total;
         $invoice->save();
 
-      
         foreach ( $request->product_id as $key => $product_id){
             $sale = new Sale();
             $sale->qty = $request->qty[$key];
@@ -78,10 +78,12 @@ class InvoiceController extends Controller
     
          }
       
-            $sales = Sale::where('invoice_id', $invoice->id)->get();
-            $totalAmount = $sales->sum('amount');
-            $invoice->total = $totalAmount;
-            $invoice->save();
+            // $sales = Sale::where('invoice_id', $invoice->id)->get();
+            // $totalAmount = $sales->sum('amount');
+            // $invoice->total = $totalAmount;
+
+
+            // $invoice->save();
             
          return redirect('invoice/'.$invoice->id)->with('message','invoice created Successfully');
 
@@ -97,8 +99,10 @@ class InvoiceController extends Controller
     {
         $invoice = Invoice::findOrFail($id);
         $sales = Sale::where('invoice_id', $id)->get();
-        // $totalAmount = $invoice->sales->sum('amount');
-        return view('invoice.show', compact('invoice','sales'));
+        
+        $invoicetotal = Invoice::where('id', $id)->value('total');
+
+        return view('invoice.show', compact('invoice','sales','invoicetotal'));
 
     }
 
@@ -138,7 +142,8 @@ class InvoiceController extends Controller
         $invoice = Invoice::findOrFail($id);
         $sales = Sale::where('invoice_id', $id)->get();
         $taxes = Tax::all();
-        return view('invoice.edit', compact('customers','products','invoice','sales','taxes'));
+        $invoicetotal = Invoice::where('id', $id)->value('total');
+        return view('invoice.edit', compact('customers','products','invoice','sales','taxes','invoicetotal'));
     }
 
 
@@ -152,13 +157,14 @@ class InvoiceController extends Controller
         'price' => 'required',
         'dis' => 'required',
         'amount' => 'required',
+        'total' => 'required',
         'tax_id'=> 'required',
 
     ]);
 
         $invoice = Invoice::findOrFail($id);
         $invoice->customer_id = $request->customer_id;
-        $invoice->total = 1000;
+        $invoice->total = $request->total;
         $invoice->tax = implode(',', $request->tax_id);
         $invoice->save();
 

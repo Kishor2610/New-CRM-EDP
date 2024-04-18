@@ -95,9 +95,9 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required|min:3|unique:products|regex:/^[a-zA-Z ]+$/',
+            'name' => 'required|min:2|regex:/^[a-zA-Z ]+$/',
             'serial_number' => 'required',
-            'model' => 'required|min:3',
+            'model' => 'required|min:2',
             'category_id' => 'required',
             'sales_price' => 'required',
             'product_qty' => 'required',

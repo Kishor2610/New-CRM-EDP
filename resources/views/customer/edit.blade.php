@@ -82,7 +82,7 @@
               </span>
               @enderror
             </div>
-            <div class="form-group">
+            {{-- <div class="form-group">
               <label class="control-label">Customer Credit Balance</label>
               <input value="{{ $customer->previous_balance }}" name="previous_balance" class="form-control @error('previous_balance') is-invalid @enderror" type="text" placeholder="Enter Balance">
               @error('previous_balance')
@@ -90,7 +90,7 @@
                 <strong>{{ $message }}</strong>
               </span>
               @enderror
-            </div>
+            </div> --}}
             <div class="form-group text-center">
               <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Update</button>
             </div>

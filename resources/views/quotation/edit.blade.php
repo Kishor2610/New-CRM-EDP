@@ -89,9 +89,14 @@
                                              </select>
                                         </td>
                                        
-                                        <td><b>Total</b></td>
+                                        {{-- <td><b>Total</b></td>
                                         <td><b class="total"></b></td>
+                                        <td></td> --}}
+
+                                        <td><b>Total</b></td>
+                                        <td><input  type="number" class="form-control total" name="total"></td>
                                         <td></td>
+
                                     </tr>
                                     </tfoot>
 
@@ -196,7 +201,8 @@
                 
                 total = parseInt(total);
             
-                $('.total').html(total);
+                // $('.total').html(total);
+                $('.total').val(total);
             }
             
             

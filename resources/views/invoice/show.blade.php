@@ -53,6 +53,7 @@
                                         <th>Product</th>
                                         <th>Price</th>
                                         <th>Qty</th>
+                                        <th>Discount</th>
                                         <th>Amount</th>
                                      </tr>
                                     </thead>
@@ -65,6 +66,7 @@
                                         <td>{{$sale->product->name}}</td>
                                         <td>{{$sale->price}}</td>
                                         <td>{{$sale->qty}}</td>
+                                        <td>{{$sale->dis}}</td>
                                         <td>{{$sale->amount}}</td>
                                         <div style="display: none">
                                             {{$total +=$sale->amount}}
@@ -77,6 +79,7 @@
 
                                         <td></td>
                                         <td></td>
+                                        <td></td>
                                         <td><b>Tax</b></td>
                                         <td><b class="tax_id">{{ $invoice->tax }}%</b></td>
                                     </tr>
@@ -84,8 +87,9 @@
 
                                         <td></td>
                                         <td></td>
+                                        <td></td>
                                         <td><b>Total</b></td>
-                                        <td><b class="total">{{$total}}</b></td>
+                                        <td>{{$invoicetotal}}</td>
                                     </tr>
 
                                     </tfoot>
