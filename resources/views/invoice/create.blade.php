@@ -17,6 +17,12 @@
             </ul>
         </div>
 
+        @if(session()->has('message'))
+            <div class="alert alert-success">
+                {{ session()->get('message') }}
+            </div>
+        @endif
+
       
          <div class="row">
              <div class="clearix"></div>
@@ -33,9 +39,11 @@
                                 <select name="customer_id" class="form-control">
                                     <option>Select Customer</option>
                                     @foreach($customers as $customer)
-                                        <option name="customer_id" value="{{$customer->id}}">{{$customer->name}} </option>
+                                        <option name="customer_id" value="{{$customer->id}}">{{$customer->name}}  </option>
                                     @endforeach
-                                </select>                            </div>
+                        
+                                </select>  
+                            </div>
                             
                             <div class="form-group col-md-3">
                                 <label class="control-label">Date</label>
@@ -55,7 +63,7 @@
                                 <th scope="col">Price</th>
                                 <th scope="col">Discount</th>
                                 <th scope="col">Amount</th>
-                                 
+                               
                                 <th scope="col"><a class="btn btn-success addRow"><i class="fa fa-plus"></i></a></th>
                             </tr>
                             </thead>
@@ -69,7 +77,18 @@
                                     </select></td>
                                 <td><input type="text" name="qty[]" class="form-control qty" ></td>
                                 <td><input type="text" name="price[]" class="form-control price" ></td>
-                                <td><input type="text" name="dis[]" class="form-control dis"></td>
+                                {{-- <td><input type="text" value="0" name="dis[]" class="form-control dis"></td> --}}
+
+                                <td>
+                                    <select name="dis[]" class="form-control dis">
+                                        <option value="0">0%</option>
+                                        <option value="5">5%</option>
+                                        <option value="10">10%</option>
+                                        <option value="20">20%</option>
+                                        <option value="50">50%</option>
+                                    </select>
+                                </td>    
+
                                  
                                 <td><input type="text" name="amount[]" class="form-control amount" ></td>
 
@@ -92,22 +111,9 @@
                                         @endforeach
                                     </select>
                                 </td>
-                                {{-- <td>
-                                    <select name="tax_id[]" class="form-control tax_id" >
-                                        <option>Select Tax</option> 
-                                    @foreach($taxes as $taxes)
-                                            <option name="tax_id[]" value="{{$taxes->slug}}">{{$taxes->slug}}%</option>
-                                        @endforeach
-                                     </select>
-                                </td> --}}
-                               
-                                {{-- <td><b>Total</b></td>
-                                <td>
-                                    <b class="total"></b>   
-                                </td>                           --}}
-
+                              
                                 <td><b>Total</b></td>
-                                    <td><input disabled type="number" class="form-control total" name="total"></td>
+                                    <td><input type="number" class="form-control total" name="total"></td>
                                 <td></td>
                             </tr>
                             </tfoot>
@@ -171,18 +177,19 @@
                 });
             });
 
-            $('tbody').delegate('.qty,.price,.dis', 'keyup', function () {
-
+            
+            $('tbody').delegate('.qty,.price,.dis', 'keyup change', function () {
                 var tr = $(this).parent().parent();
                 var qty = tr.find('.qty').val();
                 var price = tr.find('.price').val();
                 var dis = tr.find('.dis').val();
 
-            
-                var amount = (qty * price)-(qty * price * dis)/100;
+                var amount = (qty * price) - (qty * price * (dis / 100));
                 tr.find('.amount').val(amount);
                 total();
             });
+            
+
 
             $('tfoot').delegate('.tax_id','change',function(){
                 var tr =$(this).parent().parent();
@@ -228,22 +235,33 @@
 
             });
 
+
+
             function addRow() {
                 var addRow = '<tr>\n' +
                     '         <td><select name="product_id[]" class="form-control productname " >\n' +
                     '         <option value="0" selected="true" disabled="true">Select Product</option>\n' +
-'                                        @foreach($products as $product)\n' +
-'                                            <option value="{{$product->id}}">{{$product->name}}</option>\n' +
-'                                        @endforeach\n' +
+                    '                                        @foreach($products as $product)\n' +
+                    '                                            <option value="{{$product->id}}">{{$product->name}}</option>\n' +
+                    '                                        @endforeach\n' +
                     '               </select></td>\n' +
-'                                <td><input type="text" name="qty[]" class="form-control qty" ></td>\n' +
-'                                <td><input type="text" name="price[]" class="form-control price" ></td>\n' +
-'                                <td><input type="text" name="dis[]" class="form-control dis" ></td>\n' +
-'                                <td><input type="text" name="amount[]" class="form-control amount" ></td>\n' +
-'                                <td><a   class="btn btn-danger remove"> <i class="fa fa-remove"></i></a></td>\n' +
-'                             </tr>';
+                    '                                <td><input type="text" name="qty[]" class="form-control qty" ></td>\n' +
+                    '                                <td><input type="text" name="price[]" class="form-control price" ></td>\n' +
+                    '                                <td><select name="dis[]" class="form-control dis">\n' +
+                    '                                                <option value="0">0%</option>\n' +    
+                    '                                                <option value="5">5%</option>\n' +
+                    '                                                <option value="10">10%</option>\n' +
+                    '                                                <option value="20">20%</option>\n' +
+                    '                                                <option value="50">50%</option>\n' +
+                    '                                            </select></td>\n' +
+                    '                                <td><input type="text" name="amount[]" class="form-control amount" ></td>\n' +
+                    '                                <td><a   class="btn btn-danger remove"> <i class="fa fa-remove"></i></a></td>\n' +
+                    '                             </tr>';
                 $('tbody').append(addRow);
-            };
+            }
+
+
+                
 
 
             $('.remove').live('click', function () {

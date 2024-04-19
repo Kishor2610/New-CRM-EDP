@@ -70,7 +70,20 @@
                                         </select></td>
                                     <td><input value="{{$sale->qty}}" type="text" name="qty[]" class="form-control qty" ></td>
                                     <td><input value="{{$sale->price}}" type="text" name="price[]" class="form-control price" ></td>
-                                    <td><input value="{{$sale->dis}}" type="text" name="dis[]" class="form-control dis" ></td>
+                                    {{-- <td><input value="{{$sale->dis}}" type="text" name="dis[]" class="form-control dis" ></td> --}}
+                                    
+                                    <td>
+                                        <select name="dis[]" class="form-control dis">
+                                            <option value="0">0%</option>
+                                            <option value="5">5%</option>
+                                            <option value="10">10%</option>
+                                            <option value="20">20%</option>
+                                            <option value="50">50%</option>
+                                        </select>
+                                    </td>    
+    
+                                    
+                                    
                                     <td><input value="{{$sale->amount}}" type="text" name="amount[]" class="form-control amount" ></td>
                                     <td>
                                         {{-- <a class="btn btn-success add"> <i class="fa fa-plus"></i></a> --}}
@@ -91,13 +104,9 @@
                                                 @endforeach
                                              </select>
                                         </td>
-                                       
-                                        {{-- <td><b>Total</b></td>
-                                        <td><b class="total"></b></td>
-                                        <td></td> --}}
-
+                                      
                                         <td><b>Total</b></td>
-                                        <td><input  type="number" class="form-control total" name="total" disabled></td>
+                                        <td><input  type="number" class="form-control total" name="total"></td>
                                         <td></td>
 
                                     </tr>
@@ -161,16 +170,18 @@
                 });
             });
 
-            $('tbody').delegate('.qty,.price,.dis', 'keyup', function () {
 
+            $('tbody').delegate('.qty,.price,.dis', 'keyup change', function () {
                 var tr = $(this).parent().parent();
                 var qty = tr.find('.qty').val();
                 var price = tr.find('.price').val();
                 var dis = tr.find('.dis').val();
-                var amount = (qty * price)-(qty * price * dis)/100;
+
+                var amount = (qty * price) - (qty * price * (dis / 100));
                 tr.find('.amount').val(amount);
                 total();
             });
+
 
             $('tfoot').delegate('.tax_id','change',function(){
                 var tr =$(this).parent().parent();
@@ -225,12 +236,20 @@
                     '               </select></td>\n' +
                     '                                <td><input type="text" name="qty[]" class="form-control qty" ></td>\n' +
                     '                                <td><input type="text" name="price[]" class="form-control price" ></td>\n' +
-                    '                                <td><input type="text" name="dis[]" class="form-control dis" ></td>\n' +
+                    '                                <td><select name="dis[]" class="form-control dis">\n' +
+                    '                                                <option value="0">0%</option>\n' +    
+                    '                                                <option value="5">5%</option>\n' +
+                    '                                                <option value="10">10%</option>\n' +
+                    '                                                <option value="20">20%</option>\n' +
+                    '                                                <option value="50">50%</option>\n' +
+                    '                                            </select></td>\n' +
                     '                                <td><input type="text" name="amount[]" class="form-control amount" ></td>\n' +
                     '                                <td><a   class="btn btn-danger remove"> <i class="fa fa-remove"></i></a></td>\n' +
                     '                             </tr>';
                 $('tbody').append(addRow);
-            };
+            }
+
+
 
 
             $('.remove').live('click', function () {

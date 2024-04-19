@@ -66,7 +66,7 @@
                                         <td>{{$sale->product->name}}</td>
                                         <td>{{$sale->price}}</td>
                                         <td>{{$sale->qty}}</td>
-                                        <td>{{$sale->dis}}</td>
+                                        <td>{{$sale->dis}}%</td>
                                         <td>{{$sale->amount}}</td>
                                         <div style="display: none">
                                             {{$total +=$sale->amount}}
@@ -89,7 +89,7 @@
                                         <td></td>
                                         <td></td>
                                         <td><b>Total</b></td>
-                                        <td>{{$invoicetotal}}</td>
+                                        <td><b>{{$invoicetotal}}</b></td>
                                     </tr>
 
                                     </tfoot>

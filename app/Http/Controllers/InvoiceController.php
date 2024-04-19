@@ -207,6 +207,7 @@ class InvoiceController extends Controller
             $sales = $sales->merge($invoice->sales);
         }
 
+
         return view('invoice.sales', compact('invoices','sales'));
     }
 

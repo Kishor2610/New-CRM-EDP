@@ -54,7 +54,7 @@
                                         @endforeach
                                     </td> --}}
 
-                                     <td><img width="60 px" src="{{ asset('images/product/'.$product->image) }}"></td>
+                                     <td><img width="60 px" src="{{ asset('/images/product/'.$product->image) }}"></td>
                                      <td>{{$product->sales_price}}</td>
                                      <td>{{$product->product_qty}}</td>
                                      <td>

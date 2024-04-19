@@ -73,7 +73,7 @@
               @enderror
             </div> --}}
 
-            <div class="form-group">
+            {{-- <div class="form-group">
               <label class="control-label">Supplier Raw Material</label>
               <select name="details" class="form-control">
                   <option>Select Supplier</option>
@@ -86,7 +86,22 @@
                 <strong>{{ $message }}</strong>
               </span>
               @enderror
-            </div>
+            </div> --}}
+
+            <div class="form-group">
+              <label class="control-label">Supplier Raw Materials *</label>
+              <select id="details" name="details[]" class="form-control select2" multiple="multiple">
+                  @foreach($rawMaterials as $rawMaterial)
+                      <option value="{{ $rawMaterial->id }}">{{ $rawMaterial->material_name }}</option>
+                  @endforeach
+              </select>
+              @error('details')
+                  <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                  </span>
+              @enderror
+            </div> 
+  
 
 
             {{-- <div class="form-group">

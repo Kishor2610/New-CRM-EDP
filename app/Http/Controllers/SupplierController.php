@@ -39,24 +39,30 @@ class SupplierController extends Controller
 
         ]);
 
-      
-
         $supplier = new Supplier();
         $supplier->name = $request->name;
         $supplier->address = $request->address;
         $supplier->mobile = $request->mobile;
-
         $supplier->previous_balance = "0";
 
-        $detailsString = implode(',', $request->input('details'));
+        // details Raw Materials
+
+        $detailsString = implode(',', $request->input('details'));        
+        $supplier_value = $detailsString;
+
+        $ids = explode(',', $supplier_value);
+        $rawMaterials = RawMaterial::whereIn('id', $ids)->get();
+        
+        $details = [];        
+        foreach ($rawMaterials as $material) {
+            $details[$material->id] = $material->material_name;
+        }
+        
+        $detailsString = implode(',', $details);
         $supplier->details = $detailsString;
 
-    
         $supplier->save();
        
-        
-        // $supplier->rawMaterials()->attach($request->input('details'));
-
         return redirect()->back()->with('message', 'Supplier Created Successfully');
     }
 
@@ -78,7 +84,9 @@ class SupplierController extends Controller
             'name' => 'required|min:3|regex:/^[a-zA-Z ]+$/',
             'address' => 'required|min:3',
             'mobile' => 'required|min:3|digits:10',
-            'details' => 'required|min:3|',
+            // 'details' => 'required|min:3|',
+            'details' => 'required|array|min:1',
+            'details.*' => 'integer|exists:raw_material,id',
             // 'previous_balance' => 'min:3',
         ]);
 
@@ -86,8 +94,26 @@ class SupplierController extends Controller
         $supplier->name = $request->name;
         $supplier->address = $request->address;
         $supplier->mobile = $request->mobile;
-        $supplier->details = $request->details;
+        // $supplier->details = $request->details;
         $supplier->previous_balance = "0";
+
+        // details Raw Materials
+
+        $detailsString = implode(',', $request->input('details'));        
+        $supplier_value = $detailsString;
+
+        $ids = explode(',', $supplier_value);
+        $rawMaterials = RawMaterial::whereIn('id', $ids)->get();
+        
+        $details = [];        
+        foreach ($rawMaterials as $material) {
+            $details[$material->id] = $material->material_name;
+        }
+        
+        $detailsString = implode(',', $details);
+        $supplier->details = $detailsString;
+
+
         $supplier->save();
 
         return redirect()->back()->with('message', 'Suppler Updated Successfully');

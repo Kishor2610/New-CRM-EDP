@@ -83,7 +83,7 @@
                                         <td></td>
                                         <td><b>Total</b></td>
                                         {{-- <td><b class="total">{{$total}}</b></td> --}}
-                                        <td>{{$quotationtotal}}</td>
+                                        <td><b>{{$quotationtotal}}</b></td>
                                     </tr>
 
                                     </tfoot>

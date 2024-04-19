@@ -48,7 +48,7 @@ class ProductController extends Controller
             'sales_price' => 'required',
             'product_qty' => 'required',
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'tax_id' => 'required',
+            // 'tax_id' => 'required',
 
         ]);
 
@@ -61,12 +61,12 @@ class ProductController extends Controller
         $product->sales_price = $request->sales_price;
         $product->product_qty = $request->product_qty;
         $product->unit_id = '0';
-        $product->tax_id = $request->tax_id;
+        $product->tax_id = '0';
 
 
         if ($request->hasFile('image')){
             $imageName =request()->image->getClientOriginalName();
-            request()->image->move(public_path('images/product/'), $imageName);
+            request()->image->move(public_path('/images/product/'), $imageName);
             $product->image = $imageName;
         }
 
@@ -103,7 +103,7 @@ class ProductController extends Controller
             'product_qty' => 'required',
             'unit_id' => '0',
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'tax_id' => 'required',
+            // 'tax_id' => '0',
 
         ]);
 
@@ -115,17 +115,17 @@ class ProductController extends Controller
         $product->sales_price = $request->sales_price;
         $product->product_qty = $request->product_qty;
         $product->unit_id = '0';
-        $product->tax_id = $request->tax_id;
+        $product->tax_id = '0';
 
 
         if ($request->hasFile('image')){
-            $image_path ="images/product/".$product->image;
+            $image_path ="/images/product/".$product->image;
            
             // if (file_exists($image_path)){
             //     unlink($image_path);
             // }
             $imageName =request()->image->getClientOriginalName();
-            request()->image->move(public_path('images/product/'), $imageName);
+            request()->image->move(public_path('/images/product/'), $imageName);
             $product->image = $imageName;
         }
         $product->save();

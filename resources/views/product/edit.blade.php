@@ -95,7 +95,7 @@
                                     </span>
                                     @enderror
                                 </div>
-                                <div class="form-group col-md-6">
+                                {{-- <div class="form-group col-md-6">
                                     <label class="control-label">Tax </label>
                                     <select name="tax_id" class="form-control">
                                         <option value="{{$product->tax->id}}">{{$product->tax->slug}} %</option>
@@ -108,7 +108,7 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
-                                </div>
+                                </div> --}}
                                 <div class="form-group col-md-6">
                                     <label class="control-label">Product Qty</label>
                                     <input value="{{$product->product_qty}}" name="product_qty" class="form-control @error('product_qty') is-invalid @enderror" type="number" placeholder="Enter product Qty">
