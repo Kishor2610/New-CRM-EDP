@@ -70,6 +70,14 @@
             </ul>
         </li>
 
+        {{-- Query --}}
+        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-object-group"></i><span class="app-menu__label">Customer Query</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+            <ul class="treeview-menu">
+                <li><a class="treeview-item" href="{{route('customer_query.index')}}"><i class="icon fa fa-edit"></i> Query</a></li>
+             </ul>
+        </li>
+
+
       
 
 

@@ -31,7 +31,7 @@
           <form method="POST" action="{{route('supplier.store')}}">
             @csrf
             <div class="form-group row">
-              <div class="col-md-6">
+              <div class="col-md-12">
                 <label class="control-label">Supplier Name *</label>
                 <input name="name" class="form-control @error('name') is-invalid @enderror" type="text" placeholder="Enter Supplier Name">
                 @error('name')
@@ -40,7 +40,10 @@
                 </span>
                 @enderror
               </div>
-              <div class="col-md-6">
+            </div>
+
+            <div class="form-group row">
+              <div class="col-md-12">
                 <label class="control-label">Supplier Mobile *</label>
                 <input name="mobile" class="form-control @error('mobile') is-invalid @enderror" type="text" placeholder="Enter Supplier Mobile No.">
                 @error('mobile')
@@ -50,6 +53,7 @@
                 @enderror
               </div>
             </div>
+
             <div class="form-group">
               <label class="control-label">Supplier Address *</label>
               <textarea name="address" class="form-control @error('address') is-invalid @enderror" style="height: 40px;"></textarea>

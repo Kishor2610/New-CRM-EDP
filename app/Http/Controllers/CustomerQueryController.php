@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\CustomerQuery;
-use App\Models\Query;
-
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendReplyMail;
 
 class CustomerQueryController extends Controller
 {
@@ -44,8 +45,11 @@ class CustomerQueryController extends Controller
         }
         public function fetchNotifications()
         {
-            $notifications = CustomerQuery::all();
-            return response()->json($notifications);
+            
+                $notifications = CustomerQuery::where('status', 0)->get();
+
+                return response()->json($notifications);
+           
         }
 
         public function showHeader()
@@ -60,6 +64,64 @@ class CustomerQueryController extends Controller
             return response()->json(['count' => $count]);
             
         }
-  
+
+        public function updateQueryStatus($id)
+        {
+            $query = CustomerQuery::findOrFail($id);
+            $query->status = 1;
+            $query->save();
+        
+            return response()->json(['message' => 'Query status updated successfully']);
+        }
+
+
+        public function view_query()
+        {
+             $queries_view = CustomerQuery::all();
+             
+             $queries_view->transform(function ($query) {
+
+                $user = User::where('id', $query->user_id)->first();
+                
+                $query->user_name = $user ? $user->f_name . ' ' . $user->l_name : 'Unknown';
+                
+                return $query;
+            });
+          
+            return view('customer_query.index', compact('queries_view'));
+        }
+
+
+        public function sendReply(Request $request)
+        {
+
+            // dd($request->all());
+
+            try{
+
+                // try {
+                    $request->validate([
+                        'id' => 'exists:query,customerId',
+                        'solution' => 'required',
+                    ]);
+                // } catch (\Illuminate\Validation\ValidationException $e) {
+                //     dd($e->errors());
+                // }
+                   
+
+                    $customerQuery = CustomerQuery::findOrFail(1);
+
+
+                    Mail::to($customerQuery->email)->send(new SendReplyMail($customerQuery, $request->solution));
+            
+                    return redirect()->back()->with('success', 'Reply sent successfully!');
+
+            }catch(\Exception $e){
+
+                dd($e);
+            }
+        }
+        
+
 
 }

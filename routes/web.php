@@ -104,6 +104,12 @@ Route::get('/fetch-notifications', 'CustomerQueryController@fetchNotifications')
 Route::get('/fetch-notifications-count', [CustomerQueryController::class, 'fetchNotificationsCount'])
     ->name('fetch_notifications_count');
 
+Route::get('/update-query-status/{id}', 'CustomerQueryController@updateQueryStatus')->name('update_query_status');
+
+
+Route::get('customer_query/index', [CustomerQueryController::class, 'view_query'])->name('customer_query.index');
+
+Route::post('customer_query/send_reply', [CustomerQueryController::class, 'sendReply'])->name('send_reply');
 
 ?>
 

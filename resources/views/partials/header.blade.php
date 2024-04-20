@@ -2,7 +2,7 @@
    
    
     <a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
-  
+   
 
     <ul class="app-nav">
 
@@ -10,6 +10,7 @@
             <i class="fa fa-bell fa-lg"></i>
             <span class="badge badge-pill badge-danger" id="notification-count">0</span> 
         </a>
+        
 
         <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu"><i class="fa fa-user fa-lg"></i></a>
            
@@ -30,6 +31,7 @@
             </ul>
         </li>
     </ul>
+
 
 </header>
 
@@ -127,11 +129,12 @@
                         if (message.split(/\s+/).length > 9) {
                             var partialMessage = message.split(/\s+/).slice(0, 9).join(" ");
                             var fullMessage = message;
-                            row += '<div class="row"><div class="col"><span style="color: #007bff;">Query: <span class="partial-message">' + partialMessage + '... <span class="read-more">Read more</span></span><span class="full-message" style="display: none;">' + fullMessage + '</span></div></div>';
+row += '<div class="row"><div class="col" style="color: #007bff;">Query: <span class="partial-message">' + partialMessage + '... <span class="read-more">Read more</span></span><span class="full-message" style="display: none;">' + fullMessage + '</span></div></div>';
+
                         } else {
-                            row += '<div class="row"><div class="col">Query: ' + message + '</div></div>';
+                            row += '<div class="row"><div class="col" style="color: #007bff;">Query: ' + message + '</div></div>';
                         }
-                        // row += '<div class="row"><div class="col text-center"><button id="id" class="btn btn-sm btn-success read-button">Read</button></div></div>';
+                         row += '<div class="row"><div class="col text-center"><button id="id" class="btn btn-sm btn-success read-button" data-query-id=" '+notification.id+' ">Read</button></div></div>';
 
 
                         row += '</div>';
@@ -144,24 +147,38 @@
             });
         });
 
-        // Event delegation for 'Read more' functionality
         $('.modal-body').on('click', '.read-more', function() {
             $(this).closest('.query-row').find('.partial-message').hide();
             $(this).closest('.query-row').find('.full-message').show();
         });
+
+
+        $('.modal-body').on('click', '.read-button', function() {
+            var queryId = $(this).data('query-id');
+            $.ajax({
+                url: '/update-query-status/' + queryId,
+                type: 'GET', 
+                success: function(response) {
+                    $(this).closest('.query-row').remove();
+                    console.log('Query status updated successfully');
+                },
+                error: function(xhr, status, error) {
+                    console.error(error);
+                }
+            });
+        });
+
+
 
         function formatDate(dateTimeString) {
         var currentDate = new Date();
         var createdAtDate = new Date(dateTimeString);
 
         if (createdAtDate.toDateString() === currentDate.toDateString()) {
-            // Today's date
             return 'Today ' + createdAtDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
         } else if (createdAtDate.getDate() === currentDate.getDate() - 1) {
-            // Yesterday's date
             return 'Yesterday ' + createdAtDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
         } else {
-            // Other dates
             return createdAtDate.toLocaleDateString() + ' ' + createdAtDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
         }
     }

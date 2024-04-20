@@ -35,7 +35,7 @@
 
                             @csrf
                             <div class="form-group row">
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <label class="control-label">Tax Name</label>
                                 <input name="name" class="form-control @error('name') is-invalid @enderror" type="text" placeholder="Enter Tax Name">
                                 @error('name')
@@ -44,9 +44,10 @@
                                 </span>
                                 @enderror
                               </div>
+                            </div>
 
-
-                            <div class="col-md-6">
+                            <div class="form-group row">
+                            <div class="col-md-12">
                                 <label class="control-label">Tax Value</label>
                                 <input name="tax_value" class="form-control @error('tax_value') is-invalid @enderror" type="text" placeholder="Enter Tax Value">
                                 @error('tax_value')
