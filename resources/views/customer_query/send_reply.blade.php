@@ -21,7 +21,7 @@
     </p>
     <p>
         Regards,<br>
-        Your Company Name
+        EDHAAS DIGISOFT PRIVATE LIMITED
     </p>
 </body>
 </html>

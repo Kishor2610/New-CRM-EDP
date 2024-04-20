@@ -40,10 +40,19 @@
                                 <td>{{ $queries_view->email }} </td>
                                 <td>{{ $queries_view->query_subject }}</td>
                                 <td>{{$queries_view->query_message}}</td>
-                                <td>              
-                                    <button class="btn btn-success" type="button" onclick="openReplyModal('{{ $queries_view->id }}')">
-                                        Send Reply<i class="fa fa-paper-plane"></i>
-                                      </button>
+                                <td>  
+                                  
+                                    @if($queries_view->status!='2')
+                                      <button class="btn btn-danger" type="button" onclick="openReplyModal('{{ $queries_view->id }}')">
+                                          Send Reply_ <i class="fa fa-paper-plane"></i>
+                                        </button>
+                                     @endif
+                                    
+                                    @if($queries_view->status=='3')
+                                      <button class="btn btn-success" type="button">Mail Sended <i class="fa fa-paper"></i>
+                                      </button> 
+                                     
+                                    @endif
                                 </td>
                                                 
                             </tr>
@@ -54,39 +63,37 @@
                 </div>
             </div>
         </div>
-    </main>
 
 
-    <!-- Add this modal at the end of your Blade template -->
-<div class="modal fade" id="replyModal" tabindex="-1" role="dialog" aria-labelledby="replyModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="replyModalLabel">Reply to Query</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form id="replyForm" action="{{ route('send_reply') }}" method="post">
-            @csrf
-            <div class="form-group">
-              <label for="solution">Solution:</label>
-              <textarea class="form-control" id="solution" name="solution" rows="4" required>cbvncbv</textarea>
+         <!-- Add this modal at the end of your Blade template -->
+            <div class="modal fade" id="replyModal" tabindex="-1" role="dialog" aria-labelledby="replyModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="replyModalLabel">Reply to Query</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <form id="replyForm" action="{{ route('send_reply') }}" method="post">
+                      @csrf
+                      <div class="form-group">
+                        <label for="solution">Solution:</label>
+                        <textarea class="form-control" id="solution" name="solution" rows="4" required></textarea>
+                      </div>
+                      <input type="hidden" id="customerId" name="id" value="">
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" form="replyForm" class="btn btn-primary">Send Mail</button>
+                  </div>
+                </div>
+              </div>
             </div>
-            <input type="hidden" id="customerId" name="customerId" value="">
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" form="replyForm" class="btn btn-primary">Send Mail</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  
 
-
+    </main>
 
 @endsection
 

@@ -60,7 +60,8 @@
     $(document).ready(function() {
         var styles = `
             .modal-body {
-                max-height: 300px; / Adjust this height as needed /
+                // max-height: 400px; / Adjust this height as needed /
+                max-height: auto;
                 overflow-y: auto;
             }
             .query-row {
@@ -161,6 +162,7 @@ row += '<div class="row"><div class="col" style="color: #007bff;">Query: <span c
                 success: function(response) {
                     $(this).closest('.query-row').remove();
                     console.log('Query status updated successfully');
+                    location.reload();
                 },
                 error: function(xhr, status, error) {
                     console.error(error);
@@ -185,4 +187,8 @@ row += '<div class="row"><div class="col" style="color: #007bff;">Query: <span c
 
 
     });
-</script>
+</script> 
+
+
+
+

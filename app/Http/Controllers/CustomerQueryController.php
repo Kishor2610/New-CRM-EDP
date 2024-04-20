@@ -94,26 +94,19 @@ class CustomerQueryController extends Controller
 
         public function sendReply(Request $request)
         {
-
-            // dd($request->all());
-
             try{
-
-                // try {
                     $request->validate([
-                        'id' => 'exists:query,customerId',
+                        'id' => 'required|numeric',
                         'solution' => 'required',
                     ]);
-                // } catch (\Illuminate\Validation\ValidationException $e) {
-                //     dd($e->errors());
-                // }
-                   
 
-                    $customerQuery = CustomerQuery::findOrFail(1);
-
+                    $customerQuery = CustomerQuery::findOrFail($request->id);
 
                     Mail::to($customerQuery->email)->send(new SendReplyMail($customerQuery, $request->solution));
-            
+
+                    $customerQuery->status = 3;
+                    $customerQuery->save();
+
                     return redirect()->back()->with('success', 'Reply sent successfully!');
 
             }catch(\Exception $e){
