@@ -60,20 +60,6 @@
               @enderror
             </div>
 
-          {{-- <div class="form-group">
-            <label class="control-label">Supplier Raw Material *</label>
-            <select id="details" name="details[]" class="form-control select2" multiple="multiple>
-                <option>Select Supplier</option>
-                  @foreach($rawMaterials as $rawMaterial)
-                      <option value="{{ $rawMaterial->material_name }}">{{ $rawMaterial->material_name }}</option>
-                  @endforeach
-            </select>
-            @error('details')
-            <span class=" invalid-feedback" role="alert">
-              <strong>{{ $message }}</strong>
-            </span>
-            @enderror
-          </div> --}}
 
           <div class="form-group">
             <label class="control-label">Supplier Raw Materials *</label>
@@ -111,6 +97,9 @@
   $(document).ready(function() {
       $('select').selectpicker();
   });
+
+
+
 </script>
 
 @endpush

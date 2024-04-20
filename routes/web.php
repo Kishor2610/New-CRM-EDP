@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\CustomerQueryController;
 
 
 Auth::routes();
@@ -89,6 +90,19 @@ Route::get('/new-password/{token}', 'Auth\RegisterController@showresetform')->na
 Route::post('/new-password', 'Auth\RegisterController@reset')->name('password.update');
 
 
+
+
+
+Route::get('/queryform', 'CustomerQueryController@create')->name('customer.queryform');
+Route::post('/queryform', [CustomerQueryController::class, 'submitQuery'])->name('customer.submitquery');
+
+Route::get('/fetch_notifications', [CustomerQueryController::class, 'fetchNotifications'])->name('fetch_notifications');
+
+Route::get('/viewqueries', 'CustomerQueryController@viewQueries')->name('viewqueries');
+Route::get('/fetch-notifications', 'CustomerQueryController@fetchNotifications')->name('fetchNotifications');
+
+Route::get('/fetch-notifications-count', [CustomerQueryController::class, 'fetchNotificationsCount'])
+    ->name('fetch_notifications_count');
 
 
 ?>

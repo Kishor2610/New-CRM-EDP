@@ -18,6 +18,23 @@
             <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>SIGN UP</h3>
 
             <div class="form-group row">
+                <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('Role') }}</label>
+                <div class="col-md-7">
+                    <select id="role_id" class="form-control @error('role') is-invalid @enderror" name="role_id" required>
+                        <option value="">Select Role</option>
+                        @foreach($roles as $role)
+                            <option value="{{ $role->role_id }}">{{ $role->role }}</option>
+                        @endforeach
+                    </select>
+                    @error('role')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+            </div>
+
+            <div class="form-group row">
                 <label for="f_name" class="col-md-4 col-form-label text-md-right">{{ __('First Name') }}</label>
 
                 <div class="col-md-7">
@@ -84,12 +101,19 @@
                 </div>
             </div>
 
+
+            {{-- // Passsword --}}
             <div class="form-group row">
                 <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
                 <div class="col-md-7">
+                    <div class="input-group">
                     <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
+                     <div class="input-group-append">
+                        <span class="input-group-text" onclick="togglePasswordVisibility()" style="cursor: pointer;">
+                            <i class="fa fa-eye" id="togglePassword"></i>
+                        </span>
+                    </div>
+                </div>
                     @error('password')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -98,13 +122,22 @@
                 </div>
             </div>
 
+            {{-- // Confirm  Passsword --}}
+            
             <div class="form-group row">
                 <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
                 <div class="col-md-7">
-                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                    <div class="input-group">
+                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                        <div class="input-group-append">
+                            <span class="input-group-text" onclick="toggleConfirmPasswordVisibility()" style="cursor: pointer;">
+                                <i class="fa fa-eye" id="togglePassword2"></i>
+                            </span>
+                        </div>
+                    </div>
                 </div>
             </div> 
+
 
             <div class="form-group btn-container">
                 <button class="btn btn-primary btn-block" type="submit"><i class="fa fa-sign-in fa-lg fa-fw"></i>SIGN UP</button>
@@ -127,3 +160,43 @@
 @endsection
 
 
+@push('js')
+
+<script type="text/javascript">
+    
+    function togglePasswordVisibility() {
+        var passwordField = document.getElementById("password");
+        var toggleIcon = document.getElementById("togglePassword");
+        
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+            toggleIcon.classList.remove("fa-eye");
+            toggleIcon.classList.add("fa-eye-slash");
+        } else {
+            passwordField.type = "password";
+            toggleIcon.classList.remove("fa-eye-slash");
+            toggleIcon.classList.add("fa-eye");
+        }
+    }
+
+
+    function toggleConfirmPasswordVisibility() {
+        var passwordField = document.getElementById("password-confirm");
+        var toggleIcon = document.getElementById("togglePassword2");
+        
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+            toggleIcon.classList.remove("fa-eye");
+            toggleIcon.classList.add("fa-eye-slash");
+        } else {
+            passwordField.type = "password";
+            toggleIcon.classList.remove("fa-eye-slash");
+            toggleIcon.classList.add("fa-eye");
+        }
+    }
+
+</script>
+
+
+
+@endpush

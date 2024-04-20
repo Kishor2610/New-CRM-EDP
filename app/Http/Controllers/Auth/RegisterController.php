@@ -18,7 +18,8 @@ class RegisterController extends Controller
 
     public function showRegistrationForm()
     {
-        return view('auth.register');
+        $roles = DB::table('roles')->get();
+        return view('auth.register', compact('roles'));
     }
 
     public function showRegistrationForm2()
@@ -32,6 +33,7 @@ class RegisterController extends Controller
                 'f_name' => 'required|string|max:255',
                 'l_name' => 'required|string|max:255',
                 'email' => 'required|string|email|max:255|unique:users',
+                'role_id' => 'required|integer|exists:roles,role_id', // Validate that the selected role exists in the roles table
                 'password' => 'required|string|min:8|confirmed',
                 'image' => 'required|image|mimes:jpeg,png,jpg,gif',
                 // dd($request->file('image')),
@@ -44,11 +46,17 @@ class RegisterController extends Controller
                 $imageName = $request->image->getClientOriginalName();
                 $request->image->move(public_path('images/user/'), $imageName);
             }
+
+            $role_id = $request->role_id;
+            if($role_id==2){
+                $role_id=2;
+            }
                 
             User::create([
+                'role_id' => $role_id,
                 'f_name' => $request->f_name,
                 'l_name' => $request->l_name,
-                'email' => $request->email,
+                'email' => $request->email, 
                 'password' => Hash::make($request->password),
                 'image' => $imageName,
             ]);
