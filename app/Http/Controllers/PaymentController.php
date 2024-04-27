@@ -125,8 +125,5 @@ class PaymentController extends Controller
                             'payments' => $payments2
                         ]);
     }
-
-    
-
    
 }

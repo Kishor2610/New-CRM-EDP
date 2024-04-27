@@ -40,22 +40,21 @@
                                 <td>{{ $queries_view->email }} </td>
                                 <td>{{ $queries_view->query_subject }}</td>
                                 <td>{{$queries_view->query_message}}</td>
+                                                               
                                 <td>  
-                                  
-                                    @if($queries_view->status!='2')
-                                      <button class="btn btn-danger" type="button" onclick="openReplyModal('{{ $queries_view->id }}')">
-                                          Send Reply_ <i class="fa fa-paper-plane"></i>
-                                        </button>
-                                     @endif
-                                    
-                                    @if($queries_view->status=='3')
-                                      <button class="btn btn-success" type="button">Mail Sended <i class="fa fa-paper"></i>
-                                      </button> 
-                                     
-                                    @endif
-                                </td>
-                                                
+                                  @if($queries_view->status != '2')
+                                      @if($queries_view->status != '3')
+                                          <button class="btn btn-danger" type="button" onclick="openReplyModal('{{ $queries_view->id }}')">
+                                              Send Reply_ <i class="fa fa-paper-plane"></i>
+                                          </button>
+                                      @else
+                                        <button class="btn btn-success" type="button" disabled>Mail Sent <i class="fa fa-paper-plane"></i></button>
+                                      @endif
+                                  @endif
+                              </td>
+                                
                             </tr>
+                            
                             @endforeach
                             </tbody>
                         </table>
