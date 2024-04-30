@@ -54,10 +54,10 @@
             </ul>
         </li>
 
-        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-object-group"></i><span class="app-menu__label">Tax</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-object-group"></i><span class="app-menu__label">Taxation</span><i class="treeview-indicator fa fa-angle-right"></i></a>
             <ul class="treeview-menu">
-                <li><a class="treeview-item" href="{{route('tax.create')}}"><i class="icon fa fa-plus"></i> Add Tax</a></li>
-                <li><a class="treeview-item" href="{{route('tax.index')}}"><i class="icon fa fa-edit"></i> Manage Taxs</a></li>
+                <li><a class="treeview-item" href="{{route('tax.create')}}"><i class="icon fa fa-plus"></i> Add Taxation</a></li>
+                <li><a class="treeview-item" href="{{route('tax.index')}}"><i class="icon fa fa-edit"></i> Manage Taxation</a></li>
              </ul>
         </li>
 
@@ -71,10 +71,20 @@
         </li>
 
         {{-- Query --}}
-        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-object-group"></i><span class="app-menu__label">Customer Query</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-list-alt"></i><span class="app-menu__label"> Query</span><i class="treeview-indicator fa fa-angle-right"></i></a>
             <ul class="treeview-menu">
-                <li><a class="treeview-item" href="{{route('customer_query.index')}}"><i class="icon fa fa-edit"></i> Query</a></li>
+                <li><a class="treeview-item" href="{{route('customer_query.index')}}"><i class="icon fa fa-edit"></i>View Query</a></li>
              </ul>
+        </li>
+
+        {{-- enquiry --}}
+
+        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-envelope-o"></i><span class="app-menu__label">Enquiry</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+            <ul class="treeview-menu">
+                {{-- <li><a class="treeview-item" href="{{route('enquiry.create')}}"><i class="icon fa fa-plus"></i>Add Enquiry </a></li> --}}
+                <li><a class="treeview-item" href="{{route('enquiry.index')}}"><i class="icon fa fa-edit"></i> Manage Enquiry</a></li>
+                {{-- <li><a class="treeview-item" href="#"><i class="icon fa fa-edit"></i> Enquiry Status</a></li> --}}
+            </ul>
         </li>
 
 

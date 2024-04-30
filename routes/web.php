@@ -6,7 +6,7 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\CustomerQueryController;
-
+use App\Http\Controllers\EnquiryController;
 
 Auth::routes();
 
@@ -110,6 +110,15 @@ Route::get('/update-query-status/{id}', 'CustomerQueryController@updateQueryStat
 Route::get('customer_query/index', [CustomerQueryController::class, 'view_query'])->name('customer_query.index');
 
 Route::post('customer_query/send_reply', [CustomerQueryController::class, 'sendReply'])->name('send_reply');
+
+
+Route::resource('enquiry', 'EnquiryController');
+Route::post('/enquiry/store', [EnquiryController::class, 'store_data'])->name('enquiry.store_data');
+
+
+Route::post('/enquiry/change-status', 'EnquiryController@changeStatus')->name('enquiry.change_status');
+
+
 
 ?>
 
