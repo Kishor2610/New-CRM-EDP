@@ -20,5 +20,10 @@ class Quotation extends Model
         return $this->hasMany(Quotation_sale::class);
     }
 
+    public function enquiry()
+    {
+        return $this->belongsTo(Enquiry::class, 'company_id');
+    }
+
 
 }

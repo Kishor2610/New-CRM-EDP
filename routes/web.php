@@ -116,7 +116,11 @@ Route::resource('enquiry', 'EnquiryController');
 Route::post('/enquiry/store', [EnquiryController::class, 'store_data'])->name('enquiry.store_data');
 
 
+// Status 
+
 Route::post('/enquiry/change-status', 'EnquiryController@changeStatus')->name('enquiry.change_status');
+
+Route::post('/quotation/change-quotation-status', 'QuotationController@changeQuotationStatus')->name('quotation.change_quotation_status');
 
 
 

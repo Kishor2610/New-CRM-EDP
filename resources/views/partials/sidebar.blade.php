@@ -11,7 +11,38 @@
     </div>
     <ul class="app-menu">
         <li><a class="app-menu__item active" href="/"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
+
+
+         {{-- customer --}}
+         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-users"></i><span class="app-menu__label">Customer</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+            <ul class="treeview-menu">
+                <li><a class="treeview-item" href="{{route('customer.create')}}"><i class="icon fa fa-plus"></i> Add Customer</a></li>
+                <li><a class="treeview-item" href="{{route('customer.index')}}"><i class="icon fa fa-edit"></i> Manage Customer</a></li>
+            </ul>
+        </li>
+
         
+        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-envelope-o"></i><span class="app-menu__label">Enquiry</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+            <ul class="treeview-menu">
+                {{-- <li><a class="treeview-item" href="{{route('enquiry.create')}}"><i class="icon fa fa-plus"></i>Add Enquiry </a></li> --}}
+                <li><a class="treeview-item" href="{{route('enquiry.index')}}"><i class="icon fa fa-edit"></i> Manage Enquiry</a></li>
+            </ul>
+        </li>
+
+       
+        <li class="treeview "><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-quote-left"></i><span class="app-menu__label">Quotation</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+            <ul class="treeview-menu">
+                {{-- <li><a class="treeview-item " href="{{route('quotation.create')}}" ><i class="icon fa fa-plus"></i>Create Quotation </a></li> --}}
+                <li><a class="treeview-item" href="{{route('quotation.index')}}"><i class="icon fa fa-edit"></i> Manage Quotation</a></li>
+            </ul>
+        </li>
+
+        <li class="treeview "><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-shopping-cart"></i><span class="app-menu__label">Order</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+            <ul class="treeview-menu">
+                <li><a class="treeview-item" href="{{route('quotation.index')}}"><i class="icon fa fa-edit"></i> Manage Order</a></li>
+            </ul>
+        </li>
+
         {{-- Invoice  --}}
         <li class="treeview "><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-indent"></i><span class="app-menu__label">Invoice</span><i class="treeview-indicator fa fa-angle-right"></i></a>
             <ul class="treeview-menu">
@@ -22,23 +53,7 @@
             </ul>
         </li>
 
-       
-        <li class="treeview "><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-quote-left"></i><span class="app-menu__label">Quotation</span><i class="treeview-indicator fa fa-angle-right"></i></a>
-            <ul class="treeview-menu">
-                <li><a class="treeview-item " href="{{route('quotation.create')}}" ><i class="icon fa fa-plus"></i>Create Quotation </a></li>
-                <li><a class="treeview-item" href="{{route('quotation.index')}}"><i class="icon fa fa-edit"></i> Manage Quotation</a></li>
-            </ul>
-        </li>
-
-    
-        {{-- customer --}}
-        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-users"></i><span class="app-menu__label">Customer</span><i class="treeview-indicator fa fa-angle-right"></i></a>
-            <ul class="treeview-menu">
-                <li><a class="treeview-item" href="{{route('customer.create')}}"><i class="icon fa fa-plus"></i> Add Customer</a></li>
-                <li><a class="treeview-item" href="{{route('customer.index')}}"><i class="icon fa fa-edit"></i> Manage Customer</a></li>
-            </ul>
-        </li>
-
+        
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-briefcase"></i><span class="app-menu__label">Product</span><i class="treeview-indicator fa fa-angle-right"></i></a>
             <ul class="treeview-menu">
                 <li><a class="treeview-item" href="{{route('product.create')}}"><i class="icon fa fa-plus"></i> New Product</a></li>
@@ -79,14 +94,7 @@
 
         {{-- enquiry --}}
 
-        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-envelope-o"></i><span class="app-menu__label">Enquiry</span><i class="treeview-indicator fa fa-angle-right"></i></a>
-            <ul class="treeview-menu">
-                {{-- <li><a class="treeview-item" href="{{route('enquiry.create')}}"><i class="icon fa fa-plus"></i>Add Enquiry </a></li> --}}
-                <li><a class="treeview-item" href="{{route('enquiry.index')}}"><i class="icon fa fa-edit"></i> Manage Enquiry</a></li>
-                {{-- <li><a class="treeview-item" href="#"><i class="icon fa fa-edit"></i> Enquiry Status</a></li> --}}
-            </ul>
-        </li>
-
+      
 
       
 

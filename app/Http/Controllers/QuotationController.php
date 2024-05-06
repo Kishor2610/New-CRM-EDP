@@ -8,8 +8,10 @@ use App\Quotation_sale;
 use App\Tax;
 use App\Supplier;
 use App\Quotation;
+use App\Enquiry;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+
 
 class QuotationController extends Controller
 {
@@ -23,7 +25,11 @@ class QuotationController extends Controller
     public function index()
     {
         $quotations = Quotation::all();
-        return view('quotation.index', compact('quotations'));
+        $enquiries = Enquiry::where('status', 3)->get();
+       
+        $company = Customer::all();
+       
+        return view('quotation.index', compact('quotations','enquiries','company'));
     }
 
     public function create()
@@ -31,6 +37,7 @@ class QuotationController extends Controller
         $customers = Customer::all();
         $products = Product::all();
         $taxes = Tax::all();
+               
         return view('quotation.create', compact('customers','products','taxes'));
     }
 
@@ -49,11 +56,31 @@ class QuotationController extends Controller
             'tax_id'=> 'required',
         ]);
 
-        $quotation = new Quotation();
-        $quotation->customer_id = $request->customer_id;
-        $quotation->tax = implode(',', $request->tax_id);
-        $quotation->total = $request->total;
-        $quotation->save();
+        // $quotation = new Quotation();
+        // $quotation->customer_id = $request->customer_id;
+        // $quotation->tax = implode(',', $request->tax_id);
+        // $quotation->total = $request->total;
+        // $quotation->save();
+
+
+        $quotation = null; 
+        $existingQuotation = Quotation::where('customer_id', $request->customer_id)->first();
+        
+        if ($existingQuotation) {
+            // Update existing quotation record
+            $existingQuotation->tax = implode(',', $request->tax_id);
+            $existingQuotation->total = $request->total;
+            $existingQuotation->status = '2';
+            $existingQuotation->save();
+            $quotation = $existingQuotation;
+        } else {
+            // Create a new quotation record
+            $quotation = new Quotation();
+            $quotation->customer_id = $request->customer_id;
+            $quotation->tax = implode(',', $request->tax_id);
+            $quotation->total = $request->total;
+            $quotation->save();
+        }
 
         foreach ( $request->product_id as $key => $product_id){
             $quotation_sale = new Quotation_sale();
@@ -65,9 +92,9 @@ class QuotationController extends Controller
             $quotation_sale->amount = $request->amount[$key];
 
             $quotation_sale->product_id = $request->product_id[$key];
+           
             $quotation_sale->quotation_id = $quotation->id;
             $quotation_sale->save();
-
 
          }
 
@@ -156,6 +183,17 @@ class QuotationController extends Controller
         $quotation = Quotation::findOrFail($id);
         $quotation->delete();
         return redirect()->back();
+
+    }
+
+    public function changeQuotationStatus(Request $request)
+    {
+        $quotation = Quotation::findOrFail($request->quotation_id);
+        $quotation->status = $request->status;
+        $quotation->comment = $request->comment;
+        $quotation->save();
+
+        return redirect()->back()->with('message', 'Quotation status updated successfully.');
 
     }
     

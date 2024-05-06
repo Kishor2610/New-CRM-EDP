@@ -67,8 +67,17 @@
 
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label class="control-label">Item *</label>
-                <input name="item" value="{{ $enquiry->item }}" class="form-control @error('item') is-invalid @enderror" type="text" placeholder="Enter Item">
+                  <label class="control-label">Item *</label>
+                  <select name="item" id="item" class="form-control @error('item') is-invalid @enderror">
+                    <option value="">Select Item</option>
+                    @foreach($products as $product)
+                        <option value="{{ $product->name }}">{{ $product->name }}</option>
+                    @endforeach
+                    <option value="other">Other</option>
+                  </select>
+                  
+                  <input type="text" name="other_item" id="other_item" class="form-control mt-2" style="display: none;" placeholder="Enter Other Item">
+        
                 @error('item')
                 <span class="invalid-feedback" role="alert">
                   <strong>{{ $message }}</strong>
@@ -127,3 +136,24 @@
   </div>
 </main>
 @endsection
+
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+      var itemSelect = document.getElementById('item');
+      var otherItemInput = document.getElementById('other_item');
+
+      if (itemSelect) {
+          itemSelect.addEventListener('change', function () {
+              if (this.value === 'other') {
+                  otherItemInput.style.display = 'block';
+                  otherItemInput.setAttribute('required', 'required');
+              } else {
+                  otherItemInput.style.display = 'none';
+                  otherItemInput.removeAttribute('required');
+              }
+          });
+      }
+  });
+</script>

@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Product;
 use App\Enquiry;
+use App\Customer;
+use App\Quotation;
 
 
 
@@ -28,7 +31,8 @@ class EnquiryController extends Controller
     
     public function create()
     {
-        return view('enquiry.create');
+        $products = Product::all(); 
+        return view('enquiry.create',compact('products'));
     }
 
     public function store_data(Request $request)
@@ -44,18 +48,20 @@ class EnquiryController extends Controller
             'description' => 'required|string',
             'customer_specification' => 'required|string',
         ]);
+
+        $selectedItem = $validatedData['item'] === 'other' ? $request->other_item : $validatedData['item'];
     
         $enquiry = new Enquiry;
         $enquiry->company_name = $validatedData['company_name'];
         $enquiry->mobile = $validatedData['mobile'];
         $enquiry->email = $validatedData['email'];
-        $enquiry->item = $validatedData['item'];
+        $enquiry->item = $selectedItem;
         $enquiry->qty = $validatedData['qty'];
         $enquiry->enquiry_source = $validatedData['enquiry_source'];
         $enquiry->description = $validatedData['description'];
         $enquiry->customer_specification = $validatedData['customer_specification'];
         $enquiry->comment="";
-        $enquiry->status="0";
+        $enquiry->status="New";
         $enquiry->save();
 
         return redirect()->back()->with('message', 'Enquiry added Successfully');
@@ -65,7 +71,8 @@ class EnquiryController extends Controller
     public function edit($id)
     {
         $enquiry = Enquiry::findOrFail($id);
-        return view('enquiry.edit', compact('enquiry'));
+        $products = Product::all(); 
+        return view('enquiry.edit', compact('enquiry','products'));
     }
 
     public function update(Request $request, $id)
@@ -81,11 +88,13 @@ class EnquiryController extends Controller
             'customer_specification' => 'required|string',
         ]);
 
+        $selectedItem = $request['item'] === 'other' ? $request->other_item : $request['item'];
+
         $enquiry = Enquiry::findOrFail($id);
         $enquiry->company_name = $request->company_name;
         $enquiry->mobile = $request->mobile;
         $enquiry->email = $request->email;
-        $enquiry->item = $request->item;
+        $enquiry->item = $selectedItem;
         $enquiry->qty = $request->qty;
         $enquiry->enquiry_source = $request->enquiry_source;
         $enquiry->description = $request->description;
@@ -112,6 +121,69 @@ class EnquiryController extends Controller
     {
 
         $enquiry = Enquiry::findOrFail($request->enquiry_id);
+
+        // if ($request->status == 3) {
+        //     // Create a new customer record
+        //     $customer = new Customer;
+        //     $customer->name = $enquiry->company_name;
+        //     $customer->email = $enquiry->email;
+        //     $customer->mobile = $enquiry->mobile;
+
+        //     $customer->address = "";
+        //     $customer->details = "";
+        //     $customer->previous_balance = "0";
+        //     $customer->save();
+
+
+        //     $quotation = new Quotation();
+        //     $quotation->customer_id = "2";
+        //     $quotation->tax = '0';
+        //     $quotation->total = '0';
+        //     $quotation->save();
+
+
+                
+            // Optionally, you can copy other fields from the enquiry to the customer here
+            // $customer->some_field = $enquiry->some_field;
+    
+            // Delete the enquiry record
+            // $enquiry->delete();
+
+        // }
+
+
+        if ($request->status == 3) {
+            // Check if customer with the same email already exists
+            $existingCustomer = Customer::where('email', $enquiry->email)->first();
+        
+            if (!$existingCustomer) {
+                // Create a new customer record
+                $customer = new Customer;
+                $customer->name = $enquiry->company_name;
+                $customer->email = $enquiry->email;
+                $customer->mobile = $enquiry->mobile;
+                $customer->address = "";
+                $customer->details = "";
+                $customer->previous_balance = "0";
+                $customer->save();
+            } else {
+                // Update existing customer details if necessary
+                $existingCustomer->name = $enquiry->company_name;
+                // Update other fields as needed
+                $existingCustomer->save();
+                $customer = $existingCustomer;
+            }
+        
+            // Create a new quotation record
+            $quotation = new Quotation();
+            $quotation->customer_id = $customer->id; // Use the existing or newly created customer's ID
+            $quotation->tax = '0';
+            $quotation->total = '0';
+            $quotation->save();
+
+        }
+
+
         $enquiry->status = $request->status;
         $enquiry->comment = $request->comment;
         $enquiry->save();

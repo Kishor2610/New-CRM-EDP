@@ -33,9 +33,9 @@
               <tr>
                 <th>Customer Name </th>
                 <th>Email </th>
-                <th>Address </th>
+                {{-- <th>Address </th> --}}
                 <th>Mobile</th>
-                <th>Details</th>
+                {{-- <th>Details</th> --}}
                 {{-- <th>Previous Balance</th> --}}
                 
                 <th>Action</th>
@@ -46,9 +46,9 @@
               <tr>
                 <td>{{ $customer->name }} </td>
                 <td>{{ $customer->email }} </td>
-                <td>{{ $customer->address }} </td>
+                {{-- <td>{{ $customer->address }} </td> --}}
                 <td>{{ $customer->mobile }} </td>
-                <td>{{ $customer->details }} </td>
+                {{-- <td>{{ $customer->details }} </td> --}}
                 {{-- <td>{{ $customer->previous_balance }}</td> --}}
                 
                 <td>
