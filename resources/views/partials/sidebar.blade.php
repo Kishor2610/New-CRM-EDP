@@ -39,7 +39,7 @@
 
         <li class="treeview "><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-shopping-cart"></i><span class="app-menu__label">Order</span><i class="treeview-indicator fa fa-angle-right"></i></a>
             <ul class="treeview-menu">
-                <li><a class="treeview-item" href="{{route('quotation.index')}}"><i class="icon fa fa-edit"></i> Manage Order</a></li>
+                <li><a class="treeview-item" href="{{route('order.index')}}"><i class="icon fa fa-edit"></i> Manage Order</a></li>
             </ul>
         </li>
 

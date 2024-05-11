@@ -45,7 +45,7 @@
                         <div class="form-group">
                             <label for="status">New Status:</label>
                             <select class="form-control" id="status" name="status">
-                                <option value="1">New</option>
+                                {{-- <option value="1">New</option> --}}
                                 <option value="2">In Progress</option>
                                 <option value="3">Order confirmed</option>
                                 <option value="4">Cancel</option>
@@ -95,7 +95,7 @@
                                      <td>
                                         @if($quotation->status == '1') New
                                         @elseif($quotation->status == '2') In Progress
-                                        @elseif($quotation->status == '3') Quotation Accepted
+                                        @elseif($quotation->status == '3') Order confirmed
                                         @elseif($quotation->status == '4') Cancel
                                         @else New
                                         @endif

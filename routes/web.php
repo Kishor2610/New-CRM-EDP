@@ -123,6 +123,27 @@ Route::post('/enquiry/change-status', 'EnquiryController@changeStatus')->name('e
 Route::post('/quotation/change-quotation-status', 'QuotationController@changeQuotationStatus')->name('quotation.change_quotation_status');
 
 
+// Order Controller
+Route::resource('order', 'OrderController');
+
+Route::get('/order/create/{quotation_id}', 'OrderController@create')->name('order.create');
+
+
+
+// Route::post('/order/changeOrderStatus', 'OrderController@changeOrderStatus')->name('order.changeOrderStatus');
+
+Route::post('/order/changeOrderStatus', 'OrderController@changeOrderStatus')->name('order.changeOrderStatus');
+
+
+// Route::post('/order/change-order-status', 'OrderController@changeOrderStatus')->name('order.changeOrderStatus');
+
+// Route::post('/order/change-order-status', 'OrderController@changeOrderStatus')->name('order.changeOrderStatus');
+
+
+// Route::post('/order/changeOrderStatus', 'OrderController@changeOrderStatus')->name('order.changeOrderStatus');
+
+
+
 
 ?>
 
