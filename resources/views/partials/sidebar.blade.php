@@ -43,6 +43,12 @@
             </ul>
         </li>
 
+        <li class="treeview "><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-adjust"></i><span class="app-menu__label">Design</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+            <ul class="treeview-menu">
+                <li><a class="treeview-item" href="{{route('design.index')}}"><i class="icon fa fa-edit"></i> Manage Design</a></li>
+            </ul>
+        </li>
+
         {{-- Invoice  --}}
         <li class="treeview "><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-indent"></i><span class="app-menu__label">Invoice</span><i class="treeview-indicator fa fa-angle-right"></i></a>
             <ul class="treeview-menu">

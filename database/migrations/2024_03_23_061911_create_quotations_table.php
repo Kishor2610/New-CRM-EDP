@@ -18,9 +18,12 @@ class CreateQuotationsTable extends Migration
             $table->bigInteger('customer_id')->unsigned();
             $table->string('total');
             $table->string('tax');
+            $table->boolean('status');
+            $table->text('comment')->nullable();
             $table->foreign('customer_id')
                 ->references('id')->on('customers')
                 ->onDelete('cascade');
+
             $table->timestamps();
         });
     }

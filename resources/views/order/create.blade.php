@@ -72,20 +72,6 @@
 
             <div class="form-row">
 
-              {{-- <div class="form-group col-md-6">
-                  <label class="control-label">Item *</label>
-                  <select name="item[]" id="item" class="form-control @error('item') is-invalid @enderror" multiple style="height: 40px;">
-                    @foreach($products as $productId => $productName)
-                        <option value="{{ $productId }}">{{ $productName }}</option>
-                    @endforeach
-                </select>
-                @error('item')
-                <span class="invalid-feedback" role="alert">
-                  <strong>{{ $message }}</strong>
-                </span>
-                @enderror
-              </div> --}}
-
               <div class="form-group col-md-6">
                 <label class="control-label">Item *</label>
                 <select name="item[]" id="item" class="form-control @error('item') is-invalid @enderror" multiple style="height: 40px;">

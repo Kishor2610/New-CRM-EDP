@@ -128,21 +128,12 @@ Route::resource('order', 'OrderController');
 
 Route::get('/order/create/{quotation_id}', 'OrderController@create')->name('order.create');
 
-
-
-// Route::post('/order/changeOrderStatus', 'OrderController@changeOrderStatus')->name('order.changeOrderStatus');
-
 Route::post('/order/changeOrderStatus', 'OrderController@changeOrderStatus')->name('order.changeOrderStatus');
 
 
-// Route::post('/order/change-order-status', 'OrderController@changeOrderStatus')->name('order.changeOrderStatus');
+// Design Controller
 
-// Route::post('/order/change-order-status', 'OrderController@changeOrderStatus')->name('order.changeOrderStatus');
-
-
-// Route::post('/order/changeOrderStatus', 'OrderController@changeOrderStatus')->name('order.changeOrderStatus');
-
-
+Route::resource('design', 'DesignController');
 
 
 ?>
