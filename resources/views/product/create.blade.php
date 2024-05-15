@@ -75,11 +75,11 @@
 
                                     <select name="category_id" class="form-control">
                                         <option>---Select Category---</option>
-                                        {{-- @foreach($categories as $category)
+                                        @foreach($categories as $category)
                                             @if($category->status == 1)
                                                 <option value="{{$category->id}}">{{$category->name}}</option>
                                             @endif
-                                      @endforeach --}}
+                                      @endforeach
                                     </select>
 
                                     @error('category_id')

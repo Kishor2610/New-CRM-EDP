@@ -62,7 +62,7 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label class="control-label">Order Id *</label>
-                                    <input name="order_id" value="{{ $order->id }}" class="form-control @error('order_id') is-invalid @enderror" type="text" placeholder="Order Id">
+                                    <input name="order_id" value="{{ $order->order_id }}" class="form-control @error('order_id') is-invalid @enderror" type="text" placeholder="Order Id">
                                     @error('order_id')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -88,12 +88,19 @@
                                     @enderror
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label class="control-label">Process *</label>
-                                    <select name="process[]" class="form-control" multiple>
-                                        <option value="Cutting">Cutting</option>
-                                        <option value="Bending">Bending</option>
-                                        <option value="Pasting">Pasting</option>
-                                    </select>
+                                    <label class="control-label">Process *</label><br>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="process_cutting" name="process[]" value="Cutting">
+                                        <label class="form-check-label" for="process_cutting">Cutting</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="process_bending" name="process[]" value="Bending">
+                                        <label class="form-check-label" for="process_bending">Bending</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="process_pasting" name="process[]" value="Pasting">
+                                        <label class="form-check-label" for="process_pasting">Pasting</label>
+                                    </div>
                                     @error('process')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

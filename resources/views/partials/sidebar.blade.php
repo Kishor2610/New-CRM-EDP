@@ -49,6 +49,22 @@
             </ul>
         </li>
 
+       <!-- Production -->
+<li class="treeview">
+    <a class="app-menu__item" href="#" data-toggle="treeview">
+        <i class="app-menu__icon fa fa-industry"></i> <!-- Factory Icon -->
+        <span class="app-menu__label">Production</span>
+        <i class="treeview-indicator fa fa-angle-right"></i>
+    </a>
+    <ul class="treeview-menu">
+        <li>
+            <a class="treeview-item" href="{{route('production.index')}}">
+                <i class="icon fa fa-edit"></i> Manage Production
+            </a>
+        </li>
+    </ul>
+</li>
+
         {{-- Invoice  --}}
         <li class="treeview "><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-indent"></i><span class="app-menu__label">Invoice</span><i class="treeview-indicator fa fa-angle-right"></i></a>
             <ul class="treeview-menu">

@@ -66,6 +66,10 @@
                                             <a class="btn btn-primary" href="{{ route('design.create', ['order_id' => $order->id]) }}">
                                                 <i class="fa fa-plus"></i>
                                             </a>
+                                            <a class="btn btn-primary" href="{{ route('design.edit', ['order_id' => $matchedDesign->order_id]) }}">
+    <i class="fa fa-edit"></i>
+</a>
+
                                         </td>
                                     </tr>
                                 @endforeach

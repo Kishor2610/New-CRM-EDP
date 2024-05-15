@@ -130,11 +130,18 @@ Route::get('/order/create/{quotation_id}', 'OrderController@create')->name('orde
 
 Route::post('/order/changeOrderStatus', 'OrderController@changeOrderStatus')->name('order.changeOrderStatus');
 
+Route::put('order/cancel/{order_id}', 'OrderController@cancel')->name('order.cancel');
+
 
 // Design Controller
 
 Route::resource('design', 'DesignController');
 
+Route::get('design/edit/{order_id}', 'DesignController@edit')->name('design.edit');
+Route::put('design/{order_id}', 'DesignController@update')->name('design.update');
+
+
+Route::resource('production', 'ProductionController');
 
 ?>
 

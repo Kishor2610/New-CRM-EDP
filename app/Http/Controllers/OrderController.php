@@ -170,9 +170,7 @@ class OrderController extends Controller
         $order->save();
 
         return redirect()->back()->with('message', 'Order added Successfully');
-    }
-
-  
+    }  
 }
 
 
