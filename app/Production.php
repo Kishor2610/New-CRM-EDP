@@ -10,6 +10,10 @@ class Production extends Model
 
     protected $fillable = 
     [
-        'company_name', 'order_id', 'item_code', 'process'
+        'company_name', 'order_id', 'item_code', 'item_name','process'
     ];
+    public function design()
+    {
+        return $this->belongsTo(Design::class, 'order_id', 'order_id');
+    }
 }

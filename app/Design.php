@@ -12,4 +12,9 @@ class Design extends Model
     [
         'company_name', 'po_number', 'order_id', 'item_code', 'qty', 'process', 'image', 'remark'
     ];
+    public function product()
+    {
+        return $this->belongsTo(Product::class, 'item_code', 'id');
+    }
 }
+

@@ -63,14 +63,22 @@
                                             <td>N/A</td> 
                                         @endif
                                         <td>
-                                            <a class="btn btn-primary" href="{{ route('design.create', ['order_id' => $order->id]) }}">
-                                                <i class="fa fa-plus"></i>
-                                            </a>
-                                            <a class="btn btn-primary" href="{{ route('design.edit', ['order_id' => $matchedDesign->order_id]) }}">
-    <i class="fa fa-edit"></i>
-</a>
+    <a class="btn btn-primary" href="{{ route('design.create', ['order_id' => $order->id]) }}">
+        <i class="fa fa-plus"></i>
+    </a>
+    @if($matchedDesign)
+        <a class="btn btn-primary" href="{{ route('design.edit', ['order_id' => $matchedDesign->order_id]) }}">
+            <i class="fa fa-edit"></i>
+        </a>
+    @else
+        <!-- Disable the Edit button -->
+        <a class="btn btn-primary disabled" disabled>
+            <i class="fa fa-edit"></i>
+        </a>
+    @endif
+</td>
 
-                                        </td>
+
                                     </tr>
                                 @endforeach
                             </tbody>

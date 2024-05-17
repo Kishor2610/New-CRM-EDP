@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Order | ')
+@section('title', 'Production | ')
 
 @section('content')
     @include('partials.header')
@@ -9,13 +9,13 @@
     <main class="app-content">
         <div class="app-title">
             <div>
-                <h1><i class="fa fa-th-list"></i> Order Data</h1>
+                <h1><i class="fa fa-th-list"></i> Production Data</h1>
             </div>
             <ul class="app-breadcrumb breadcrumb side">
                 <li class="breadcrumb-item">
                     <a href="/"><i class="fa fa-home fa-lg"></i></a>
                 </li>
-                <li class="breadcrumb-item active"><a href="#">Order</a></li>
+                <li class="breadcrumb-item active"><a href="#">Production</a></li>
             </ul>
         </div>
 
@@ -31,82 +31,41 @@
                 <div class="tile">
                     <div class="tile-body">
                         <table class="table table-hover table-bordered" id="sampleTable">
-                            <thead>
-                                <tr style="vertical-align: middle; text-align:center">
-                                    <th>Order ID</th>
-                                    <th>Customer Name</th>
-                                    <th>Product ID</th>
-                                    <th>Quantity</th>
-                                    <th>Total Amount</th>
-                                    {{-- <th>Expected Delivery</th>
-                                    <th>Status</th> --}}
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
+                        <thead>
+    <tr style="vertical-align: middle; text-align:center">
+        <th rowspan="2">Order ID</th>
+        <th rowspan="2">Company Name</th>
+        <th rowspan="2">Product ID</th>
+        <th rowspan="2">Product Name</th>
+        <th colspan="3">Process</th>
+        <th rowspan="2">Action</th>
+    </tr>
+    <tr style="vertical-align: middle; text-align:center">
+        <th>Cutting</th>
+        <th>Bending</th>
+        <th>Pasting</th>
+    </tr>
+</thead>
 
-                            <tbody>
-
-                                @foreach ($organizedData as $quotationId => $data)
-                                    
-                                    @php
-                                            $uniqueCustomerNames = array_unique($customerNamesByQuotationId[$quotationId]);
-                                    @endphp
-                                    
-                                    @foreach ($data['products'] as $index => $product)
-                                        <tr>
-                                            @if ($index === 0)
-                                                <td rowspan="{{ count($data['products']) }}" style="vertical-align: middle; text-align:center">{{ $quotationId }}</td>
-                                            @endif
-    
-                                            @if ($index === 0)
-                                            <td rowspan="{{ count($data['products']) }}" style="vertical-align: middle; text-align:center">
-                                                @foreach ($uniqueCustomerNames as $customerName)
-                                                    {{ $customerName }}
-                                                    @if (!$loop->last)
-                                                        <br>
-                                                    @endif
-                                                @endforeach
-                                            </td>
-                                            @endif
-
-                                        
-                                            <td  style="vertical-align: middle; text-align:center">
-                                                {{ App\Product::find($product['product_id'])->name }}
-                                            </td>
-
-                                            <td  style="vertical-align: middle; text-align:center">
-                                                {{ $product['qty'] }}
-                                            </td>
+<tbody>
+                                @foreach($designs as $design)
+                                    <tr>
+                                        <td style="text-align: center;">{{ $design->order_id }}</td>
+                                        <td style="text-align: center;">{{ $design->company_name }}</td>
+                                        <td style="text-align: center;">{{ $design->product->id }}</td>
+                                        <td style="text-align: center;">{{ $design->product->name }}</td>
+                                        <td style="text-align: center;"><span style="color: {{ in_array('Cutting', explode(',', $design->process)) ? 'green' : 'red' }}">{{ in_array('Cutting', explode(',', $design->process)) ? '✔' : '✘' }}</span></td>
+                                        <td style="text-align: center;"><span style="color: {{ in_array('Bending', explode(',', $design->process)) ? 'green' : 'red' }}">{{ in_array('Bending', explode(',', $design->process)) ? '✔' : '✘' }}</span></td>
+                                        <td style="text-align: center;"><span style="color: {{ in_array('Pasting', explode(',', $design->process)) ? 'green' : 'red' }}">{{ in_array('Pasting', explode(',', $design->process)) ? '✔' : '✘' }}</span></td>
+                                        <td>
+    <a class="btn btn-primary" href="{{ route('production.create', ['order_id' => $design->order_id]) }}"><i class="fa fa-plus"></i></a>
+    <a class="btn btn-info" href="{{ route('production.edit', ['order_id' => $design->order_id]) }}"><i class="fa fa-circle"></i></a>
+</td>
 
 
-                                            @if ($index === 0)
-                                                <td rowspan="{{ count($data['products']) }}" style="vertical-align: middle; text-align:center">{{ $product['total_value'] }}</td>
-                                             @endif
-                                          
-                                            
-                                            {{-- @if ($index === 0)
-                                            <td rowspan="{{ count($data['products']) }}" style="vertical-align: middle; text-align: center"> 14/2/2024</td>
-                                            @endif --}}
-                                            
-                                            {{-- @if ($index === 0)
-                                            <td rowspan="{{ count($data['products']) }}" style="vertical-align: middle;">New</td>
-                                            @endif --}}
 
-                                            @if ($index === 0)
-                                            <td rowspan="{{ count($data['products']) }}" style="vertical-align: middle; text-align:center">
-
-                                                <a class="btn btn-primary" href="{{ route('order.create', ['quotation_id' => $quotationId]) }}">
-                                                    <i class="fa fa-payment"></i> Place Order
-                                                </a>
-                                        
-
-                                             </td>
-
-                                            @endif
-
-                                        </tr>
-                                    @endforeach 
-                                @endforeach 
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -122,6 +81,14 @@
     <script type="text/javascript">
         $('#sampleTable').DataTable();
     </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            @if(session('refresh'))
+                location.reload();
+            @endif
+        });
+    </script>
+
     <script src="https://unpkg.com/sweetalert2@7.19.1/dist/sweetalert2.all.js"></script>
 
 

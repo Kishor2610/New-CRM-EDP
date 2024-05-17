@@ -7,6 +7,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\CustomerQueryController;
 use App\Http\Controllers\EnquiryController;
+use App\Http\Controllers\ProductionController;
 
 Auth::routes();
 
@@ -142,6 +143,8 @@ Route::put('design/{order_id}', 'DesignController@update')->name('design.update'
 
 
 Route::resource('production', 'ProductionController');
+Route::post('/production/store', 'ProductionController@store')->name('production.store');
+
 
 ?>
 

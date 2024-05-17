@@ -39,30 +39,7 @@ class OrderController extends Controller
             $matchedQuotationSales = array_merge($matchedQuotationSales, $quotationSales->toArray());
         }
 
-        // dd($customerNamesByQuotationId);
-
-
-        // $organizedData = [];
-        // foreach ($matchedQuotationSales as $quotationSale) {
-        //     $quotationId = $quotationSale['quotation_id'];
- 
-        //     $customer = Customer::find($quotation->customer_id); 
-        //     if (!isset($organizedData[$quotationId])) {
-        //         $organizedData[$quotationId] = [
-        //             'products' => [],
-        //             'customer_id' => $customer 
-        //         ];
-        //     }
-
-        //     $organizedData[$quotationId]['products'][] = [
-        //         'product_id' => $quotationSale['product_id'],
-        //         'qty' => $quotationSale['qty'],
-        //         'amount' => $quotationSale['amount']
-        //     ];
-        // }
-
-        // dd($organizedData);
-
+       
 
         $organizedData = [];
         foreach ($matchedQuotationSales as $quotationSale) {
@@ -96,7 +73,6 @@ class OrderController extends Controller
             }
         }
         
-        // dd($organizedData);
         
 
 
@@ -171,6 +147,8 @@ class OrderController extends Controller
 
         return redirect()->back()->with('message', 'Order added Successfully');
     }  
+
+    
 }
 
 
